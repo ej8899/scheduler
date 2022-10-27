@@ -12,7 +12,12 @@ export default function Button(props) {
     "button--danger": props.danger,
   });
 
+  function myClickHandler() {
+    if (global.config.debug) console.log("TEST of click handler in Button.js")
+    props.onClick();
+  }
+
   return (
-    <button disabled={props.disabled} className={buttonClass} onClick={props.onClick} >{props.children}</button>
+    <button disabled={props.disabled} className={buttonClass} onClick={myClickHandler} >{props.children}</button>
   );
 }
