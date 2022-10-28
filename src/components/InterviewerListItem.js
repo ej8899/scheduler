@@ -9,10 +9,15 @@ export default function InterviewListItem(props) {
     "interviewers__item--selected": props.selected
   });
 
+  function clickHandler() {
+    props.setInterviewer(props.id);
+    if (global.config.debug) console.log("TEST of click handler in InterviewListItem")
+    // or could have used this in onClick={() => props.setInterviewer(props.id)}
+  } 
 
   return (
 
-  <li className={componentClass} onClick={() => props.setInterviewer(props.id)}>
+  <li className={componentClass} onClick={clickHandler}>
   <img
     className="interviewers__item-image"
     src={props.avatar}
