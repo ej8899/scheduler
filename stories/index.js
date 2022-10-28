@@ -85,7 +85,7 @@ storiesOf("DayList", module)
 
 
   //
-  // InterviewerList
+  // InterviewerListItem
   //
   import InterviewerListItem      from "components/InterviewerListItem.js";
 
@@ -116,10 +116,9 @@ storiesOf("DayList", module)
     ))
     .add("Clickable", () => (
       <InterviewerListItem
-        id={interviewer.id}
         name={interviewer.name}
         avatar={interviewer.avatar}
-        setInterviewer={action("setInterviewer")}
+        setInterviewer={() => action("setInterviewer")(interviewer.id)}
       />
     ));
 
