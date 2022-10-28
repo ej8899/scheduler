@@ -11,7 +11,7 @@ export default function InterviewListItem(props) {
 
   function clickHandler() {
     props.setInterviewer(props.id);
-    if (global.config.debug) console.log("TEST of click handler in InterviewListItem")
+    if (global.config.debug) console.log("TEST of click handler in InterviewListItem:PROPS:",props)
     // or could have used this in onClick={() => props.setInterviewer(props.id)}
   } 
 
@@ -24,7 +24,7 @@ export default function InterviewListItem(props) {
     alt={props.name}
   />
   {props.selected && props.name}
-</li>
+  </li>
 
 );
 
