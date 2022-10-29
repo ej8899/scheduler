@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "components/Appointment/styles.scss";
 import Button from "components/Button.js";
 import InterviewerList from "components/InterviewerList.js";
@@ -8,35 +8,56 @@ import InterviewerList from "components/InterviewerList.js";
 //
 
 export default function Form(props) {
+// STATE
+const [student, setStudent] = useState(props.student || "");
+const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
-  if (global.config.debug) console.log("in FORM:props",props)
+// FUNCTIONS
+const reset = function () {
+  setStudent("");
+  setInterviewer(null);
+};
+const cancel = function () {
+  reset();
+  props.onCancel();
+};
+
+if (global.config.debug) console.log("in FORM:props",props)
+if (global.config.debug) console.log("in FORM:STATE:student",student)
+if (global.config.debug) console.log("in FORM:STATE:interviewer",interviewer)
 
 return (
 
 <main className="appointment__card appointment__card--create">
   <section className="appointment__card-left">
-    <form autoComplete="off">
+    <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
       <input
         className="appointment__create-input text--semi-bold"
         name="name"
         type="text"
         placeholder="Enter Student Name"
-        value = {props.student}
-        /*
-          This must be a controlled component
-          your code goes here
-        */
+        value = {student}
+        onChange={(event) => setStudent(event.target.value)}
+        
+        // !REMINDER - we have to use state
+        // !QUESTION - can or should we just not capture on 'submit' instead? save CPU cycles?
+
       />
     </form>
     <InterviewerList 
       interviewers={props.interviewers}
-      value={props.interviewer}
+      value={interviewer}
+      interviewer={props.interviewer}
+      onChange={setInterviewer}
     />
   </section>
   <section className="appointment__card-right">
     <section className="appointment__actions">
-      <Button danger onClick={props.onCancel}>Cancel</Button>
-      <Button confirm onClick={props.onSave}>Save</Button>
+      <Button danger onClick={cancel}>Cancel</Button>
+      <Button confirm 
+        onClick={props.onSave}
+        // TODO State should be showing onSave
+        >Save</Button>
     </section>
   </section>
 </main>

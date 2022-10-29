@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -7,14 +7,11 @@ import 'config.js'; // for global configuration variables (EJ added)
 
 import "index.scss";
 
-import Button       from "components/Button";
-import DayListItem  from "components/DayListItem.js";
-import DayList      from "components/DayList.js";
-
 
 //
 // Button
 //
+import Button       from "components/Button";
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -35,6 +32,7 @@ storiesOf("Button", module)
 //
 // DayListItem
 //
+import DayListItem  from "components/DayListItem.js";
 storiesOf("DayListItem", module) //Initiates Storybook and registers our DayListItem component
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -67,7 +65,7 @@ const days = [
     spots: 0,
   },
 ];
-
+import DayList      from "components/DayList.js";
 storiesOf("DayList", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
@@ -200,3 +198,21 @@ storiesOf("Appointment", module)
     onSave={action("onSave")}
     onCancel={action("onCancel")}
   />)
+
+  .add("Appointment Empty", () =>  (
+    <Fragment>
+      <Appointment id={1} time="4pm" />
+      <Appointment time="5pm" />
+    </Fragment>
+  ))
+
+  .add("Appointment Booked", () => (
+    <Fragment>
+      <Appointment
+        id={1}
+        time="4pm"
+        interview={{ student: "Lydia Miller-Jones", interviewer }}
+      />
+      <Appointment time="5pm" />
+    </Fragment>
+  ))
