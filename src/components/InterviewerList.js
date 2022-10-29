@@ -5,10 +5,10 @@ import "components/InterviewerList.scss";
 
 
 export default function interviewerList(props) {
-
+  const {} = props;
   if(global.config.debug) console.log("interviewerList PROPS:",props)
 
-  // !IMPORTANT -- DON'T FORGET THE KEY !!
+  // !IMPORTANT --DON'T FORGET THE KEY !!
   const interviewerArray = props.interviewers.map((item) => {
     return (
       <InterviewerListItem
@@ -16,8 +16,8 @@ export default function interviewerList(props) {
         
         name={item.name}
         avatar={item.avatar}
-        selected={item.id === props.interviewer}
-        setInterviewer={(event)=> props.setInterviewer(item.id)}
+        selected={item.id === props.value}
+        setInterviewer={(event)=> props.onChange(item.id)}
       />
     )
   });
