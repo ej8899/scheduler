@@ -164,6 +164,8 @@ storiesOf("DayList", module)
 // Appointment
 //
 import Appointment from "components/Appointment/index.js";
+import Header from "components/Appointment/Header.js";
+import Empty from "components/Appointment/Empty.js";
 
 storiesOf("Appointment", module)
   .addParameters({
@@ -171,3 +173,5 @@ storiesOf("Appointment", module)
   })
   .add("Appointment", () => <Appointment />)
   .add("Appointment w Time", () => <Appointment time="12pm" />)
+  .add("Header", () => <Header time="2pm" />)
+  .add("Empty", () => <Empty onAdd={action("onAdd")} />)
