@@ -170,6 +170,7 @@ import Show from "components/Appointment/Show.js";
 import Confirm from "components/Appointment/Confirm.js";
 import Status from "components/Appointment/Status.js";
 import Error from "components/Appointment/Error.js";
+import Form from "components/Appointment/Form.js";
 
 storiesOf("Appointment", module)
   .addParameters({
@@ -187,3 +188,15 @@ storiesOf("Appointment", module)
   .add("Confirm", () => <Confirm onConfirm={action("onConfirm")} onCancel={action("onCancel")} message="confirm delete"/>)
   .add("Status", () => <Status message="deleting or other message..."/>)
   .add("Error", () => <Error message="could not delete" onClose={action("onClose")}/>)
+  .add("Form-Edit", () => <Form 
+    student="Bob"
+    interviewer={3}
+    interviewers={interviewers}
+    onSave={action("onSave")}
+    onCancel={action("onCancel")}
+  />)
+  .add("Form-Add", () => <Form 
+    interviewers={interviewers}
+    onSave={action("onSave")}
+    onCancel={action("onCancel")}
+  />)
