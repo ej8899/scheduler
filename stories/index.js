@@ -166,6 +166,10 @@ storiesOf("DayList", module)
 import Appointment from "components/Appointment/index.js";
 import Header from "components/Appointment/Header.js";
 import Empty from "components/Appointment/Empty.js";
+import Show from "components/Appointment/Show.js";
+import Confirm from "components/Appointment/Confirm.js";
+import Status from "components/Appointment/Status.js";
+import Error from "components/Appointment/Error.js";
 
 storiesOf("Appointment", module)
   .addParameters({
@@ -175,3 +179,11 @@ storiesOf("Appointment", module)
   .add("Appointment w Time", () => <Appointment time="12pm" />)
   .add("Header", () => <Header time="2pm" />)
   .add("Empty", () => <Empty onAdd={action("onAdd")} />)
+  .add("Show", () => <Show 
+    student={"Lydia Miller-Jones"}
+    interviewer={interviewer}
+    onEdit={action("onEdit")}
+    onDelete={action("onDelete")}/>)
+  .add("Confirm", () => <Confirm onConfirm={action("onConfirm")} onCancel={action("onCancel")} message="confirm delete"/>)
+  .add("Status", () => <Status message="deleting or other message..."/>)
+  .add("Error", () => <Error message="could not delete" onClose={action("onClose")}/>)

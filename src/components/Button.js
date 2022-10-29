@@ -18,6 +18,6 @@ export default function Button(props) {
   }
 
   return (
-    <button disabled={props.disabled} className={buttonClass} onClick={myClickHandler} >{props.children}</button>
+    <button disabled={props.disabled} className={buttonClass} onClick={props.onClick} >{props.children}</button>
   );
 }
