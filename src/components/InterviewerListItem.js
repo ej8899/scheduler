@@ -4,14 +4,14 @@ import 'components/InterviewerListItem.scss';
 
 export default function InterviewListItem(props) {
   
-  // deal with classes
+  // deal with classes if the interviewer is SELECTED
   const componentClass = classNames("interviewers__item", {
     "interviewers__item--selected": props.selected
   });
 
-  function clickHandler() {
+  function clickHandler(id) {
     //props.setInterviewer(props.id);
-    props.setInterviewer; 
+    props.setInterviewer(id); 
     // above  line is refactored from above -- which ties to refactor of INterviewerList
     // see here: https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w17/activities/898?journey_step=54&workbook=22
     if (global.config.debug) console.log("TEST of click handler in InterviewListItem:PROPS:",props)
@@ -21,7 +21,7 @@ export default function InterviewListItem(props) {
 
   return (
 
-  <li className={componentClass} onClick={props.setInterviewer}>
+  <li className={componentClass} onClick={clickHandler}>
   <img
     className="interviewers__item-image"
     src={props.avatar}
