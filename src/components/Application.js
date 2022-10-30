@@ -6,6 +6,7 @@ import DayList  from "components/DayList.js";
 import Appointment  from "components/Appointment/index.js";
 
 
+// TODO remove data below
 // TEST DATA for DayListItem
 // const days = [
 //   {
@@ -75,6 +76,7 @@ export default function Application(props) {
   const [day, setDay] = useState("Tuesday"); // default day
   const [days,setDays] = useState([]);
 
+  // https://dmitripavlutin.com/react-useeffect-explanation/
   useEffect(() => {
     const testURL = `http://localhost:8001/api/days`;
     axios.get(testURL)
@@ -82,7 +84,7 @@ export default function Application(props) {
       if(global.config.debug) console.log("axiosGET(days):",response.data);
       setDays(response.data);
     });
-  }, [])
+  }, []) // empty array says to run ONCE after initial load of Application
   
 
   const appointmentList = Object.values(appointments).map((item) => {

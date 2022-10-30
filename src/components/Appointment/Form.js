@@ -56,7 +56,7 @@ return (
       <Button danger onClick={cancel}>Cancel</Button>
       <Button confirm 
         onClick={props.onSave}
-        // TODO State should be showing onSave
+        // TODO State should be showing onSave - or should it?  Maybe check w instructor.
         >Save</Button>
     </section>
   </section>
