@@ -4,8 +4,7 @@ import "components/Application.scss";
 
 import DayList  from "components/DayList.js";
 import Appointment  from "components/Appointment/index.js";
-import getAppointmentsForDay from "helpers/selectors.js";
-
+import {getAppointmentsForDay, getInterview }  from "helpers/selectors.js";
 
 // TODO remove data below
 // TEST DATA for DayListItem
@@ -126,12 +125,15 @@ export default function Application(props) {
 
   // parse out appointments for day
   dailyAppointments = getAppointmentsForDay(state,state.day)
-
+  
   const appointmentList = Object.values(dailyAppointments).map((item) => {
+    const interviewer = getInterview(state, item.interview);
     return (
       <Appointment
         key={item.id}
-        {...item}
+        id={item.id}
+        time={item.time}
+        interview={interviewer}
       />
     )
   })

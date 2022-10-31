@@ -3,7 +3,7 @@ import config from "config";
 
 //... returns an array of appointments for that day
 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/928?journey_step=55&workbook=23
-export default function getAppointmentsForDay(state, day) {
+export function getAppointmentsForDay(state, day) {
 
   let appointmentArray = [];
 
@@ -28,4 +28,18 @@ export default function getAppointmentsForDay(state, day) {
 
   if(global.config.debug) console.log("selectors - appointmentArray (RETURN data) (for day)",appointmentArray);
   return appointmentArray;
-};
+}
+
+
+// https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/945?journey_step=55
+export function getInterview(state, interview) {
+  if(global.config.debug) console.log("TEST:interview:",interview)
+  if (!interview) return null;
+//
+  const filterInterview = {};
+  filterInterview.student = interview.student;
+  if(global.config.debug) console.log("TEST:state.interviewers:",state.interviewers);
+  filterInterview.interviewer = state.interviewers[interview.interviewer];
+  if(global.config.debug) console.log("TEST:getInterview RETURN:",filterInterview)
+  return filterInterview;
+}
