@@ -26,6 +26,6 @@ export function getAppointmentsForDay(state, day) {
     appointmentArray.push(state.appointments[appointment]);
   }
 
-  if(global.config.debug) console.log("selectors - appointmentArray (for day)",appointmentArray);
+  if(global.config.debug) console.log("selectors - appointmentArray (RETURN data) (for day)",appointmentArray);
   return appointmentArray;
 }

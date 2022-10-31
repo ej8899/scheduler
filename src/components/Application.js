@@ -72,9 +72,22 @@ const appointments = {
 };
 
 
+
 export default function Application(props) {
-  const [day, setDay] = useState("Tuesday"); // default day
-  const [days,setDays] = useState([]);
+  const [state, setState] = useState ({
+    day: "Tuesday",
+    days: [],
+    appointments: {},
+  })
+
+  // for combined state object
+  // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/929?journey_step=55
+  const setDay = (day) => {
+    setState({ ...state, day });
+  };
+  const setDays = (days) => {
+    setState(prev => ({...state,days}));
+  };
 
   // https://dmitripavlutin.com/react-useeffect-explanation/
   useEffect(() => {
@@ -105,7 +118,7 @@ export default function Application(props) {
   
       <nav className="sidebar__menu">
   
-      <DayList days={days} value={day} onChange={setDay} />
+      <DayList days={state.days} value={state.day} onChange={setDay} />
 
       </nav>
 
