@@ -3,7 +3,7 @@ import config from "config";
 
 //... returns an array of appointments for that day
 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/928?journey_step=55&workbook=23
-export function getAppointmentsForDay(state, day) {
+export default function getAppointmentsForDay(state, day) {
 
   let appointmentArray = [];
 
@@ -28,4 +28,4 @@ export function getAppointmentsForDay(state, day) {
 
   if(global.config.debug) console.log("selectors - appointmentArray (RETURN data) (for day)",appointmentArray);
   return appointmentArray;
-}
+};
