@@ -177,7 +177,7 @@ storiesOf("Appointment", module)
   .add("Appointment", () => <Appointment />)
   .add("Appointment w Time", () => <Appointment time="12pm" />)
   .add("Header", () => <Header time="2pm" />)
-  .add("Empty", () => <Empty onAdd={action("onAdd")} />)
+  .add("Empty", () => <Empty onAdd={action("onAdd TESt")} />)
   .add("Show", () => <Show 
     student={"Lydia Miller-Jones"}
     interviewer={interviewer}

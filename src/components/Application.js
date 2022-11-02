@@ -5,6 +5,7 @@ import "components/Application.scss";
 import DayList  from "components/DayList.js";
 import Appointment  from "components/Appointment/index.js";
 import {getAppointmentsForDay, getInterview }  from "helpers/selectors.js";
+
 import { isFalsey } from "config";
 
 // TODO remove data below
