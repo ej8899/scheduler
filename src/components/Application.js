@@ -5,6 +5,7 @@ import "components/Application.scss";
 import DayList  from "components/DayList.js";
 import Appointment  from "components/Appointment/index.js";
 import {getAppointmentsForDay, getInterview }  from "helpers/selectors.js";
+import { isFalsey } from "config";
 
 // TODO remove data below
 // TEST DATA for DayListItem
@@ -79,6 +80,8 @@ export default function Application(props) {
     days: [],
     appointments: {},
   });
+
+  isFalsey("test")
 
   // for combined state object
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/929?journey_step=55

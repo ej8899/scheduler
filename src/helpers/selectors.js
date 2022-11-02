@@ -1,4 +1,5 @@
-import config from "config";
+import "config";
+
 
 
 //... returns an array of appointments for that day
@@ -14,9 +15,8 @@ export function getAppointmentsForDay(state, day) {
   const filterStateDays = state.days.filter(theDay => theDay.name === day);
 
   // no data, let's return before needless work
-  if (filterStateDays.length === 0 || state.days.length === 0) {
-    return appointmentArray;
-  }
+  if(isFalsey(filterStateDays.length) || isFalsey(state.days.length)) return [];
+    
 
   if(global.config.debug) console.log("selectors - filterStateDays:",filterStateDays);
 
@@ -34,8 +34,8 @@ export function getAppointmentsForDay(state, day) {
 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/945?journey_step=55
 export function getInterview(state, interview) {
   if(global.config.debug) console.log("TEST:interview:",interview)
-  if (!interview) return null;
-//
+  if (global.config.isFalsey(interview)) return null;
+
   const filterInterview = {};
   filterInterview.student = interview.student;
   if(global.config.debug) console.log("TEST:state.interviewers:",state.interviewers);
