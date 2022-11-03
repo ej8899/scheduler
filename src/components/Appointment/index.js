@@ -17,31 +17,39 @@ export default function Appointment(props) {
 
   if (global.config.debug) console.log("in Appointment - props:",props)
 
+  function save(name, interviewer) {
+    if (global.config.debug) console.log("in Appointment - save - name:",name)
+    const interview = {
+      student: name,
+      interviewer,
+    };
+    props.bookInterview(props.id, interview);
+  }
 
 
-return (
-<article className="appointment">
-<Header time={props.time} />
+  return (
+  <article className="appointment">
+  <Header time={props.time} />
 
-{mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+  {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
 
-{mode === SHOW && (
-  <Show
-    student={props.interview.student}
-    interviewer={props.interview.interviewer}
-  />
-)}
+  {mode === SHOW && (
+    <Show
+      student={props.interview.student}
+      interviewer={props.interview.interviewer}
+    />
+  )}
 
-{mode === CREATE && 
-<Form 
-    interviewers={props.interviewers}
-    onSave={() => console.log("onSave")}
-    onCancel={() => {console.log("onCancel");transition(EMPTY)}}
-  />
-}
+  {mode === CREATE && 
+  <Form 
+      interviewers={props.interviewers}
+      onSave={save}
+      onCancel={() => {console.log("onCancel");transition(EMPTY)}}
+    />
+  }
 
 
-</article>
-);
+  </article>
+  );
 
 };

@@ -128,6 +128,14 @@ export default function Application(props) {
     })
   },[]);
 
+  function bookInterview(id, interview) {
+    if(global.config.debug) console.log("APPLICATION:bookInterview:id:",id);
+    if(global.config.debug) console.log("APPLICATION:bookInterview:interview:",interview);
+  }
+
+
+
+
   // parse out appointments for day
   dailyAppointments = getAppointmentsForDay(state,state.day);
   interviewers = getInterviewersForDay(state,state.day);
@@ -141,6 +149,7 @@ export default function Application(props) {
         time={item.time}
         interview={interviewer}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     )
   })
