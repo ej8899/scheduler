@@ -54,8 +54,7 @@ return (
   <section className="appointment__card-right">
     <section className="appointment__actions">
       <Button danger onClick={cancel}>Cancel</Button>
-      <Button confirm 
-        onClick={props.onSave(student,interviewer)}
+      <Button confirm onClick={() => props.onSave(student,interviewer)}
         // TODO State should be showing onSave - or should it?  Maybe check w instructor.
         >Save</Button>
     </section>

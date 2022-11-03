@@ -131,6 +131,20 @@ export default function Application(props) {
   function bookInterview(id, interview) {
     if(global.config.debug) console.log("APPLICATION:bookInterview:id:",id);
     if(global.config.debug) console.log("APPLICATION:bookInterview:interview:",interview);
+
+    // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/963?journey_step=56&workbook=24
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    // setState({
+    //   ...state,
+    //   appointments
+    // });
   }
 
 
