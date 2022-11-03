@@ -4,7 +4,7 @@ import "components/Application.scss";
 
 import DayList  from "components/DayList.js";
 import Appointment  from "components/Appointment/index.js";
-import {getAppointmentsForDay, getInterview }  from "helpers/selectors.js";
+import {getAppointmentsForDay, getInterview, getInterviewersForDay }  from "helpers/selectors.js";
 
 import { isFalsey } from "config";
 
@@ -97,6 +97,7 @@ export default function Application(props) {
   };
   */
   let dailyAppointments = [];
+  let interviewers = [];
 
 
   // https://dmitripavlutin.com/react-useeffect-explanation/
@@ -128,8 +129,9 @@ export default function Application(props) {
   },[]);
 
   // parse out appointments for day
-  dailyAppointments = getAppointmentsForDay(state,state.day)
-  
+  dailyAppointments = getAppointmentsForDay(state,state.day);
+  interviewers = getInterviewersForDay(state,state.day);
+
   const appointmentList = Object.values(dailyAppointments).map((item) => {
     const interviewer = getInterview(state, item.interview);
     return (
@@ -138,6 +140,7 @@ export default function Application(props) {
         id={item.id}
         time={item.time}
         interview={interviewer}
+        interviewers={interviewers}
       />
     )
   })

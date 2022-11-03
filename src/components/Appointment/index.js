@@ -34,7 +34,7 @@ return (
 
 {mode === CREATE && 
 <Form 
-    interviewers={["test","test"]}
+    interviewers={props.interviewers}
     onSave={() => console.log("onSave")}
     onCancel={() => {console.log("onCancel");transition(EMPTY)}}
   />
