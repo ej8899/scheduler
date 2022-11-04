@@ -128,6 +128,9 @@ export default function Application(props) {
     })
   },[]);
 
+  //
+  // bookInterview (save into DB)
+  //
   function bookInterview(id, interview) {
     if(global.config.debug) console.log("APPLICATION:bookInterview:id:",id);
     if(global.config.debug) console.log("APPLICATION:bookInterview:interview:",interview);
@@ -141,13 +144,48 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
+    // PUT data into db: https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/963?journey_step=56&workbook=24
+    // reminder, this is TWO STEP action with axios.put
+    return axios.put(`http://localhost:8000/api/appointments/${id}`, { interview })
+    .then((res) => {
+      if(global.config.debug) console.log("BOOKINTERVIEW - PUT response:",res.status);
+      // 204 is all good
+      // TODO error handling?
+      setState({
+        ...state,
+        appointments
+      });
+      return;
+    })
+    // FOR LOCAL ONLY
     // setState({
-    //   ...state,
-    //   appointments
-    // });
+    //       ...state,
+    //       appointments
+    //     });
+    //     return;
   }
 
 
+  //
+  // removeInterview (delete From DB)
+  //
+  function cancelInterview(id,interview=null) {
+    const appointment = { 
+      ...state.appointments[id],
+      interview
+    }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+    if(global.config.debug) console.log("cancelInterview() id:",id);
+    return axios.delete(`http://localhost:8000/api/appointments/${id}`, { appointment })
+    .then((res) => {
+      if(global.config.debug) console.log("cancelINTERVIEW - PUT response:",res.status);
+      setState({...state, appointments})
+      return;
+    })
+  }
 
 
   // parse out appointments for day
@@ -164,6 +202,7 @@ export default function Application(props) {
         interview={interviewer}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     )
   })
