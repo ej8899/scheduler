@@ -48,13 +48,15 @@ export default function Appointment(props) {
   }
 
 
-  function remove() {
-    if(global.config.debug) console.log("in REMOVE():props",props)
+  function del() {
+    if(global.config.debug) console.log("in DEL():props",props)
+    // see below for CONFIRM,true for 'double back' in:
+    // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/966?journey_step=56&workbook=24
     transition(CONFIRM,true); // show the 'deleting in progress' message
     props
       .cancelInterview(props.id)
       .then((res) => {
-        if(global.config.debug) console.log("DELETE item response:", res);
+        if(global.config.debug) console.log("DEL item response:", res);
         transition(EMPTY,true);
       }).catch((err) => {
         if(global.config.debug) console.error(err);
@@ -102,7 +104,7 @@ export default function Appointment(props) {
     <Confirm
     message={"Delete this interview?"}
     onCancel={() => {back()}}
-    onConfirm={remove}
+    onConfirm={del}
     /> }
 
   { mode === SAVE && 
