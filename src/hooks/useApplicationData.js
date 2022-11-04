@@ -85,6 +85,30 @@ useEffect(() => {
 },[]);
 
 
+// deal with spots remaining - only do in here to ensure it's a success
+// https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/968?journey_step=56
+function spotsRemaining(type) {
+    let day = {};
+    const numDayOfWeek = findDay(state.day); // convert written day of week to day number
+    if(global.config.debug) console.log("state.day:",numDayOfWeek);
+    // reminder - we add to spots available if we remove an existing appointment!
+    if(type === "increase") {
+      day = {
+        ...state.days[numDayOfWeek],
+        spots: state.days[numDayOfWeek].spots + 1,
+      }
+    } else if (type === "decrease") {
+      day = {
+        ...state.days[numDayOfWeek],
+        spots: state.days[numDayOfWeek].spots - 1,
+      }
+    }
+    
+    let days = state.days;
+    days[numDayOfWeek] = day;
+    return days;
+}
+
 
 //
 // bookInterview (save into DB)
@@ -110,24 +134,9 @@ function bookInterview(id, interview) {
     // 204 is all good
     // TODO error handling?
 
-    // deal with spots remaining - only do in here to ensure it's a success
-    // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/968?journey_step=56
-    const numDayOfWeek = findDay(state.day); // convert written day of week to day number
-    if(global.config.debug) console.log("state.day:",numDayOfWeek);
-    // reminder - we add to spots available if we remove an existing appointment!
-    const day = {
-      ...state.days[numDayOfWeek],
-      spots: state.days[numDayOfWeek].spots - 1,
-    }
-    let days = state.days;
-    days[numDayOfWeek] = day;
+    const days = spotsRemaining("decrease");
 
-
-    setState({
-      ...state,
-      appointments, 
-      days
-    });
+    setState({ ...state, appointments, days });
     return res.status;
   })
 }
@@ -153,17 +162,7 @@ function cancelInterview(id,interview=null) {
   .then((res) => {
     if(global.config.debug) console.log("cancelINTERVIEW - PUT response:",res.status);
 
-    // deal with spots remaining - only do in here to ensure it's a success
-    const numDayOfWeek = findDay(state.day); // convert written day of week to day number
-    if(global.config.debug) console.log("state.day:",numDayOfWeek);
-    // reminder - we add to spots available if we remove an existing appointment!
-    const day = {
-      ...state.days[numDayOfWeek],
-      spots: state.days[numDayOfWeek].spots + 1,
-    }
-    let days = state.days;
-    days[numDayOfWeek] = day;
-
+    const days = spotsRemaining("increase");
     setState({...state, appointments, days})
     return res.status;
   })
