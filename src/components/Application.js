@@ -155,7 +155,7 @@ export default function Application(props) {
         ...state,
         appointments
       });
-      return;
+      return res.status;
     })
     // FOR LOCAL ONLY
     // setState({
@@ -183,7 +183,7 @@ export default function Application(props) {
     .then((res) => {
       if(global.config.debug) console.log("cancelINTERVIEW - PUT response:",res.status);
       setState({...state, appointments})
-      return;
+      return res.status;
     })
   }
 

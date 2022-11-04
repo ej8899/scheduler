@@ -6,6 +6,7 @@ import Empty from "components/Appointment/Empty.js";
 import Form from "components/Appointment/Form.js";
 import Status from "components/Appointment/Status.js";
 import Confirm from "components/Appointment/Confirm.js";
+import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode.js";
 //
 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w17/activities/900?journey_step=54 
@@ -18,7 +19,9 @@ export default function Appointment(props) {
   const SAVE    = "SAVE";
   const DELETE  = "DELETE";
   const CONFIRM = "CONFIRM";
-  const EDIT = "EDIT";
+  const EDIT    = "EDIT";
+  const ERROR_SAVE    = "ERROR_SAVE"
+  const ERROR_DELETE  = "ERROR_DELETE"
 
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
 
@@ -32,27 +35,32 @@ export default function Appointment(props) {
     };
     transition(SAVE);
     // this returns ASYNC ("later") when done - need to run transitions here!
-    props.bookInterview(props.id, interview)
+    props
+      .bookInterview(props.id, interview)
       .then((res) => {
         if(global.config.debug) console.log("BOOKINTERVIEW RESULT:", res)
         transition(SHOW);
       })
       .catch((err) => {
-        console.error(err)
+        if(global.config.debug) console.error(err);
+        transition(ERROR_SAVE,true);
       })
   }
 
 
   function remove() {
     if(global.config.debug) console.log("in REMOVE():props",props)
-    transition(CONFIRM); // show the 'deleting in progress' message
-    props.cancelInterview(props.id)
+    transition(CONFIRM,true); // show the 'deleting in progress' message
+    props
+      .cancelInterview(props.id)
       .then((res) => {
-        console.log("DELETE item response:", res)
-        transition(EMPTY, true);
+        if(global.config.debug) console.log("DELETE item response:", res);
+        transition(EMPTY,true);
       }).catch((err) => {
-        console.error(err)
-        transition(ERROR_DELETE);
+        if(global.config.debug) console.error(err);
+        // replacing mode
+        // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/966?journey_step=56&workbook=24
+        transition(ERROR_DELETE,true);
       })
   }
 
@@ -97,8 +105,18 @@ export default function Appointment(props) {
     onConfirm={remove}
     /> }
 
-  { mode === SAVE && <Status message={"Saving Appointment..."}/>}
-  { mode === CONFIRM && <Status message={"Deleting..."}/>}
+  { mode === SAVE && 
+    <Status message={"Saving Appointment..."}/>}
+
+  { mode === CONFIRM && 
+    <Status message={"Deleting..."}/>}
+
+{ mode === ERROR_SAVE && 
+    <Error  message={"Could not save.  Try again later."} onClose={() => {back()}}/>}
+
+  { mode === ERROR_DELETE && 
+    <Error  message={"Could not delete.  Try again later."} onClose={() => {back()}}/>}
+
   </article>
   );
 
