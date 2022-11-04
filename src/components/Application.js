@@ -167,7 +167,7 @@ export default function Application(props) {
 
 
   //
-  // removeInterview (delete From DB)
+  // cancelInterview (delete From DB)
   //
   function cancelInterview(id,interview=null) {
     const appointment = { 
