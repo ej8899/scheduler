@@ -32,6 +32,8 @@ function findDay(dayName,dayNum) {
     Wednesday:2,
     Thursday: 3,
     Friday:   4,
+    Saturday: 5,
+    Sunday:   6,
   }
   if(dayName) {
     return daysList[dayName];
@@ -42,10 +44,11 @@ function findDay(dayName,dayNum) {
 }
 
 const d = new Date();
-const dayName = findDay(null,d.getDay()-1);
-if(global.config.debug) console.log("WHAT DAY IS IT: ",dayName);
+let dayName = findDay(null,d.getDay()-1);
+if(global.config.debug) console.log("WHAT DAY IS IT: |" +dayName+"|");
 if (dayName === "Saturday" || dayName === "Sunday") {
-  dayName === "Tuesday";
+  dayName = "Tuesday";
+  if(global.config.debug) console.log("WHAT DAY IS IT NOW: ",dayName);
 }
 
 //

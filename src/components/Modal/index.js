@@ -32,7 +32,7 @@ export default function ZModal(props) {
           {props.children}
         </div>
         <div className="zmodal-footer">
-          <button className="button" onClick={props.onClose}>close</button>
+          <button className="zmodalbutton" onClick={props.onClose}>close</button>
         </div>
       </div>
     </div>,document.getElementById("root")

@@ -25,17 +25,24 @@ export default function Appointment(props) {
   const ERROR_DELETE  = "ERROR_DELETE"
 
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
+  let errorType ='';
 
   if (global.config.debug) console.log("in Appointment - props:",props)
 
   // using zModal
   const [showModal,setShowModal] = useState(false);
+  const [modalError,setModalError] = useState();
 
   function save(name, interviewer) {
 
     if(!name || !interviewer) {
       // can't have a null
-      if (global.config.debug) console.log("ERROR - trying to save NULL values")  
+      let messageUpdate;
+      if (global.config.debug) console.log("ERROR - trying to save NULL values");
+      if(!name) { messageUpdate = "student name" }
+      if(!interviewer) { messageUpdate = "interviewer" }
+      if (global.config.debug) console.log("ERROR -",errorType);
+      setModalError(messageUpdate);
       setShowModal(true);
       return;
     }
@@ -82,11 +89,13 @@ export default function Appointment(props) {
   return (
     
   <article className="appointment">
-  <Header time={props.time} />
-  <ZModal show={showModal} onClose={() => setShowModal(false)} title="form is empty">
-        <p>you need to fill otu the form proper
+  <Header time={props.time}/>
+  
+  <ZModal show={showModal} onClose={() => setShowModal(false)} title="form error">
+        <p>you're missing |{modalError}|
         </p>
-        </ZModal>
+  </ZModal>
+
   {mode === EMPTY && 
     <Empty onAdd={() => transition(CREATE)} />}
 
