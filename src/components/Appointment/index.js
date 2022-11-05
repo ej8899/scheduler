@@ -37,13 +37,16 @@ export default function Appointment(props) {
 
     if(!name || !interviewer) {
       // can't have a null
-      let messageUpdate;
-      if (global.config.debug) console.log("ERROR - trying to save NULL values");
-      if(!name) { messageUpdate = "student name" }
-      if(!interviewer) { messageUpdate = "interviewer" }
-      if (global.config.debug) console.log("ERROR -",errorType);
-      setModalError(messageUpdate);
-      setShowModal(true);
+
+      // this was for initial error modal before discovering project that deals with the errors here
+      
+      // let messageUpdate;
+      // if (global.config.debug) console.log("ERROR - trying to save NULL values");
+      // if(!name) { messageUpdate = "student name" }
+      // if(!interviewer) { messageUpdate = "interviewer" }
+      // if (global.config.debug) console.log("ERROR -",errorType);
+      // setModalError(messageUpdate);
+      // setShowModal(true);
       return;
     }
 
@@ -91,11 +94,6 @@ export default function Appointment(props) {
   <article className="appointment">
   <Header time={props.time}/>
   
-  <ZModal show={showModal} onClose={() => setShowModal(false)} title="form error">
-        <p>you're missing |{modalError}|
-        </p>
-  </ZModal>
-
   {mode === EMPTY && 
     <Empty onAdd={() => transition(CREATE)} />}
 

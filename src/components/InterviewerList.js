@@ -2,6 +2,8 @@ import React from "react";
 import InterviewerListItem from "./InterviewerListItem";
 import "components/InterviewerList.scss";
 
+// https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m08w20/activities/991?journey_step=61
+import PropTypes from 'prop-types';
 
 
 export default function interviewerList(props) {
@@ -33,3 +35,7 @@ export default function interviewerList(props) {
 
   );
 }
+
+interviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired
+};

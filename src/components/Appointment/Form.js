@@ -31,11 +31,11 @@ if (global.config.debug) console.log("in FORM:STATE:interviewer",interviewer)
 function validate() {
   if (global.config.debug) console.log("in FORM:VALIDATE")
   if (name === "") {
-    setError("Student name cannot be blank");
+    setError("Student name cannot be blank...");
     return;
   }
   if (interviewer === null) {
-    setError("Please select an interviewer");
+    setError("Please select an interviewer...");
     return;
   }
   props.onSave(name, interviewer);
