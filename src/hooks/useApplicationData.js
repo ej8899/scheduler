@@ -85,7 +85,6 @@ useEffect(() => {
 },[]);
 
 
-// deal with spots remaining - only do in here to ensure it's a success
 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/968?journey_step=56
 function spotsRemaining(type) {
     let day = {};
@@ -135,7 +134,6 @@ function bookInterview(id, interview) {
     // TODO error handling?
 
     const days = spotsRemaining("decrease");
-
     setState({ ...state, appointments, days });
     return res.status;
   })
@@ -155,15 +153,13 @@ function cancelInterview(id,interview=null) {
     [id]: appointment
   }
 
-  
-
   if(global.config.debug) console.log("cancelInterview() id:",id);
   return axios.delete(`${baseURL}appointments/${id}`, { appointment })
   .then((res) => {
     if(global.config.debug) console.log("cancelINTERVIEW - PUT response:",res.status);
 
     const days = spotsRemaining("increase");
-    setState({...state, appointments, days})
+    setState({...state, appointments, days});
     return res.status;
   })
 }

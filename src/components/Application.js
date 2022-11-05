@@ -8,6 +8,8 @@ import {getAppointmentsForDay, getInterview, getInterviewersForDay }  from "help
 import useApplicationData from "hooks/useApplicationData";
 import { isFalsey } from "config";
 
+import ZModal from "./Modal";
+
 // TODO remove data below
 // TEST DATA for DayListItem
 // const days = [
@@ -77,6 +79,10 @@ import { isFalsey } from "config";
 
 export default function Application(props) {
   
+  // using zModal
+  const [showModal,setShowModal] = useState(false);
+
+
   const {
     state,
     setDay,
@@ -130,11 +136,20 @@ export default function Application(props) {
     )
   })
 
+
+  
+
   return (
     <main className="layout">
       <section className="sidebar">
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       <img className="sidebar--centered" src="images/logo.png" alt="Interview Scheduler" />
+      
+      <button onClick={() => setShowModal(true) }>modal</button>
+      <ZModal show={showModal} onClose={() => setShowModal(false)} title="cookies">
+        this is the modal body
+      </ZModal>
+
       <hr className="sidebar__separator sidebar--centered" />
   
       <nav className="sidebar__menu">

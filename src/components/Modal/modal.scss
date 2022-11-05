@@ -1,0 +1,40 @@
+
+.zmodal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.zmodal.showzmodal {
+  opacity: 1;
+  pointer-events: visible;
+}
+
+.zmodal-content {
+  width: 500px;
+  background-color: #e2eae5;
+}
+
+.zmodal-header, .zmodal-footer {
+  padding: 10px;
+}
+
+.zmodal-title {
+  margin: 0;
+}
+
+.zmodal-body {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
