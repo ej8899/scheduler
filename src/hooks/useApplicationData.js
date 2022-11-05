@@ -48,7 +48,7 @@ let dayName = findDay(null,d.getDay()-1);
 if(global.config.debug) console.log("WHAT DAY IS IT: |" +dayName+"|");
 if (dayName === "Saturday" || dayName === "Sunday") {
   dayName = "Tuesday";
-  if(global.config.debug) console.log("WHAT DAY IS IT NOW: ",dayName);
+  if(global.config.debug) console.log("WHAT DAY IS IT NOW (change from sat/sun): ",dayName);
 }
 
 //
