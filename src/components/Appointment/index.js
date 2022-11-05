@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "components/Appointment/styles.scss";
 import Header from "components/Appointment/Header.js";
 import Show from "components/Appointment/Show.js";
@@ -8,6 +8,7 @@ import Status from "components/Appointment/Status.js";
 import Confirm from "components/Appointment/Confirm.js";
 import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode.js";
+import ZModal from "components/Modal";
 //
 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w17/activities/900?journey_step=54 
 //
@@ -27,7 +28,18 @@ export default function Appointment(props) {
 
   if (global.config.debug) console.log("in Appointment - props:",props)
 
+  // using zModal
+  const [showModal,setShowModal] = useState(false);
+
   function save(name, interviewer) {
+
+    if(!name || !interviewer) {
+      // can't have a null
+      if (global.config.debug) console.log("ERROR - trying to save NULL values")  
+      setShowModal(true);
+      return;
+    }
+
     if (global.config.debug) console.log("in Appointment - save - name:",name)
     const interview = {
       student: name,
@@ -68,9 +80,13 @@ export default function Appointment(props) {
 
 
   return (
+    
   <article className="appointment">
   <Header time={props.time} />
-
+  <ZModal show={showModal} onClose={() => setShowModal(false)} title="form is empty">
+        <p>you need to fill otu the form proper
+        </p>
+        </ZModal>
   {mode === EMPTY && 
     <Empty onAdd={() => transition(CREATE)} />}
 

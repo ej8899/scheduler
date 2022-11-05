@@ -10,70 +10,6 @@ import { isFalsey } from "config";
 
 import ZModal from "./Modal";
 
-// TODO remove data below
-// TEST DATA for DayListItem
-// const days = [
-//   {
-//     id: 1,
-//     name: "Monday",
-//     spots: 2,
-//   },
-//   {
-//     id: 2,
-//     name: "Tuesday",
-//     spots: 5,
-//   },
-//   {
-//     id: 3,
-//     name: "Wednesday",
-//     spots: 0,
-//   },
-//   {
-//     id: 4,
-//     name: "Thurs",
-//     spots: 16,
-//   },
-// ];
-
-// TEST DATA for appointments.
-// const appointments = {
-//   "1": {
-//     id: 1,
-//     time: "12pm",
-//   },
-//   "2": {
-//     id: 2,
-//     time: "1pm",
-//     interview: {
-//       student: "Lydia Miller-Jones",
-//       interviewer:{
-//         id: 3,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       }
-//     }
-//   },
-//   "3": {
-//     id: 3,
-//     time: "2pm",
-//   },
-//   "4": {
-//     id: 4,
-//     time: "3pm",
-//     interview: {
-//       student: "Archie Andrews",
-//       interviewer:{
-//         id: 4,
-//         name: "Cohana Roy",
-//         avatar: "https://i.imgur.com/FK8V841.jpg",
-//       }
-//     }
-//   },
-//   "5": {
-//     id: 5,
-//     time: "4pm",
-//   }
-// };
 
 
 
@@ -101,21 +37,6 @@ export default function Application(props) {
   let interviewers = [];
 
 
-  // https://dmitripavlutin.com/react-useeffect-explanation/
-  /* SINGLE useEffect with Axios GET
-  useEffect(() => {
-    const testURL = `http://localhost:8001/api/days`;
-    axios.get(testURL)
-    .then(response => {
-      if(global.config.debug) console.log("axiosGET(days):",response.data);
-      setDays(response.data);
-    });
-  }, []); */
-   // empty array says to run ONCE after initial load of Application
-
-
-
-
 
   // parse out appointments for day
   dailyAppointments = getAppointmentsForDay(state,state.day);
@@ -136,8 +57,18 @@ export default function Application(props) {
     )
   })
 
+  // https://dmitripavlutin.com/react-useeffect-explanation/
+  useEffect(() => {
+    cookiesModal(true);
+  }, [])
 
-  
+  function cookiesModal(modalState=false) {
+    console.log("IN COOKIES MODAL")
+    // load from localStorage - don't show modal if we've done it before
+    setShowModal(modalState);
+    // update localStorage once user says ok 
+  }
+
 
   return (
     <main className="layout">
@@ -145,9 +76,11 @@ export default function Application(props) {
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       <img className="sidebar--centered" src="images/logo.png" alt="Interview Scheduler" />
       
-      <button onClick={() => setShowModal(true) }>modal</button>
-      <ZModal show={showModal} onClose={() => setShowModal(false)} title="cookies">
-        this is the modal body
+  
+      <ZModal show={showModal} onClose={() => setShowModal(false)} title="Why yes, we do use cookies...">
+        this is the modal body<p>
+        [] todo is to set info in localStorage to not show this a 2nd time - ignoring for learning purposes 
+        </p>
       </ZModal>
 
       <hr className="sidebar__separator sidebar--centered" />
