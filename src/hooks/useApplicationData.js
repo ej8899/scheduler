@@ -43,6 +43,7 @@ function findDay(dayName,dayNum) {
   }
 }
 
+// grab current day or set default day to start on
 const d = new Date();
 let dayName = findDay(null,d.getDay()-1);
 if(global.config.debug) console.log("WHAT DAY IS IT: |" +dayName+"|");
