@@ -4,7 +4,7 @@ import classNames from "classnames";
 import "components/Button.scss";
 
 export default function Button(props) {
-
+  //if (global.config.debug) console.log("BUTTON PROPS",props)
 
   const buttonClass = classNames("button",
   {
@@ -18,6 +18,6 @@ export default function Button(props) {
   }
 
   return (
-    <button disabled={props.disabled} className={buttonClass} onClick={props.onClick} >{props.children}</button>
+    <button id={props.id} disabled={props.disabled} className={buttonClass} onClick={props.onClick} >{props.children}</button>
   );
 }

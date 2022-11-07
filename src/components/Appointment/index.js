@@ -9,6 +9,7 @@ import Confirm from "components/Appointment/Confirm.js";
 import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode.js";
 import ZModal from "components/Modal";
+import useApplicationData from "hooks/useApplicationData";
 //
 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w17/activities/900?journey_step=54 
 //
@@ -27,6 +28,28 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
   let errorType ='';
 
+  
+  //
+  // TODO - allow only 1 form open at a time (WIP)
+  //
+
+
+  function editOpen() {
+    console.log("in edits open:start:",global.config.editsOpen)
+
+    // if time in editsOPen, force a clkick on button w id of editsOpen time
+    // get the cancel button of form id of this 
+    if(global.config.editsOpen) {
+      
+      
+    }
+    // set the new editsOpen
+    global.config.editsOpen = props.time;
+    console.log("in edits open:exit:",global.config.editsOpen)
+  }
+
+
+
   if (global.config.debug) console.log("in Appointment - props:",props)
 
   // using zModal
@@ -39,7 +62,7 @@ export default function Appointment(props) {
       // can't have a null
 
       // this was for initial error modal before discovering project that deals with the errors here
-      
+
       // let messageUpdate;
       // if (global.config.debug) console.log("ERROR - trying to save NULL values");
       // if(!name) { messageUpdate = "student name" }
@@ -95,7 +118,7 @@ export default function Appointment(props) {
   <Header time={props.time}/>
   
   {mode === EMPTY && 
-    <Empty onAdd={() => transition(CREATE)} />}
+    <Empty onAdd={() => {editOpen();transition(CREATE)}} />}
 
   {mode === SHOW && (
     <Show
@@ -109,8 +132,9 @@ export default function Appointment(props) {
   {mode === CREATE && 
     <Form 
     interviewers={props.interviewers}
+    time={props.time}
     onSave={save}
-    onCancel={() => {console.log("onCancel");transition(EMPTY)}}
+    onCancel={() => {console.log("onCancel of create");transition(EMPTY)}}
     />
   }
 
@@ -136,7 +160,7 @@ export default function Appointment(props) {
   { mode === CONFIRM && 
     <Status message={"Deleting..."}/>}
 
-{ mode === ERROR_SAVE && 
+  { mode === ERROR_SAVE && 
     <Error  message={"Could not save.  Try again later."} onClose={() => {back()}}/>}
 
   { mode === ERROR_DELETE && 

@@ -47,7 +47,7 @@ function findDay(dayName,dayNum) {
 const d = new Date();
 let dayName = findDay(null,d.getDay()-1);
 if(global.config.debug) console.log("WHAT DAY IS IT: |" +dayName+"|");
-if (dayName === "Saturday" || dayName === "Sunday") {
+if (dayName === "Saturday" || dayName === "Sunday" || dayName === undefined) {
   dayName = "Tuesday";
   if(global.config.debug) console.log("WHAT DAY IS IT NOW (change from sat/sun): ",dayName);
 }
@@ -67,6 +67,7 @@ const [state, setState] = useState ({
 const setDay = (day) => {
   setState({ ...state, day });
 };
+
 
 
 
@@ -175,7 +176,7 @@ return {
   state, 
   setDay,
   bookInterview,
-  cancelInterview
+  cancelInterview,
 }
 
 } // end of useApplicationData()
