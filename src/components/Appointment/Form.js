@@ -31,7 +31,7 @@ if (global.config.debug) console.log("in FORM:STATE:interviewer",interviewer)
 
 function validate() {
   if (global.config.debug) console.log("in FORM:VALIDATE")
-  if (name === "") {
+  if (student === "") {
     setError("student name cannot be blank");
     return;
   }
@@ -40,7 +40,7 @@ function validate() {
     return;
   }
   setError("");
-  props.onSave(name, interviewer);
+  props.onSave(student, interviewer);
 }
 
 return (
@@ -53,8 +53,8 @@ return (
         name="name"
         type="text"
         placeholder="Enter Student Name"
-        value = {name}
-        onChange={(event) => setName(event.target.value)}
+        value = {student}
+        onChange={(event) => setStudent(event.target.value)}
         data-testid="student-name-input"
         
         // !REMINDER - we have to use state
@@ -72,7 +72,7 @@ return (
   </section>
   <section className="appointment__card-right">
     <section className="appointment__actions">
-      <Button danger   id={props.time} onClick={cancel}>Cancel</Button>
+      <Button danger   id={props.time} onClick={cancel} >Cancel</Button>
       <Button confirm onClick={event=>validate()}>Save</Button>
     </section>
   </section>

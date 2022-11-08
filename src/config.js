@@ -9,8 +9,8 @@
 module.exports = global.config = {
   // debug mode true or false
   // usage is:  if (global.config.debug) console.log("debugging info here"); // or of course, other options for debug purposes
-  debug: false,
-  editsOpen: "",
+  debug: true,
+  editsOpen: {},
   editRef: null,
 
   // isFalsey(value) - is true if false value - checks Nan, 0, null, undefined, false, ""

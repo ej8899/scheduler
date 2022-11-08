@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import classNames from "classnames";
 
 import "components/Button.scss";
@@ -12,12 +12,17 @@ export default function Button(props) {
     "button--danger": props.danger,
   });
 
+  const inputRef = React.useRef(null);
+  if(props.danger) {
+    global.config.editsOpen = inputRef;
+  }
+
   function myClickHandler() {
     if (global.config.debug) console.log("TEST of click handler in Button.js")
     props.onClick();
   }
 
   return (
-    <button id={props.id} disabled={props.disabled} className={buttonClass} onClick={props.onClick} >{props.children}</button>
+    <button ref={inputRef} id={props.id} disabled={props.disabled} className={buttonClass} onClick={props.onClick} >{props.children}</button>
   );
 }

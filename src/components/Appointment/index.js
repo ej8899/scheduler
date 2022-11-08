@@ -39,12 +39,11 @@ export default function Appointment(props) {
 
     // if time in editsOPen, force a clkick on button w id of editsOpen time
     // get the cancel button of form id of this 
-    if(global.config.editsOpen) {
-      
-      
+    if(!isFalsey(global.config.editsOpen.current)) {
+      console.log("CLOSING prior form")
+      global.config.editsOpen.current.click();
     }
-    // set the new editsOpen
-    global.config.editsOpen = props.time;
+    global.config.editsOpen = {};
     console.log("in edits open:exit:",global.config.editsOpen)
   }
 
@@ -125,7 +124,7 @@ export default function Appointment(props) {
     student={props.interview.student}
     interviewer={props.interview.interviewer}
     onDelete={() => {transition(DELETE)}}
-    onEdit={() => {transition(EDIT)}}
+    onEdit={() => {editOpen();transition(EDIT)}}
     />
   )}
 
