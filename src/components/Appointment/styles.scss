@@ -41,7 +41,7 @@ $appointment-height: 11rem;
     justify-content: space-between;
     flex-flow: row wrap;
     color: $white;
-
+    animation: fadeIn 0.5s;
     &-left {
       display: flex;
       flex-direction: column;
@@ -138,10 +138,14 @@ $appointment-height: 11rem;
     height: 2rem;
     margin-bottom: 0.25rem;
     width: 100%;
-
     &:focus {
       outline: none;
     }
+  }
+
+  @keyframes fadeIn {
+    0% {opacity: 0; }
+    100% {opacity: 1; }
   }
 
   &__status-image {
