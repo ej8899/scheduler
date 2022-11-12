@@ -22,6 +22,7 @@ const reset = function () {
 };
 const cancel = function () {
   reset();
+  setError("");
   props.onCancel();
 };
 

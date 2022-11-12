@@ -58,9 +58,11 @@ export default function Application(props) {
   })
 
   // https://dmitripavlutin.com/react-useeffect-explanation/
+  /*
   useEffect(() => {
     cookiesModal(true);
   }, [])
+  */
 
   function cookiesModal(modalState=false) {
     console.log("IN COOKIES MODAL")
@@ -76,13 +78,14 @@ export default function Application(props) {
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       <img className="sidebar--centered" src="images/logo.png" alt="Interview Scheduler" />
       
-  
+  {/*
       <ZModal show={showModal} onClose={() => setShowModal(false)} title="Why yes, we do use cookies...">
         this is the modal body<p>
         [] todo is to set info in localStorage to not show this a 2nd time - ignoring for learning purposes 
         </p>
       </ZModal>
-
+  */}
+  
       <hr className="sidebar__separator sidebar--centered" />
   
       <nav className="sidebar__menu">
