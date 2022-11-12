@@ -14,7 +14,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+//import axios from "__mocks__/axios";
 const baseURL = "http://localhost:8001/api/";
 
 export default function useApplicationData() {
@@ -76,9 +76,9 @@ const setDay = (day) => {
 //
 //
 useEffect(() => {
-  const daysURL         = `${baseURL}days`;
-  const appointmentURL  = `${baseURL}appointments`;
-  const interviewersURL = `${baseURL}interviewers`;
+  const daysURL         = `/api/days`;
+  const appointmentURL  = `/api/appointments`;
+  const interviewersURL = `/api/interviewers`;
   Promise.all([
     axios.get(daysURL),
     axios.get(appointmentURL),
@@ -87,8 +87,10 @@ useEffect(() => {
     if(global.config.debug) console.log("axiosGET(DAYS):",all[0].data);
     if(global.config.debug) console.log("axiosGET(APPOINTMENTS):",all[1].data);
     if(global.config.debug) console.log("axiosGET(INTERVIEWERS):",all[2].data);
-    setState(prev=>({...prev, days:all[0].data, appointments:all[1].data, interviewers:all[2].data}));
-  })
+    setState(prev =>  ({ ...prev,  days:all[0].data,  appointments:all[1].data,  interviewers: all[2].data}));
+  }).catch((err) => {
+    console.error("ERR in axiosGET:",err);
+  });
 },[]);
 
 

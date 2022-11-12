@@ -3,6 +3,7 @@ import React from "react";
 import { render, cleanup } from "@testing-library/react";
 
 import DayListItem from "components/DayListItem";
+import '../../config'; // for global configuration variables (EJ added)
 
 afterEach(cleanup);
 

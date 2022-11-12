@@ -16,7 +16,7 @@ import ZModal from "./Modal";
 export default function Application(props) {
   
   // using zModal
-  const [showModal,setShowModal] = useState(false);
+  //const [showModal,setShowModal] = useState(false);
 
 
   const {
@@ -85,7 +85,7 @@ export default function Application(props) {
         </p>
       </ZModal>
   */}
-  
+
       <hr className="sidebar__separator sidebar--centered" />
   
       <nav className="sidebar__menu">
