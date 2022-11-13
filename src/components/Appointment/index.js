@@ -35,7 +35,7 @@ export default function Appointment(props) {
 
 
   function editOpen() {
-    console.log("in edits open:start:",global.config.editsOpen)
+    if (global.config.debug) console.log("in editOpen:start:",global.config.editsOpen)
 
     // if time in editsOPen, force a clkick on button w id of editsOpen time
     // get the cancel button of form id of this 
@@ -44,7 +44,7 @@ export default function Appointment(props) {
       global.config.editsOpen.current.click();
     }
     global.config.editsOpen = {};
-    console.log("in edits open:exit:",global.config.editsOpen)
+    if (global.config.debug) console.log("in editOpen:exit:",global.config.editsOpen)
   }
 
 
