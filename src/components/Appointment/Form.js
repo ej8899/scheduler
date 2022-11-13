@@ -17,7 +17,8 @@ const [name,setName] = useState(props.name || "");
 
 // FUNCTIONS
 const reset = function () {
-  setStudent("");
+  //setStudent("");
+  setName("");
   setInterviewer(null);
 };
 const cancel = function () {
@@ -32,7 +33,8 @@ if (global.config.debug) console.log("in FORM:STATE:interviewer",interviewer)
 
 function validate() {
   if (global.config.debug) console.log("in FORM:VALIDATE")
-  if (student === "") {
+  //if (student === "") {
+  if (name === "") {
     setError("student name cannot be blank");
     return;
   }
@@ -41,7 +43,8 @@ function validate() {
     return;
   }
   setError("");
-  props.onSave(student, interviewer);
+  //props.onSave(student, interviewer);
+  props.onSave(name, interviewer);
 }
 
 return (
@@ -51,11 +54,14 @@ return (
     <form id={props.time} autoComplete="off" onSubmit={(event) => event.preventDefault()}>
       <input
         className="appointment__create-input text--semi-bold"
-        name="name"
+        //name="name"
+        name = {props.name}
         type="text"
         placeholder="Enter Student Name"
-        value = {student}
-        onChange={(event) => setStudent(event.target.value)}
+        // value = {student}
+        value = {name}
+        //onChange={(event) => setStudent(event.target.value)}
+        onChange={(event) => setName(event.target.value)}
         data-testid="student-name-input"
         
         // !REMINDER - we have to use state
