@@ -7,9 +7,15 @@
 // import './config.js'; // for global configuration variables (EJ added)
 
 module.exports = global.config = {
+  // application details:
+  version: "1.0",
+  developer: "ernie johnson",
+
   // debug mode true or false
   // usage is:  if (global.config.debug) console.log("debugging info here"); // or of course, other options for debug purposes
   debug: false,
+  
+  // additional global vars and functions:
   editsOpen: {},
   editRef: null,
 

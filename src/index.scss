@@ -22,6 +22,14 @@ body {
   background-color: $white;
 }
 
+.socicons, a {
+  color:$white;
+  padding-top: 20px;
+}
+.socicons, a:hover {
+  color:orange;
+}
+
 @media only screen and (max-width: 960px) {
   html {
     font-size: 12px;
