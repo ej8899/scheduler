@@ -20,21 +20,23 @@ export default function ZModal(props) {
     };
   }, [closeOnEscapeKeyDown]);
 
-  return ReactDOM.createPortal (
+  // props.title - deprecated 2022-11-14 - along with zmodal-title class
+  
+  //return ReactDOM.createPortal (
+  return (
     <div className={`zmodal ${props.show ? 'showzmodal' : ''}`} onClick={props.onClose}>
       <div className="zmodal-content" onClick={e => e.stopPropagation()}>
-        <div className="zmodal-header">
-          <h4 className="zmodal-title">
-            {props.title}
-          </h4>
+        <div className="zmodal-header" align="right">
+          <i onClick={props.onClose} className="zmodalclose fa-regular fa-circle-xmark fa-xl"></i>
         </div>
         <div className="zmodal-body">
           {props.children}
         </div>
-        <div className="zmodal-footer">
+        <div className="zmodal-footer" align="center">
           <button className="zmodalbutton" onClick={props.onClose}>close</button>
         </div>
       </div>
-    </div>,document.getElementById("root")
+    </div>
   );
+  // ,document.getElementById("root") // was above  as part of the return
 }

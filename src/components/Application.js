@@ -11,13 +11,22 @@ import { isFalsey } from "config";
 import ZModal from "./Modal";
 
 
-
-
 export default function Application(props) {
   
   // using zModal
-  //const [showModal,setShowModal] = useState(false);
-
+  // todo - how do we wrap this in an 'if' statement given that it's not to be in an if statement? (useeffect)
+  // https://reactjs.org/docs/hooks-rules.html#explanation
+  const [showModal,setShowModal] = useState(false);
+  
+  let mymodalMessage = `<div align=center>
+  <i class="fashadow fa-solid fa-cookie-bite" style="font-size:6rem;color:orange"></i>
+  <br clear=all><BR>
+  <BIG>Why yes, we do use cookies in this application.<BR>
+  Please accept our cookies to continue!</BIG>
+  <BR><BR>
+  </div>
+  `;
+  const [modalMessage,setModalMessage] = useState(mymodalMessage);
 
   const {
     state,
@@ -58,11 +67,9 @@ export default function Application(props) {
   })
 
   // https://dmitripavlutin.com/react-useeffect-explanation/
-  /*
-  useEffect(() => {
-    cookiesModal(true);
-  }, [])
-  */
+  if(global.config.cookiesModal) {
+    useEffect(() => { cookiesModal(true); }, []);
+  }
 
   function cookiesModal(modalState=false) {
     console.log("IN COOKIES MODAL")
@@ -71,21 +78,41 @@ export default function Application(props) {
     // update localStorage once user says ok 
   }
 
+  function showAbout() {
+    let mymodalMessage = `<div align=center>
+    <i class="fashadow fa-solid fa-circle-question" style="font-size:6rem;color:orange"></i>
+    <br clear=all><BR>
+    <BIG>
+    <B>LHL Scheduler App</B><BR>
+    is a project for learning React and<BR>
+    various testing integrations.<BR><BR>
+    Modified by ${global.config.appDeveloper}<BR>
+    <i class="fa-regular fa-copyright"></i> 2022, All Rights Reserved<BR>
+    Version: ${global.config.appVersion}
+    </BIG>
+
+    <BR><BR>
+    </div>
+    `;
+    setModalMessage(mymodalMessage)
+    setShowModal(true);
+    return;
+  }
 
   return (
     <main className="layout">
       <section className="sidebar">
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       <img className="sidebar--centered" src="images/logo.png" alt="Interview Scheduler" />
-      
-  {/*
-      <ZModal show={showModal} onClose={() => setShowModal(false)} title="Why yes, we do use cookies...">
-        this is the modal body<p>
-        [] todo is to set info in localStorage to not show this a 2nd time - ignoring for learning purposes 
-        </p>
+
+      { global.config.cookiesModal && 
+      <ZModal show={showModal} onClose={() => setShowModal(false)} title="Why yes, we do use cookies..." >
+        <div dangerouslySetInnerHTML={{__html: modalMessage}}></div>
       </ZModal>
-  */}
-      <div className="socicons" align="center"><a href="https://github.com/ej8899/scheduler" target="_new"><i className="fa-brands fa-square-github fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://ca.linkedin.com/in/ernie-johnson-3b77829b" target="_new"><i className="fa-brands fa-linkedin fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://github.com/ej8899/scheduler" target="_new"><i className="fa-brands fa-square-twitter fa-xl"></i></a></div>
+      }
+    
+  
+      <div className="socicons" align="center"><a href="https://github.com/ej8899/scheduler" target="_new"><i className="fa-brands fa-square-github fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://ca.linkedin.com/in/ernie-johnson-3b77829b" target="_new"><i className="fa-brands fa-linkedin fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://github.com/ej8899/scheduler" target="_new"><i className="fa-brands fa-square-twitter fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a><i onClick={() => showAbout() }  className="fa-solid fa-circle-question fa-xl"></i></a></div>
 
       <hr className="sidebar__separator sidebar--centered" />
   
@@ -102,6 +129,7 @@ export default function Application(props) {
         {appointmentList}
         <Appointment key="last" time="5pm"/>
       </section>
+      
     </main>
   );
 }

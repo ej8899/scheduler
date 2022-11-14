@@ -45,8 +45,8 @@ function findDay(dayName,dayNum) {
 
 // grab current day or set default day to start on
 const d = new Date();
-let dayName = findDay(null,d.getDay()-1);
-if(global.config.debug) console.log("WHAT DAY IS IT: |" +dayName+"|");
+let dayName = findDay(null,d.getDay() - 1);
+if(global.config.debug) console.log("WHAT DAY IS IT: |" + dayName + "|");
 if (dayName === "Saturday" || dayName === "Sunday" || dayName === undefined) {
   dayName = "Monday";
   if(global.config.debug) console.log("WHAT DAY IS IT NOW (change from sat/sun): ",dayName);
@@ -69,11 +69,8 @@ const setDay = (day) => {
 };
 
 
-
-
-
 //
-//
+// grab our data
 //
 useEffect(() => {
   const daysURL         = `/api/days`;

@@ -28,12 +28,9 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
   let errorType ='';
 
-  
   //
-  // TODO - allow only 1 form open at a time (WIP)
+  // extrastretch -- don't allow more than one edit form open at a time
   //
-
-
   function editOpen() {
     if (global.config.debug) console.log("in editOpen:start:",global.config.editsOpen)
 
@@ -54,23 +51,25 @@ export default function Appointment(props) {
   // using zModal
   const [showModal,setShowModal] = useState(false);
   const [modalError,setModalError] = useState();
+ 
 
   function save(name, interviewer) {
-
     if(!name || !interviewer) {
       // can't have a null
-
       // this was for initial error modal before discovering project that deals with the errors here
-
-      // let messageUpdate;
-      // if (global.config.debug) console.log("ERROR - trying to save NULL values");
-      // if(!name) { messageUpdate = "student name" }
-      // if(!interviewer) { messageUpdate = "interviewer" }
-      // if (global.config.debug) console.log("ERROR -",errorType);
-      // setModalError(messageUpdate);
-      // setShowModal(true);
+      let messageUpdate;
+      if (global.config.debug) console.log("ERROR - trying to save NULL values");
+      if(!name) { messageUpdate = "student name" }
+      if(!interviewer) { messageUpdate = "interviewer" }
+      if (global.config.debug) console.log("ERROR -",errorType);
+      setModalError(messageUpdate);
+      setShowModal(true);
       return;
     }
+    // modal 
+    //let messageUpdate ="in saving"
+    //setModalError(messageUpdate);
+    //setShowModal(true);
 
     if (global.config.debug) console.log("in Appointment - save - name:",name)
     const interview = {
@@ -114,6 +113,9 @@ export default function Appointment(props) {
   return (
     
   <article className="appointment" data-testid="appointment">
+      <ZModal show={showModal} onClose={() => setShowModal(false)} title="Why yes, we do use cookies...">
+      {modalError}
+      </ZModal>
   <Header time={props.time}/>
   
   {mode === EMPTY && 
@@ -142,6 +144,7 @@ export default function Appointment(props) {
     onCancel={() => {back()}}
     onSave={save}
     student={props.interview.student}
+    name={props.interview.student}
     interviewer={props.interview.interviewer.id}
     interviewers={props.interviewers}
     />}
@@ -160,7 +163,8 @@ export default function Appointment(props) {
     <Status message={"Deleting..."}/>}
 
   { mode === ERROR_SAVE && 
-    <Error  message={"Could not save.  Try again later."} onClose={() => {back()}}/>}
+    <Error  message={"Could not save.  Try again later."} onClose={() => {back()}}/>
+    }
 
   { mode === ERROR_DELETE && 
     <Error  message={"Could not delete.  Try again later."} onClose={() => {back()}}/>}

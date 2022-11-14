@@ -8,18 +8,20 @@
 
 module.exports = global.config = {
   // application details:
-  version: "1.0",
-  developer: "ernie johnson",
+  appVersion: "1.0",
+  appDeveloper: "Ernie Johnson",
 
   // debug mode true or false
   // usage is:  if (global.config.debug) console.log("debugging info here"); // or of course, other options for debug purposes
   debug: false,
+
+  cookiesModal: true,
   
   // additional global vars and functions:
   editsOpen: {},
   editRef: null,
 
-  // isFalsey(value) - is true if false value - checks Nan, 0, null, undefined, false, ""
+  // isFalsey(value) - is true if false value - checks Nan, 0, null, undefined, false, and ""
   isFalsey: function(value) { return !value},
 };
 
