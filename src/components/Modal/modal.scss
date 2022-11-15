@@ -42,17 +42,19 @@
   cursor: pointer;
 }
 .zmodalbutton:hover {
-  background-color: grey;
+  background-color: rgb(69, 68, 68);
   color:orange;
   cursor: pointer;
 }
 .zmodalclose {
-  color:black;
+  color:rgb(50, 49, 49);
   font-size:2rem;
+  cursor: pointer;
 }
 .zmodalclose:hover {
-  color:orange;
+  color:red !important;
 }
+
 
 .zmodal-content {
   position: absolute;

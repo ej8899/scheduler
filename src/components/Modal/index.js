@@ -21,22 +21,20 @@ export default function ZModal(props) {
   }, [closeOnEscapeKeyDown]);
 
   // props.title - deprecated 2022-11-14 - along with zmodal-title class
-  
-  //return ReactDOM.createPortal (
   return (
     <div className={`zmodal ${props.show ? 'showzmodal' : ''}`} onClick={props.onClose}>
       <div className="zmodal-content" onClick={e => e.stopPropagation()}>
         <div className="zmodal-header" align="right">
-          <i onClick={props.onClose} className="zmodalclose fa-regular fa-circle-xmark fa-xl"></i>
+          <i onClick={props.onClose} className="zmodalclose fa-regular fa-circle-xmark fa-xl" style={{color:'#323131',}}></i>
         </div>
         <div className="zmodal-body">
+          {/*<div dangerouslySetInnerHTML={{__html: props.body}}></div>*/}
           {props.children}
         </div>
         <div className="zmodal-footer" align="center">
-          <button className="zmodalbutton" onClick={props.onClose}>close</button>
+          <button className="zmodalbutton" onClick={props.onClose}>{props.buttontext || "continue"}</button>
         </div>
       </div>
     </div>
   );
-  // ,document.getElementById("root") // was above  as part of the return
 }

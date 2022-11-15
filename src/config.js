@@ -15,7 +15,8 @@ module.exports = global.config = {
   // usage is:  if (global.config.debug) console.log("debugging info here"); // or of course, other options for debug purposes
   debug: false,
 
-  cookiesModal: true,
+  cookiesModal: true,       // use modal windows in this app
+  useToday:     true,       // use today to set current day view in scheduler - fails tests if true
   
   // additional global vars and functions:
   editsOpen: {},

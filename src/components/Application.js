@@ -18,15 +18,26 @@ export default function Application(props) {
   // https://reactjs.org/docs/hooks-rules.html#explanation
   const [showModal,setShowModal] = useState(false);
   
-  let mymodalMessage = `<div align=center>
-  <i class="fashadow fa-solid fa-cookie-bite" style="font-size:6rem;color:orange"></i>
-  <br clear=all><BR>
-  <BIG>Why yes, we do use cookies in this application.<BR>
-  Please accept our cookies to continue!</BIG>
-  <BR><BR>
-  </div>
-  `;
-  const [modalMessage,setModalMessage] = useState(mymodalMessage);
+  let styles = {
+    color: "navy",
+    cursor: "pointer"
+  }
+  let mymodalMessage = (
+    <div>
+    <div align="center">
+    <div><img className="fashadow" src="./images/cookie.svg" alt="myCookie" width="200" height="200" /></div>
+    <big>
+    Our web application uses cookies to provide you with the best browsing
+    experience and relevant information.
+    <br/><br/>
+    Before continuing
+    to use our web application, you agree & accept our <span style={styles} onClick={showPrivacy}>Cookie & Privacy Policy</span>.
+    </big>
+    </div>
+    </div>
+  );
+  const [modalMessage,setModalMessage]  = useState(mymodalMessage);
+  const [modalButton,setModalButton]    = useState("AGREE & CONTINUE");
 
   const {
     state,
@@ -38,7 +49,7 @@ export default function Application(props) {
 
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/930?journey_step=55
   /*
-  const setDays = (days) => {
+    const setDays = (days) => {
     setState(prev => ({...state,days}));
   };
   */
@@ -79,25 +90,60 @@ export default function Application(props) {
   }
 
   function showAbout() {
-    let mymodalMessage = `<div align=center>
-    <i class="fashadow fa-solid fa-circle-question" style="font-size:6rem;color:orange"></i>
-    <br clear=all><BR>
-    <BIG>
-    <B>LHL Scheduler App</B><BR>
-    is a project for learning React and<BR>
-    various testing integrations.<BR><BR>
-    Modified by ${global.config.appDeveloper}<BR>
-    <i class="fa-regular fa-copyright"></i> 2022, All Rights Reserved<BR>
-    Version: ${global.config.appVersion}
-    </BIG>
-
-    <BR><BR>
-    </div>
-    `;
+    let styles = {
+      fontSize: '6rem',
+      color: 'orange',
+    }
+    const mymodalMessage = (
+      <div align="center">
+      <i className="fashadow fa-solid fa-circle-question" style={styles}></i><br/><br/>
+      <h2>
+      LHL Scheduler App</h2><br/><big>
+      This is a project for learning React and<br/>
+      various testing integrations such as<br/>
+      Jest and Cypress.<br/><br/>
+      Modified by {global.config.appDeveloper}<br/>
+      <i className="fa-regular fa-copyright"></i> 2022, All Rights Reserved<br/>
+      Version: {global.config.appVersion}
+      </big>
+      <br/><br/>
+      </div>
+    );
     setModalMessage(mymodalMessage)
+    setModalButton("");
     setShowModal(true);
     return;
   }
+
+
+  function showPrivacy() {
+    let styles = {
+      fontSize:"6rem",
+      color:"orange"
+    }
+    let mymodalMessage = (
+      <div>
+      <div align="center">
+      <i className="fashadow fa-solid fa-lock" style={styles}></i>
+      <br/><br/>
+    
+      <h3>Privacy Policy</h3><br/>
+      Nullam cursus velit ac dui cursus hendrerit. Proin malesuada erat eu tempus sagittis. Pellentesque sit amet odio at mauris tristique egestas at vulputate mauris. Duis eget est eu neque accumsan fringilla in at mauris. Donec molestie libero sem, et mattis tellus porttitor quis. Nulla ut dolor quis nibh maximus venenatis. Vestibulum iaculis tempus commodo. Nulla tincidunt dolor mauris, quis eleifend massa commodo in. Nulla vehicula neque nec malesuada eleifend. Vivamus sagittis ornare risus, vel semper purus aliquam nec. Donec porttitor elit sem, vel rhoncus diam vulputate sed.
+      <br/><br/>
+      </div>
+  
+      </div>
+    );
+
+    setModalMessage(mymodalMessage)
+    setModalButton("agree");
+    setShowModal(true);
+    return;
+  }
+
+
+
+
 
   return (
     <main className="layout">
@@ -106,13 +152,13 @@ export default function Application(props) {
       <img className="sidebar--centered" src="images/logo.png" alt="Interview Scheduler" />
 
       { global.config.cookiesModal && 
-      <ZModal show={showModal} onClose={() => setShowModal(false)} title="Why yes, we do use cookies..." >
-        <div dangerouslySetInnerHTML={{__html: modalMessage}}></div>
-      </ZModal>
+        <ZModal buttontext={modalButton} show={showModal} onClose={() => setShowModal(false)} title="Why yes, we do use cookies..." body={modalMessage}>
+          {modalMessage}
+        </ZModal>
       }
     
   
-      <div className="socicons" align="center"><a href="https://github.com/ej8899/scheduler" target="_new"><i className="fa-brands fa-square-github fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://ca.linkedin.com/in/ernie-johnson-3b77829b" target="_new"><i className="fa-brands fa-linkedin fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://github.com/ej8899/scheduler" target="_new"><i className="fa-brands fa-square-twitter fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a><i onClick={() => showAbout() }  className="fa-solid fa-circle-question fa-xl"></i></a></div>
+      <div className="socicons-container" align="center"><a className="socicons" href="https://github.com/ej8899/scheduler" target="_new"><i className="fa-brands fa-square-github fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href="https://ca.linkedin.com/in/ernie-johnson-3b77829b" target="_new"><i className="fa-brands fa-linkedin fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href="https://github.com/ej8899/scheduler" target="_new"><i className="fa-brands fa-square-twitter fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons"><i onClick={() => showAbout() }  className="fa-solid fa-circle-question fa-xl"></i></a></div>
 
       <hr className="sidebar__separator sidebar--centered" />
   

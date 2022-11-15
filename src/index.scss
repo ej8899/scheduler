@@ -22,12 +22,16 @@ body {
   background-color: $white;
 }
 
-.socicons, a {
+.socicons-container {
+  padding-top: 20px;
+}
+
+.socicons {
   color:darken($white, 10%);
   padding-top: 20px;
   text-shadow: 0 0 10px darken($dark-background,15%), 0 0 20px darken($dark-background,15%), 0 0 30px darken($dark-background,15%);
 }
-.socicons,a:hover {
+.socicons:hover {
   color: $orange;
 }
 
