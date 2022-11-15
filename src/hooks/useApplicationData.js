@@ -51,6 +51,7 @@ if (dayName === "Saturday" || dayName === "Sunday" || dayName === undefined) {
   dayName = "Monday";
   if(global.config.debug) console.log("WHAT DAY IS IT NOW (change from sat/sun): ",dayName);
 }
+// default to Monday (for testing) - set through config.js
 if(!global.config.useToday) {
   dayName="Monday";
 }
