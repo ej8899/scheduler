@@ -16,28 +16,15 @@ export default function Application(props) {
   // using zModal
   // todo - how do we wrap this in an 'if' statement given that it's not to be in an if statement? (useeffect)
   // https://reactjs.org/docs/hooks-rules.html#explanation
-  const [showModal,setShowModal] = useState(false);
+
+  const [zmodalData, updateZModal] = useState ({
+    message: "",
+    button: "Agree & Continue",
+    othersettings: {},
+    show: false,
+  });
+
   
-  let styles = {
-    color: "navy",
-    cursor: "pointer"
-  }
-  let mymodalMessage = (
-    <div>
-    <div align="center">
-    <div><img className="fashadow" src="./images/cookie.svg" alt="myCookie" width="200" height="200" /></div>
-    <big>
-    Our web application uses cookies to provide you with the best browsing
-    experience and relevant information.
-    <br/><br/>
-    Before continuing
-    to use our web application, you agree & accept our <span style={styles} onClick={showPrivacy}>Cookie & Privacy Policy</span>.
-    </big>
-    </div>
-    </div>
-  );
-  const [modalMessage,setModalMessage]  = useState(mymodalMessage);
-  const [modalButton,setModalButton]    = useState("AGREE & CONTINUE");
 
   const {
     state,
@@ -77,15 +64,40 @@ export default function Application(props) {
     )
   })
 
+  
   // https://dmitripavlutin.com/react-useeffect-explanation/
   if(global.config.cookiesModal) {
     useEffect(() => { cookiesModal(true); }, []);
   }
-
+  
   function cookiesModal(modalState=false) {
-    console.log("IN COOKIES MODAL")
+    if (global.config.debug) console.log("IN COOKIES MODAL");
+  
+    let styles = {
+      color: "navy",
+      cursor: "pointer"
+    }
+    let mymodalMessage = (
+      <div>
+      <div align="center">
+      <div><img className="fashadow" src="./images/cookie.svg" alt="myCookie" width="200" height="200" /></div>
+      <big>
+      Our web application uses cookies to provide you with the best browsing
+      experience and relevant information.
+      <br/><br/>
+      Before continuing
+      to use our web application, you agree & accept our <span style={styles} onClick={showPrivacy}>Cookie & Privacy Policy</span>.
+      </big>
+      </div>
+      </div>
+    );
+    
+    zmodalUpdate({
+      message: mymodalMessage,
+      show:true,
+    });
+
     // load from localStorage - don't show modal if we've done it before
-    setShowModal(modalState);
     // update localStorage once user says ok 
   }
 
@@ -109,9 +121,11 @@ export default function Application(props) {
       <br/><br/>
       </div>
     );
-    setModalMessage(mymodalMessage)
-    setModalButton("");
-    setShowModal(true);
+    zmodalUpdate({
+      message:mymodalMessage,
+      button:"",
+      show:true,
+    });
     return;
   }
 
@@ -127,20 +141,43 @@ export default function Application(props) {
       <i className="fashadow fa-solid fa-lock" style={styles}></i>
       <br/><br/>
     
-      <h3>Privacy Policy</h3><br/>
+      <h2>Privacy Policy</h2><br/>
       Nullam cursus velit ac dui cursus hendrerit. Proin malesuada erat eu tempus sagittis. Pellentesque sit amet odio at mauris tristique egestas at vulputate mauris. Duis eget est eu neque accumsan fringilla in at mauris. Donec molestie libero sem, et mattis tellus porttitor quis. Nulla ut dolor quis nibh maximus venenatis. Vestibulum iaculis tempus commodo. Nulla tincidunt dolor mauris, quis eleifend massa commodo in. Nulla vehicula neque nec malesuada eleifend. Vivamus sagittis ornare risus, vel semper purus aliquam nec. Donec porttitor elit sem, vel rhoncus diam vulputate sed.
       <br/><br/>
       </div>
   
       </div>
     );
-
-    setModalMessage(mymodalMessage)
-    setModalButton("agree");
-    setShowModal(true);
+    zmodalUpdate({
+      message:mymodalMessage,
+      button:"agree",
+      show:true,
+    });
     return;
   }
 
+  //
+  // zmodalUpdate(data)
+  //
+  // update the modal with new data
+  // data is an object with the below items:
+  // message: "",                 - body text
+  // button: "Agree & Continue",  - button text
+  // othersettings: {},           - future use
+  // show: false                  - true to show, false to hide
+  function zmodalUpdate(data) {
+    if (global.config.debug) console.log("zmodalUpdate data:",data);
+  
+    updateZModal(zmodalData => { return {...zmodalData, ...data }});
+    
+    // updateZModal( (zmodalData) => { 
+    //   return {...zmodalData, ...data }
+    // });
+
+    // updateZModal( function(zmodalData) { 
+    //   return {...zmodalData, ...data }
+    // });
+  }
 
 
 
@@ -152,8 +189,8 @@ export default function Application(props) {
       <img className="sidebar--centered" src="images/logo.png" alt="Interview Scheduler" />
 
       { global.config.cookiesModal && 
-        <ZModal buttontext={modalButton} show={showModal} onClose={() => setShowModal(false)} title="Why yes, we do use cookies..." body={modalMessage}>
-          {modalMessage}
+        <ZModal buttontext={zmodalData.button} show={zmodalData.show} onClose={() => zmodalUpdate({show:false})} title="Why yes, we do use cookies...">
+          {zmodalData.message}
         </ZModal>
       }
     

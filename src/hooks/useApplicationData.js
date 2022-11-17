@@ -46,13 +46,13 @@ function findDay(dayName,dayNum) {
 // grab current day or set default day to start on
 const d = new Date();
 let dayName = findDay(null,d.getDay() - 1);
-if(global.config.debug) console.log("WHAT DAY IS IT: |" + dayName + "|");
+if (global.config.debug) console.log("WHAT DAY IS IT: |" + dayName + "|");
 if (dayName === "Saturday" || dayName === "Sunday" || dayName === undefined) {
   dayName = "Monday";
-  if(global.config.debug) console.log("WHAT DAY IS IT NOW (change from sat/sun): ",dayName);
+  if (global.config.debug) console.log("WHAT DAY IS IT NOW (change from sat/sun): ",dayName);
 }
 // default to Monday (for testing) - set through config.js
-if(!global.config.useToday) {
+if (!global.config.useToday) {
   dayName="Monday";
 }
 
