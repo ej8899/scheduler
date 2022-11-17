@@ -2,6 +2,7 @@
 // GLOBAL object
 //
 
+
 // TASK:
 // add this to index.js
 // import './config.js'; // for global configuration variables (EJ added)
@@ -22,13 +23,20 @@ module.exports = global.config = {
   editsOpen: {},
   editRef: null,
 
+  link: {
+    github:   "https://github.com/ej8899/scheduler",
+    linkedin: "https://ca.linkedin.com/in/ernie-johnson-3b77829b",
+    twitter:  "",
+  },
+
   // isFalsey(value) - is true if false value - checks Nan, 0, null, undefined, false, and ""
   isFalsey: function(value) { return !value},
 };
 
+/*
+Setup for a global function like this:
 
-// isFalsey(value) - is true if false value - checks Nan, 0, null, undefined, false, ""
-// ! above function inside our global object works fine to.
 const isFalsey = (value) => !value;
 global.isFalsey = isFalsey;
 
+*/

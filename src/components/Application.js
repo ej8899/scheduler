@@ -81,6 +81,7 @@ export default function Application(props) {
       <div>
       <div align="center">
       <div><img className="fashadow" src="./images/cookie.svg" alt="myCookie" width="200" height="200" /></div>
+      <h2>Nom, Nom, Nom...</h2>
       <big>
       Our web application uses cookies to provide you with the best browsing
       experience and relevant information.
@@ -167,16 +168,7 @@ export default function Application(props) {
   // show: false                  - true to show, false to hide
   function zmodalUpdate(data) {
     if (global.config.debug) console.log("zmodalUpdate data:",data);
-  
     updateZModal(zmodalData => { return {...zmodalData, ...data }});
-    
-    // updateZModal( (zmodalData) => { 
-    //   return {...zmodalData, ...data }
-    // });
-
-    // updateZModal( function(zmodalData) { 
-    //   return {...zmodalData, ...data }
-    // });
   }
 
 
@@ -195,19 +187,17 @@ export default function Application(props) {
       }
     
   
-      <div className="socicons-container" align="center"><a className="socicons" href="https://github.com/ej8899/scheduler" target="_new"><i className="fa-brands fa-square-github fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href="https://ca.linkedin.com/in/ernie-johnson-3b77829b" target="_new"><i className="fa-brands fa-linkedin fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href="https://github.com/ej8899/scheduler" target="_new"><i className="fa-brands fa-square-twitter fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons"><i onClick={() => showAbout() }  className="fa-solid fa-circle-question fa-xl"></i></a></div>
+      <div className="socicons-container" align="center"><a className="socicons" href={global.config.link.github} target="_new"><i className="fa-brands fa-square-github fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href={global.config.link.linkedin} target="_new"><i className="fa-brands fa-linkedin fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href={global.config.link.twitter} target="_new"><i className="fa-brands fa-square-twitter fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons"><i onClick={() => showAbout() }  className="fa-solid fa-circle-question fa-xl"></i></a></div>
 
       <hr className="sidebar__separator sidebar--centered" />
-  
-      <nav className="sidebar__menu">
-  
-      <DayList days={state.days} value={state.day} onChange={setDay} />
 
+      <nav className="sidebar__menu">
+      <DayList days={state.days} value={state.day} onChange={setDay} />
       </nav>
 
       <img className="sidebar__lhl sidebar--centered" src="images/lhl.png" alt="Lighthouse Labs" />
-
       </section>
+
       <section className="schedule">
         {appointmentList}
         <Appointment key="last" time="5pm"/>

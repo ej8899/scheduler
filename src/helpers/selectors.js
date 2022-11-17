@@ -17,7 +17,7 @@ export function getAppointmentsForDay(state, day) {
   const filterStateDays = state.days.filter(theDay => theDay.name === day);
 
   // no data, let's return before needless work
-  if(isFalsey(filterStateDays.length) || isFalsey(state.days.length)) return [];
+  if(global.config.isFalsey(filterStateDays.length) || global.config.isFalsey(state.days.length)) return [];
     
 
   if(global.config.debug) console.log("selectors - filterStateDays:",filterStateDays);
@@ -63,7 +63,7 @@ export function getInterviewersForDay(state, day) {
   const filterStateDays = state.days.filter(theDay => theDay.name === day);
 
   // no data, let's return before needless work
-  if(isFalsey(filterStateDays.length) || isFalsey(state.days.length)) return [];
+  if(global.config.isFalsey(filterStateDays.length) || global.config.isFalsey(state.days.length)) return [];
     
 
   

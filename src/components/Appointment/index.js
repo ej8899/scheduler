@@ -36,7 +36,7 @@ export default function Appointment(props) {
 
     // if time in editsOPen, force a clkick on button w id of editsOpen time
     // get the cancel button of form id of this 
-    if(!isFalsey(global.config.editsOpen.current)) {
+    if(!global.config.isFalsey(global.config.editsOpen.current)) {
       console.log("CLOSING prior form")
       global.config.editsOpen.current.click();
     }
