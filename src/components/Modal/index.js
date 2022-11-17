@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./modal.scss";
 
+
 export default function ZModal(props) {
   // props.show  true = show modal, false = remove modal
   // if(!props.show) {
@@ -21,6 +22,8 @@ export default function ZModal(props) {
   }, [closeOnEscapeKeyDown]);
 
   // props.title - deprecated 2022-11-14 - along with zmodal-title class
+  // todo - separate out the close button as an 'abort' vs a button as an accept
+  // todo - add option for second button on bottom so we have a 'cancel' / 'confirm' setup
   return (
     <div className={`zmodal ${props.show ? 'showzmodal' : ''}`} onClick={props.onClose}>
       <div className="zmodal-content" onClick={e => e.stopPropagation()}>
@@ -37,4 +40,18 @@ export default function ZModal(props) {
       </div>
     </div>
   );
-}
+};
+
+  //
+  // zmodalUpdater(data)
+  //
+  // update the modal with new data
+  // data is an object with the below items:
+  // message: "",                 - body text
+  // button: "Agree & Continue",  - button text
+  // othersettings: {},           - future use
+  // show: false                  - true to show, false to hide
+  export function zmodalUpdater(stateFunction, currState, newData) {
+    if (global.config.debug) console.log("zmodalUpdate data:",newData);
+    stateFunction(currState => { return {...currState, ...newData }});
+  };

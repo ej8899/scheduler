@@ -8,22 +8,17 @@ import {getAppointmentsForDay, getInterview, getInterviewersForDay }  from "help
 import useApplicationData from "hooks/useApplicationData";
 import { isFalsey } from "config";
 
-import ZModal from "./Modal";
-
+import ZModal, { zmodalUpdater } from "./Modal/index.js";
 
 export default function Application(props) {
   
-  // using zModal
-  // todo - how do we wrap this in an 'if' statement given that it's not to be in an if statement? (useeffect)
-  // https://reactjs.org/docs/hooks-rules.html#explanation
-
+  // set up states for our zmodal windows
   const [zmodalData, updateZModal] = useState ({
     message: "",
     button: "Agree & Continue",
     othersettings: {},
     show: false,
   });
-
   
 
   const {
@@ -93,7 +88,7 @@ export default function Application(props) {
       </div>
     );
     
-    zmodalUpdate({
+    zmodalUpdater(updateZModal ,zmodalData, {
       message: mymodalMessage,
       show:true,
     });
@@ -122,7 +117,7 @@ export default function Application(props) {
       <br/><br/>
       </div>
     );
-    zmodalUpdate({
+    zmodalUpdater(updateZModal ,zmodalData, {
       message:mymodalMessage,
       button:"",
       show:true,
@@ -149,26 +144,12 @@ export default function Application(props) {
   
       </div>
     );
-    zmodalUpdate({
+    zmodalUpdater(updateZModal ,zmodalData, {
       message:mymodalMessage,
       button:"agree",
       show:true,
     });
     return;
-  }
-
-  //
-  // zmodalUpdate(data)
-  //
-  // update the modal with new data
-  // data is an object with the below items:
-  // message: "",                 - body text
-  // button: "Agree & Continue",  - button text
-  // othersettings: {},           - future use
-  // show: false                  - true to show, false to hide
-  function zmodalUpdate(data) {
-    if (global.config.debug) console.log("zmodalUpdate data:",data);
-    updateZModal(zmodalData => { return {...zmodalData, ...data }});
   }
 
 
@@ -181,7 +162,7 @@ export default function Application(props) {
       <img className="sidebar--centered" src="images/logo.png" alt="Interview Scheduler" />
 
       { global.config.cookiesModal && 
-        <ZModal buttontext={zmodalData.button} show={zmodalData.show} onClose={() => zmodalUpdate({show:false})} title="Why yes, we do use cookies...">
+        <ZModal buttontext={zmodalData.button} show={zmodalData.show} onClose={() => zmodalUpdater(updateZModal ,zmodalData, {show:false})} title="Why yes, we do use cookies...">
           {zmodalData.message}
         </ZModal>
       }
