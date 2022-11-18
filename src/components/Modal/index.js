@@ -8,8 +8,11 @@ export default function ZModal(props) {
   // if(!props.show) {
   //   return null;
   // }
-  const { onClose } = props;
-  const closeOnEscapeKeyDown = useCallback((e) => {
+  const isFalsey = function(value) { return !value};
+
+  const { onClose, settings } = props;
+
+  const closeOnEscapeKeyDown = useCallback((e) => {  
     if ((e.charCode || e.keyCode) === 27) {
       onClose();
     }
@@ -55,3 +58,5 @@ export default function ZModal(props) {
     if (global.config.debug) console.log("zmodalUpdate data:",newData);
     stateFunction(currState => { return {...currState, ...newData }});
   };
+
+  

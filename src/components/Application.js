@@ -12,11 +12,13 @@ import ZModal, { zmodalUpdater } from "./Modal/index.js";
 
 export default function Application(props) {
   
-  // set up states for our zmodal windows
+  // set up states & defaults for our zmodal windows
   const [zmodalData, updateZModal] = useState ({
     message: "",
     button: "Agree & Continue",
-    othersettings: {},
+    settings: { 
+        noAbort: true, 
+    },
     show: false,
   });
   
@@ -82,7 +84,7 @@ export default function Application(props) {
       experience and relevant information.
       <br/><br/>
       Before continuing
-      to use our web application, you agree & accept our <span style={styles} onClick={showPrivacy}>Cookie & Privacy Policy</span>.
+      to use our web application, you agree & accept our <br/><span style={styles} onClick={showPrivacy}>Cookie & Privacy Policy</span>.
       </big>
       </div>
       </div>
@@ -91,6 +93,9 @@ export default function Application(props) {
     zmodalUpdater(updateZModal ,zmodalData, {
       message: mymodalMessage,
       show:true,
+      settings: { 
+        noAbort: true, 
+      },
     });
 
     // load from localStorage - don't show modal if we've done it before
@@ -121,6 +126,9 @@ export default function Application(props) {
       message:mymodalMessage,
       button:"",
       show:true,
+      settings: { 
+        noAbort: false, 
+      },
     });
     return;
   }
@@ -148,6 +156,9 @@ export default function Application(props) {
       message:mymodalMessage,
       button:"agree",
       show:true,
+      settings: { 
+        noAbort: true, 
+    },
     });
     return;
   }
@@ -162,7 +173,7 @@ export default function Application(props) {
       <img className="sidebar--centered" src="images/logo.png" alt="Interview Scheduler" />
 
       { global.config.cookiesModal && 
-        <ZModal buttontext={zmodalData.button} show={zmodalData.show} onClose={() => zmodalUpdater(updateZModal ,zmodalData, {show:false})} title="Why yes, we do use cookies...">
+        <ZModal settings={zmodalData.settings} buttontext={zmodalData.button} show={zmodalData.show} onClose={() => zmodalUpdater(updateZModal ,zmodalData, {show:false})} title="Why yes, we do use cookies...">
           {zmodalData.message}
         </ZModal>
       }

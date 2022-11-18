@@ -55,8 +55,10 @@
   color:red !important;
 }
 
-
+// this is the entire content of the visible modal container
 .zmodal-content {
+  //box-shadow: -5px -5px 20px 2px rgb(208, 86, 16), 5px 5px 20px 2px rgb(208, 86, 16);
+  box-shadow: 0 0 30px 15px rgba(69, 68, 68, 0.723);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -75,8 +77,10 @@
   margin: 0;
 }
 
+// content of the modal iteself
 .zmodal-body {
   padding: 10px;
+  font-size: 1.2rem;
   
 }
 
