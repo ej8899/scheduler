@@ -8,6 +8,7 @@ import {getAppointmentsForDay, getInterview, getInterviewersForDay }  from "help
 import useApplicationData from "hooks/useApplicationData";
 import { isFalsey } from "config";
 
+import Tooltip from "./Tooltips/Tooltip.js";
 import ZModal, { zmodalUpdater } from "./Modal/index.js";
 
 export default function Application(props) {
@@ -179,7 +180,7 @@ export default function Application(props) {
       }
     
   
-      <div className="socicons-container" align="center"><a className="socicons" href={global.config.link.github} target="_new"><i className="fa-brands fa-square-github fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href={global.config.link.linkedin} target="_new"><i className="fa-brands fa-linkedin fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href={global.config.link.twitter} target="_new"><i className="fa-brands fa-square-twitter fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons"><i onClick={() => showAbout() }  className="fa-solid fa-circle-question fa-xl"></i></a></div>
+      <div className="socicons-container" align="center"><Tooltip content="Visit our GitHub profile" direction="right"><a className="socicons" href={global.config.link.github} target="_new"><i className="fa-brands fa-square-github fa-xl"></i></a></Tooltip>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href={global.config.link.linkedin} target="_new"><i className="fa-brands fa-linkedin fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href={global.config.link.twitter} target="_new"><i className="fa-brands fa-square-twitter fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<Tooltip content="About Scheduler" direction="right"><a className="socicons"><i onClick={() => showAbout() }  className="fa-solid fa-circle-question fa-xl"></i></a></Tooltip></div>
 
       <hr className="sidebar__separator sidebar--centered" />
 
