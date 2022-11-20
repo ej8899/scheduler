@@ -4,7 +4,10 @@
   --tooltip-text-color: white;
   --tooltip-background-color: black;
   --tooltip-margin: 20px;       // proximity to the element with the tooltip
-  --tooltip-arrow-size: 6px;
+  
+  --tooltip-font-size: 1.2rem;
+  --tooltip-padding: 14px;
+  --tooltip-arrow-size: calc(var(--tooltip-font-size) / 2.0);
 }
 
 /* Wraper for the element the tooltip will be applied to */
@@ -19,20 +22,32 @@
   border-radius: 4px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 14px;
+  padding: var(--tooltip-padding);
   color: var(--tooltip-text-color);
   background: var(--tooltip-background-color);
-  font-size: 16px;
+  font-size: var(--tooltip-font-size);
   font-family: sans-serif;
   line-height: 1;
   z-index: 100;
   white-space: nowrap;
-
+  //opacity: 1;
+  //transition: opacity 0.5s;
   animation: fadeIn 0.3s;
 }
+.Tooltip-Tip:after {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+
 @keyframes fadeIn {
   0%    { opacity: 0; }
   100%  { opacity: 1; }
+}
+// future use:
+@keyframes fadeOut {
+  0%    { opacity: 1; }
+  100%  { opacity: 0; }
 }
 
 /* CSS border triangles */

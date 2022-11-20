@@ -30,6 +30,7 @@ body {
   color:darken($white, 10%);
   padding-top: 20px;
   text-shadow: 0 0 10px darken($dark-background,15%), 0 0 20px darken($dark-background,15%), 0 0 30px darken($dark-background,15%);
+  cursor: pointer;
 }
 .socicons:hover {
   color: $orange;

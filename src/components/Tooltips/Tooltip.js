@@ -15,20 +15,24 @@ import "./Tooltip.scss";
 
 const Tooltip = (props) => {
   let timeout;
+  let styleUpdates = {...props.styles};
+  const mouseHoverDelay = 400;    // how long for mouse hover over item until tooltip is rendered
   const [active, setActive] = useState(false);
 
   const showTip = () => {
-    const mouseHoverDelay = 400;    // how long for mouse hover over item until tooltip is rendered
+    console.log("SHOW",styleUpdates)
     timeout = setTimeout(() => {
       setActive(true);
     }, props.delay || mouseHoverDelay);
   };
 
-  const hideTip = () => {
+  const hideTip = async () => {
     clearInterval(timeout);
+    //await new Promise(r => setTimeout(r, 2000));
     setActive(false);
   };
 
+  
   return (
     <div
       className="Tooltip-Wrapper"
@@ -38,11 +42,14 @@ const Tooltip = (props) => {
     >
       {/* Wrapping */}
       {props.children}
+    
       {active && (
         <div className={`Tooltip-Tip ${props.direction || "top"}`} style={props.styles}>
+    
           {/* Content */}
           {props.content}
         </div>
+      
       )}
     </div>
   );
