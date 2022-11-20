@@ -20,7 +20,6 @@ const Tooltip = (props) => {
   const [active, setActive] = useState(false);
 
   const showTip = () => {
-    console.log("SHOW",styleUpdates)
     timeout = setTimeout(() => {
       setActive(true);
     }, props.delay || mouseHoverDelay);
