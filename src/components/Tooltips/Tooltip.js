@@ -4,7 +4,6 @@ import "./Tooltip.scss";
 // original tooltipcode:
 // https://paladini.dev/posts/how-to-make-an-extremely-reusable-tooltip-component-with-react--and-nothing-else/
 
-
 // usage: <Tooltip content="Visit our GitHub profile" direction="right" delay="400">item to add tip to</Tooltip>
 // content - text, jsx, etc.
 // direction - top, bottom, left, right
@@ -15,8 +14,8 @@ import "./Tooltip.scss";
 
 const Tooltip = (props) => {
   let timeout;
-  let styleUpdates = {...props.styles};
-  const mouseHoverDelay = 400;    // how long for mouse hover over item until tooltip is rendered
+  let styleUpdates = { ...props.styles };
+  const mouseHoverDelay = 400; // how long for mouse hover over item until tooltip is rendered
   const [active, setActive] = useState(false);
 
   const showTip = () => {
@@ -31,7 +30,6 @@ const Tooltip = (props) => {
     setActive(false);
   };
 
-  
   return (
     <div
       className="Tooltip-Wrapper"
@@ -41,14 +39,15 @@ const Tooltip = (props) => {
     >
       {/* Wrapping */}
       {props.children}
-    
+
       {active && (
-        <div className={`Tooltip-Tip ${props.direction || "top"}`} style={props.styles}>
-    
+        <div
+          className={`Tooltip-Tip ${props.direction || "top"}`}
+          style={props.styles}
+        >
           {/* Content */}
           {props.content}
         </div>
-      
       )}
     </div>
   );

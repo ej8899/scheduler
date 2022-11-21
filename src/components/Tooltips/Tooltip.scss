@@ -1,13 +1,12 @@
-
 /* Custom properties */
 :root {
   --tooltip-text-color: white;
   --tooltip-background-color: black;
-  --tooltip-margin: 20px;       // proximity to the element with the tooltip
-  
+  --tooltip-margin: 20px; // proximity to the element with the tooltip
+
   --tooltip-font-size: 1.2rem;
   --tooltip-padding: 14px;
-  --tooltip-arrow-size: calc(var(--tooltip-font-size) / 2.0);
+  --tooltip-arrow-size: calc(var(--tooltip-font-size) / 2);
 }
 
 /* Wraper for the element the tooltip will be applied to */
@@ -39,15 +38,22 @@
   transition: opacity 1s ease-in-out;
 }
 
-
 @keyframes fadeIn {
-  0%    { opacity: 0; }
-  100%  { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 // future use:
 @keyframes fadeOut {
-  0%    { opacity: 1; }
-  100%  { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /* CSS border triangles */
@@ -78,7 +84,6 @@
   left: calc(100% + var(--tooltip-margin));
   top: 50%;
   transform: translateX(0) translateY(-50%);
-  
 }
 /* CSS border triangles */
 .Tooltip-Tip.right::before {
