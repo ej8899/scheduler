@@ -62,7 +62,7 @@ npm run storybook
 [( back to top 🔺)](#lhl-scheduler)
 ---
 ## Known Bugs...
-- none known 
+- when clicking to delete an existing appointment, clicking 'add appointment' defaults to a confirm on the delete box - it should be locked out until the delete is confirmed or cancelled
 - be sure to report any found bugs on Github!  
 [( back to top 🔺)](#lhl-scheduler)
 ---

@@ -2,7 +2,6 @@
 // GLOBAL object
 //
 
-
 // TASK:
 // add this to index.js
 // import './config.js'; // for global configuration variables (EJ added)
@@ -16,21 +15,23 @@ module.exports = global.config = {
   // usage is:  if (global.config.debug) console.log("debugging info here"); // or of course, other options for debug purposes
   debug: false,
 
-  cookiesModal: true,       // use modal windows in this app.
-  useToday:     true,       // use today to set current day view in scheduler - fails tests if true
-  
+  cookiesModal: true, // use modal windows in this app.
+  useToday: true, // use today to set current day view in scheduler - fails tests if true
+
   // additional global vars and functions:
   editsOpen: {},
   editRef: null,
 
   link: {
-    github:   "https://github.com/ej8899/scheduler",
+    github: "https://github.com/ej8899/scheduler",
     linkedin: "https://ca.linkedin.com/in/ernie-johnson-3b77829b",
-    twitter:  "",
+    twitter: "",
   },
 
   // isFalsey(value) - is true if false value - checks Nan, 0, null, undefined, false, and ""
-  isFalsey: function(value) { return !value},
+  isFalsey: function (value) {
+    return !value;
+  },
 };
 
 /*
