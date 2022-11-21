@@ -25,7 +25,7 @@ const Tooltip = (props) => {
     }, props.delay || mouseHoverDelay);
   };
 
-  const hideTip = async () => {
+  const hideTip = () => {
     clearInterval(timeout);
     //await new Promise(r => setTimeout(r, 2000));
     setActive(false);
