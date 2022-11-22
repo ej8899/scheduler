@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Tooltip.scss";
+import config from "config";
 
 // original tooltipcode:
 // https://paladini.dev/posts/how-to-make-an-extremely-reusable-tooltip-component-with-react--and-nothing-else/
@@ -12,9 +13,9 @@ import "./Tooltip.scss";
 // ex: {"--tooltip-text-color": "black",
 // "--tooltip-background-color": "orange"};
 
-const Tooltip = (props) => {
+function Tooltip(props) {
+  let styleUpdates = { visibility: "hidden" };
   let timeout;
-  let styleUpdates = { ...props.styles };
   const mouseHoverDelay = 400; // how long for mouse hover over item until tooltip is rendered
   const [active, setActive] = useState(false);
 
@@ -26,31 +27,31 @@ const Tooltip = (props) => {
 
   const hideTip = () => {
     clearInterval(timeout);
-    //await new Promise(r => setTimeout(r, 2000));
+    //await new Promise(r => setTimeout(r, 300)); // this was to initiate a way to 'fade out' the tool tip still a consideration for use
     setActive(false);
   };
 
   return (
     <div
       className="Tooltip-Wrapper"
-      // When to show the tooltip
       onMouseEnter={showTip}
       onMouseLeave={hideTip}
+      onClick={hideTip}
     >
       {/* Wrapping */}
       {props.children}
 
+      {/* in style we had visibility: active ? 'visible' : 'hidden' this worked, but 'not quite' */}
       {active && (
         <div
           className={`Tooltip-Tip ${props.direction || "top"}`}
-          style={props.styles}
+          style={{ ...props.styles }}
         >
-          {/* Content */}
           {props.content}
         </div>
       )}
     </div>
   );
-};
+}
 
 export default Tooltip;
