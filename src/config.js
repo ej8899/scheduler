@@ -8,7 +8,7 @@
 
 module.exports = global.config = {
   // application details:
-  appVersion: "1.0",
+  appVersion: "1.1",
   appDeveloper: "Ernie Johnson",
 
   // debug mode true or false
@@ -16,14 +16,12 @@ module.exports = global.config = {
   debug: false,
 
   cookiesModal: true, // use modal windows in this app.
-  useToday: true, // use today to set current day view in scheduler - fails tests if true
+  useToday: true, // use today to set current day view in scheduler - fails tests if true (tests were modified to support this - to remove)
 
   // additional global vars and functions:
   editsOpen: {},
   deleteOpen: false,
   editRef: null,
-
-
 
   link: {
     github: "https://github.com/ej8899/scheduler",

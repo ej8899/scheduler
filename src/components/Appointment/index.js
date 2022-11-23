@@ -37,10 +37,10 @@ export default function Appointment(props) {
     if (global.config.debug)
       console.log("in editOpen:start:", global.config.editsOpen);
 
-    // if delete panel is open, do not allow a co
+    // if delete panel is open, do not allow a new edit
     if (global.config.deleteOpen) return;
 
-    // if time in editsOPen, force a click on button w id of editsOpen time
+    // if exists a schedule time in editsOpen, force a click on button w id of editsOpen 'time' (id)
     // get the cancel button of form id of this
     if (!global.config.isFalsey(global.config.editsOpen.current)) {
       console.log("CLOSING prior form");
@@ -53,7 +53,7 @@ export default function Appointment(props) {
 
   if (global.config.debug) console.log("in Appointment - props:", props);
 
-  // using zModal
+  // using zModal - just to catch vague saving errors
   const [showModal, setShowModal] = useState(false);
   const [modalError, setModalError] = useState();
 
@@ -122,21 +122,16 @@ export default function Appointment(props) {
 
   return (
     <article className="appointment" data-testid="appointment">
-      <ZModal
-        show={showModal}
-        onClose={() => setShowModal(false)}
-        title="Why yes, we do use cookies..."
-      >
-        {modalError}
-      </ZModal>
       <Header time={props.time} />
 
       {mode === EMPTY && (
         <Empty
           onAdd={() => {
-            if (global.config.deleteOpen === true) return;
-            editOpen();
-            transition(CREATE);
+            if (!global.config.deleteOpen === true) {
+              // delete panel is NOT open so we can allow user to create new entry
+              editOpen();
+              transition(CREATE);
+            }
           }}
         />
       )}
@@ -147,6 +142,7 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer}
           onDelete={() => {
             if (global.config.deleteOpen === true) return;
+            editOpen();
             transition(DELETE);
           }}
           onEdit={() => {

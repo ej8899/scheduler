@@ -12,7 +12,7 @@ export default function Confirm(props) {
   // onConfirm:Function to be called when the user clicks the Confirm button
   // onCancel:Function to be called when the user clicks the Cancel button
   if (global.config.debug) console.log("in CONFIRM:props", props);
-
+  
   return (
     <main className="appointment__card appointment__card--confirm">
       <h1 className="text--semi-bold">{props.message}</h1>
