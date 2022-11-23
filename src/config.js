@@ -20,7 +20,9 @@ module.exports = global.config = {
 
   // additional global vars and functions:
   editsOpen: {},
+  deleteOpen: false,
   editRef: null,
+
 
 
   link: {

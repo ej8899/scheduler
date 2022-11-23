@@ -48,6 +48,7 @@ npm run storybook
 
 ## Bonus features...
 - start app on "today" vs a default of Monday - if used on Saturday or Sunday, then default to Monday
+- prevent opening form/edits if delete confirmation panel is open
 - limit interview add form to only 1 spot at a time (original code allowed multiple forms open needlessly)
 - create modal window react component for:
   - cookies notice and privacy policy modal windows
@@ -62,7 +63,7 @@ npm run storybook
 [( back to top 🔺)](#lhl-scheduler)
 ---
 ## Known Bugs...
-- when clicking to delete an existing appointment, clicking 'add appointment' defaults to a confirm on the delete box - it should be locked out until the delete is confirmed or cancelled
+- none known
 - be sure to report any found bugs on Github!  
 [( back to top 🔺)](#lhl-scheduler)
 ---

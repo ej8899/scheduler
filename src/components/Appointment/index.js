@@ -37,7 +37,10 @@ export default function Appointment(props) {
     if (global.config.debug)
       console.log("in editOpen:start:", global.config.editsOpen);
 
-    // if time in editsOPen, force a clkick on button w id of editsOpen time
+    // if delete panel is open, do not allow a co
+    if (global.config.deleteOpen) return;
+
+    // if time in editsOPen, force a click on button w id of editsOpen time
     // get the cancel button of form id of this
     if (!global.config.isFalsey(global.config.editsOpen.current)) {
       console.log("CLOSING prior form");
@@ -101,6 +104,7 @@ export default function Appointment(props) {
     // see below for CONFIRM,true for 'double back' in:
     // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/966?journey_step=56&workbook=24
     transition(CONFIRM, true); // show the 'deleting in progress' message
+    global.config.deleteOpen = false;
     props
       .cancelInterview(props.id)
       .then((res) => {
@@ -114,6 +118,7 @@ export default function Appointment(props) {
         transition(ERROR_DELETE, true);
       });
   }
+  if (mode === DELETE) global.config.deleteOpen = true;
 
   return (
     <article className="appointment" data-testid="appointment">
@@ -129,6 +134,7 @@ export default function Appointment(props) {
       {mode === EMPTY && (
         <Empty
           onAdd={() => {
+            if (global.config.deleteOpen === true) return;
             editOpen();
             transition(CREATE);
           }}
@@ -140,9 +146,11 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => {
+            if (global.config.deleteOpen === true) return;
             transition(DELETE);
           }}
           onEdit={() => {
+            if (global.config.deleteOpen === true) return;
             editOpen();
             transition(EDIT);
           }}
@@ -177,7 +185,9 @@ export default function Appointment(props) {
       {mode === DELETE && (
         <Confirm
           message={"Delete this interview?"}
+          id={props.time}
           onCancel={() => {
+            global.config.deleteOpen = false;
             back();
           }}
           onConfirm={del}

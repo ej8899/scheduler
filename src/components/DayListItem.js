@@ -25,7 +25,10 @@ export default function DayListItem(props) {
   return (
     <li
       className={dayListItemClass}
-      onClick={() => props.setDay(props.name)}
+      onClick={() => {
+        global.config.deleteOpen = false;
+        props.setDay(props.name);
+      }}
       data-testid="day"
     >
       <h2 className="text--regular">{props.name}</h2>
