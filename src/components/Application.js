@@ -183,7 +183,11 @@ export default function Application(props) {
       }
     
   
-      <div className="socicons-container" align="center"><Tooltip styles={tipStyles} content="Visit our GitHub profile" direction="right"><a className="socicons" href={global.config.link.github} target="_new"><i className="fa-brands fa-square-github fa-xl"></i></a></Tooltip>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href={global.config.link.linkedin} target="_new"><i className="fa-brands fa-linkedin fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a className="socicons" href={global.config.link.twitter} target="_new"><i className="fa-brands fa-square-twitter fa-xl"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<Tooltip styles={tipStyles} content="About Scheduler" direction="right"><a className="socicons"><i onClick={() => showAbout() }  className="fa-solid fa-circle-question fa-xl"></i></a></Tooltip></div>
+      <div className="socicons-container" align="center">
+        <Tooltip styles={tipStyles} content="Visit our GitHub profile" direction="right"><a className="socicons" href={global.config.link.github} target="_new"><i className="fa-brands fa-square-github fa-xl"></i></a></Tooltip>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <Tooltip styles={tipStyles} content="Visit our LinkedIn profile" direction="right"><a className="socicons" href={global.config.link.linkedin} target="_new"><i className="fa-brands fa-linkedin fa-xl"></i></a></Tooltip>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <Tooltip styles={tipStyles} content="check us out on Twitter" direction="right"><a className="socicons" href={global.config.link.twitter} target="_new"><i className="fa-brands fa-square-twitter fa-xl"></i></a></Tooltip>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <Tooltip styles={tipStyles} content="About Scheduler" direction="right"><a className="socicons"><i onClick={() => showAbout() }  className="fa-solid fa-circle-question fa-xl"></i></a></Tooltip></div>
 
       <hr className="sidebar__separator sidebar--centered" />
 

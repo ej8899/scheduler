@@ -28,7 +28,7 @@ module.exports = global.config = {
   link: {
     github: "https://github.com/ej8899/scheduler",
     linkedin: "https://ca.linkedin.com/in/ernie-johnson-3b77829b",
-    twitter: "",
+    twitter: "http://www.twitter.com/ejdevscom",
   },
 
   // isFalsey(value) - is true if false value - checks Nan, 0, null, undefined, false, and ""
