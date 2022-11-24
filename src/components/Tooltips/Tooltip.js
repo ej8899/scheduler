@@ -31,6 +31,7 @@ function Tooltip(props) {
     setActive(false);
   };
 
+  
   return (
     <div
       className="Tooltip-Wrapper"
@@ -53,5 +54,10 @@ function Tooltip(props) {
     </div>
   );
 }
+
+
+export function tooltipUpdator(stateFunction, currState, newData) {
+  stateFunction(currState => { return {...currState, ...newData }});
+};
 
 export default Tooltip;

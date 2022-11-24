@@ -11,8 +11,10 @@ import { isFalsey } from "config";
 import Tooltip from "./Tooltips/Tooltip.js";
 import ZModal, { zmodalUpdater } from "./Modal/index.js";
 
+//import { showAbout, showPrivacy } from "./Modal/ModalData.js";
+
 export default function Application(props) {
-  
+
   // set up states & defaults for our zmodal windows
   const [zmodalData, updateZModal] = useState ({
     message: "",
@@ -22,15 +24,80 @@ export default function Application(props) {
     },
     show: false,
   });
+
+
+
+  function showAbout() {
+  let styles = {
+    fontSize: '6rem',
+    color: 'orange',
+  }
+  const mymodalMessage = (
+    <div align="center">
+    <i className="fashadow fa-solid fa-circle-question" style={styles}></i><br/><br/>
+    <h2>
+    LHL Scheduler App</h2><br/><big>
+    This is a project for learning React and<br/>
+    various testing integrations such as<br/>
+    Jest and Cypress.<br/><br/>
+    Modified by {global.config.appDeveloper}<br/>
+    <i className="fa-regular fa-copyright"></i> 2022, All Rights Reserved<br/>
+    Version: {global.config.appVersion}
+    </big>
+    <br/><br/>
+    </div>
+  );
+  zmodalUpdater(updateZModal ,zmodalData, {
+    message:mymodalMessage,
+    button:"",
+    show:true,
+    settings: { 
+      noAbort: false, 
+    },
+  });
+  return;
+}
+
+  function showPrivacy() {
+  let styles = {
+    fontSize:"6rem",
+    color:"orange"
+  }
+  let mymodalMessage = (
+    <div>
+    <div align="center">
+    <i className="fashadow fa-solid fa-lock" style={styles}></i>
+    <br/><br/>
+  
+    <h2>Privacy Policy</h2><br/>
+    Nullam cursus velit ac dui cursus hendrerit. Proin malesuada erat eu tempus sagittis. Pellentesque sit amet odio at mauris tristique egestas at vulputate mauris. Duis eget est eu neque accumsan fringilla in at mauris. Donec molestie libero sem, et mattis tellus porttitor quis. Nulla ut dolor quis nibh maximus venenatis. Vestibulum iaculis tempus commodo. Nulla tincidunt dolor mauris, quis eleifend massa commodo in. Nulla vehicula neque nec malesuada eleifend. Vivamus sagittis ornare risus, vel semper purus aliquam nec. Donec porttitor elit sem, vel rhoncus diam vulputate sed.
+    <br/><br/>
+    </div>
+
+    </div>
+  );
+  zmodalUpdater(updateZModal ,zmodalData, {
+    message:mymodalMessage,
+    button:"agree",
+    show:true,
+    settings: { 
+      noAbort: true, 
+  },
+  });
+  return;
+}
   
 
   const {
     state,
     setDay,
+    setTip,
+    toolTip,
     bookInterview,
-    cancelInterview
+    cancelInterview,
   } = useApplicationData();
-
+  
+  
 
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/930?journey_step=55
   /*
@@ -58,6 +125,8 @@ export default function Application(props) {
         interviewers={interviewers}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
+        toolTip={props.toolTip}
+        changeTip={setTip}
       />
     )
   })
@@ -67,7 +136,11 @@ export default function Application(props) {
   if(global.config.cookiesModal) {
     useEffect(() => { cookiesModal(true); }, []);
   }
+
   
+  // console.log("\n\nDELETEOPEN:",global.config.deleteOpen);
+  // useEffect(() => { setTip("Cancel or Confirm your delete interview action first!"); }, []);
+
   function cookiesModal(modalState=false) {
     if (global.config.debug) console.log("IN COOKIES MODAL");
   
@@ -101,67 +174,6 @@ export default function Application(props) {
 
     // load from localStorage - don't show modal if we've done it before
     // update localStorage once user says ok 
-  }
-
-  function showAbout() {
-    let styles = {
-      fontSize: '6rem',
-      color: 'orange',
-    }
-    const mymodalMessage = (
-      <div align="center">
-      <i className="fashadow fa-solid fa-circle-question" style={styles}></i><br/><br/>
-      <h2>
-      LHL Scheduler App</h2><br/><big>
-      This is a project for learning React and<br/>
-      various testing integrations such as<br/>
-      Jest and Cypress.<br/><br/>
-      Modified by {global.config.appDeveloper}<br/>
-      <i className="fa-regular fa-copyright"></i> 2022, All Rights Reserved<br/>
-      Version: {global.config.appVersion}
-      </big>
-      <br/><br/>
-      </div>
-    );
-    zmodalUpdater(updateZModal ,zmodalData, {
-      message:mymodalMessage,
-      button:"",
-      show:true,
-      settings: { 
-        noAbort: false, 
-      },
-    });
-    return;
-  }
-
-
-  function showPrivacy() {
-    let styles = {
-      fontSize:"6rem",
-      color:"orange"
-    }
-    let mymodalMessage = (
-      <div>
-      <div align="center">
-      <i className="fashadow fa-solid fa-lock" style={styles}></i>
-      <br/><br/>
-    
-      <h2>Privacy Policy</h2><br/>
-      Nullam cursus velit ac dui cursus hendrerit. Proin malesuada erat eu tempus sagittis. Pellentesque sit amet odio at mauris tristique egestas at vulputate mauris. Duis eget est eu neque accumsan fringilla in at mauris. Donec molestie libero sem, et mattis tellus porttitor quis. Nulla ut dolor quis nibh maximus venenatis. Vestibulum iaculis tempus commodo. Nulla tincidunt dolor mauris, quis eleifend massa commodo in. Nulla vehicula neque nec malesuada eleifend. Vivamus sagittis ornare risus, vel semper purus aliquam nec. Donec porttitor elit sem, vel rhoncus diam vulputate sed.
-      <br/><br/>
-      </div>
-  
-      </div>
-    );
-    zmodalUpdater(updateZModal ,zmodalData, {
-      message:mymodalMessage,
-      button:"agree",
-      show:true,
-      settings: { 
-        noAbort: true, 
-    },
-    });
-    return;
   }
 
 

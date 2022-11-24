@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "components/Appointment/styles.scss";
 import Header from "components/Appointment/Header.js";
 import Show from "components/Appointment/Show.js";
@@ -30,6 +30,7 @@ export default function Appointment(props) {
   );
   let errorType = "";
 
+
   //
   // extrastretch -- don't allow more than one edit form open at a time
   //
@@ -51,11 +52,19 @@ export default function Appointment(props) {
       console.log("in editOpen:exit:", global.config.editsOpen);
   }
 
-  if (global.config.debug) console.log("in Appointment - props:", props);
-
   // using zModal - just to catch vague saving errors
   const [showModal, setShowModal] = useState(false);
   const [modalError, setModalError] = useState();
+
+  const [theTip, updateTip] = useState("click schedule an interview");
+  
+  useEffect(() => { 
+    if(global.config.deleteOpen === true) {
+      console.log('changing tool tip')
+      updateTip("Cancel or Confirm your delete interview action first!"); 
+    }
+  }, [mode]);
+  
 
   function save(name, interviewer) {
     if (!name || !interviewer) {
@@ -126,6 +135,7 @@ export default function Appointment(props) {
 
       {mode === EMPTY && (
         <Empty
+          toolTip={theTip}
           onAdd={() => {
             if (!global.config.deleteOpen === true) {
               // delete panel is NOT open so we can allow user to create new entry
