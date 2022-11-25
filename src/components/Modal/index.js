@@ -9,8 +9,8 @@ export default function ZModal(props) {
   //   return null;
   // }
   const isFalsey = function(value) { return !value};
-
   const { onClose, settings } = props;
+  
 
   const closeOnEscapeKeyDown = useCallback((e) => {  
     if ((e.charCode || e.keyCode) === 27) {

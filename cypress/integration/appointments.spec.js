@@ -45,8 +45,9 @@ it("should edit an interview",()=>{
 
 
 it("should cancel an interview", () => {
+  
   cy.get("[alt=Delete]")
-    .click({ force: true });
+    .click({ force: true, multiple: true });
 
   cy.contains("Confirm").click();
 

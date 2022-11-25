@@ -1,10 +1,31 @@
 import React, { useState } from "react";
-import { zmodalUpdater } from ".";
 
 
 
+export function modalCookiesMessage(data) {
+  let styles = {
+    color: "navy",
+    cursor: "pointer"
+  }
+  let mymodalMessage = (
+    <div>
+    <div align="center">
+    <div><img className="fashadow" src="./images/cookie.svg" alt="myCookie" width="200" height="200" /></div>
+    <h2>Nom, Nom, Nom...</h2>
+    <big>
+    Our web application uses cookies to provide you with the best browsing
+    experience and relevant information.
+    <br/><br/>
+    Before continuing
+    to use our web application, you agree & accept our <br/><span style={styles} onClick={data.clickFunction}>Cookie & Privacy Policy</span>.
+    </big>
+    </div>
+    </div>
+  );
+  return mymodalMessage;
+};
 
-export function showAbout() {
+export function modalAboutMessage() {
   let styles = {
     fontSize: '6rem',
     color: 'orange',
@@ -24,18 +45,12 @@ export function showAbout() {
     <br/><br/>
     </div>
   );
-  zmodalUpdater(updateZModal ,zmodalData, {
-    message:mymodalMessage,
-    button:"",
-    show:true,
-    settings: { 
-      noAbort: false, 
-    },
-  });
-  return;
-}
+  
+  return mymodalMessage;
+};
 
-export function showPrivacy() {
+
+export function modalPrivacyPolicy() {
   let styles = {
     fontSize:"6rem",
     color:"orange"
@@ -53,13 +68,6 @@ export function showPrivacy() {
 
     </div>
   );
-  zmodalUpdater(updateZModal ,zmodalData, {
-    message:mymodalMessage,
-    button:"agree",
-    show:true,
-    settings: { 
-      noAbort: true, 
-  },
-  });
-  return;
+
+  return mymodalMessage;
 }
