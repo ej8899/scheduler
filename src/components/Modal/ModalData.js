@@ -33,7 +33,16 @@ export function modalCookiesMessage(data) {
       </div>
     </div>
   );
-  return mymodalMessage;
+
+  const settings = {
+    message: mymodalMessage,
+    show:true,
+    settings: { 
+      noAbort: true, 
+    },
+  };
+
+  return settings;
 }
 
 export function modalAboutMessage() {
@@ -67,7 +76,16 @@ export function modalAboutMessage() {
     </div>
   );
 
-  return mymodalMessage;
+  const settings = {
+      message:mymodalMessage,
+      button:"",
+      show:true,
+      settings: { 
+        noAbort: false, 
+      },
+    };
+
+  return settings;
 }
 
 export function modalPrivacyPolicy() {
@@ -98,5 +116,14 @@ export function modalPrivacyPolicy() {
     </div>
   );
 
-  return mymodalMessage;
+  const settings = {
+    message: mymodalMessage,
+    button:"agree",
+    show:true,
+    settings: { 
+      noAbort: true, 
+  },
+  };
+
+  return settings;
 }

@@ -27,29 +27,12 @@ export default function Application(props) {
   });
 
 
-
   function showAbout() {
-    zmodalUpdater(updateZModal ,zmodalData, {
-      message:modalAboutMessage(),
-      button:"",
-      show:true,
-      settings: { 
-        noAbort: false, 
-      },
-    });
-    return;
+    zmodalUpdater(updateZModal ,zmodalData, modalAboutMessage());
   }
 
   function showPrivacy() {
-    zmodalUpdater(updateZModal ,zmodalData, {
-      message:modalPrivacyPolicy(),
-      button:"agree",
-      show:true,
-      settings: { 
-        noAbort: true, 
-    },
-    });
-    return;
+    zmodalUpdater(updateZModal ,zmodalData, modalPrivacyPolicy());
   }
 
 
@@ -108,15 +91,8 @@ export default function Application(props) {
 
   function cookiesModal(modalState=false) {
     if (global.config.debug) console.log("IN COOKIES MODAL");
-    let data = {clickFunction: showPrivacy,};
-    zmodalUpdater(updateZModal ,zmodalData, {
-      message: modalCookiesMessage(data),
-      show:true,
-      settings: { 
-        noAbort: true, 
-      },
-    });
-
+    zmodalUpdater(updateZModal, zmodalData, modalCookiesMessage({clickFunction: showPrivacy}));
+    
     // load from localStorage - don't show modal if we've done it before
     // update localStorage once user says ok 
   }
