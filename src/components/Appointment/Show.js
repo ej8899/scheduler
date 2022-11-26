@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "components/Appointment/styles.scss";
 import Tooltip from "../Tooltips/Tooltip.js";
 
@@ -9,8 +9,13 @@ import Tooltip from "../Tooltips/Tooltip.js";
 export default function Show(props) {
   if (global.config.debug) console.log("in SHOW:props", props);
 
+console.log(props)
   return (
-    <main className="appointment__card appointment__card--show">
+    <main className="appointment__card appointment__card--show dragitem" 
+      draggable
+      onDragStart={(e) => {props.dragStartFn(e,props.keyname)}}
+
+      >
       <section className="appointment__card-left">
         <h2 className="text--regular">{props.student}</h2>
         <section className="interviewer">

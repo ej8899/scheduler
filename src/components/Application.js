@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "components/Application.scss";
 
@@ -62,7 +62,29 @@ export default function Application(props) {
   dailyAppointments = getAppointmentsForDay(state,state.day);
   interviewers = getInterviewersForDay(state,state.day);
 
-  const appointmentList = Object.values(dailyAppointments).map((item) => {
+  //
+  // draggable items
+  // ref: https://rootstack.com/en/blog/how-do-i-use-drag-and-drop-react
+  //
+  const dragItem = useRef();
+  const dragOverItem = useRef();
+  const dragStart = (e, position) => {
+    dragItem.current = position;
+    console.log(e.target.innerHTML);
+    console.log("drag item:",position);
+  };
+  const dragEnter = (e, position) => {
+    dragOverItem.current = position;
+    console.log(e.target.innerHTML);
+    console.log("drag to:",position)
+  };
+  const dragEnd = (e) => {
+    console.log("in drag END")
+    // check if somethgn is already here, if so, abort the drag.
+    // if empty, save new item here & delete old location
+  }
+
+  const appointmentList = Object.values(dailyAppointments).map((item,index) => {
     const interviewer = getInterview(state, item.interview);
     return (
       <Appointment
@@ -75,6 +97,9 @@ export default function Application(props) {
         cancelInterview={cancelInterview}
         toolTip={props.toolTip}
         changeTip={setTip}
+        dragStartFn={dragStart}
+        dragEnterFn={dragEnter}
+        dragEndFn={dragEnd}
       />
     )
   })
@@ -90,11 +115,9 @@ export default function Application(props) {
   // useEffect(() => { setTip("Cancel or Confirm your delete interview action first!"); }, []);
 
   function cookiesModal(modalState=false) {
-    if (global.config.debug) console.log("IN COOKIES MODAL");
     zmodalUpdater(updateZModal, zmodalData, modalCookiesMessage({clickFunction: showPrivacy}));
-    
-    // load from localStorage - don't show modal if we've done it before
-    // update localStorage once user says ok 
+    // todo -load from localStorage - don't show modal if we've done it before
+    // todo - update localStorage once user says ok 
   }
 
 

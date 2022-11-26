@@ -4,6 +4,11 @@
 
 $appointment-height: 11rem;
 
+
+.dragitem {
+  border:0;
+}
+
 .appointment {
   &__add {
     min-height: $appointment-height;

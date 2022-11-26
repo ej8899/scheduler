@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "components/Appointment/styles.scss";
 import Header from "components/Appointment/Header.js";
 import Show from "components/Appointment/Show.js";
@@ -29,6 +29,8 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
   let errorType = "";
+
+
 
 
   //
@@ -135,6 +137,9 @@ export default function Appointment(props) {
 
       {mode === EMPTY && (
         <Empty
+          keyname = {props.id}
+          dragEnterFn={props.dragEnterFn}
+          dragEndFn={props.dragEndFn}
           toolTip={theTip}
           onAdd={() => {
             if (!global.config.deleteOpen === true) {
@@ -150,6 +155,9 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          keyname = {props.id}
+          dragStartFn={props.dragStartFn}
+          
           onDelete={() => {
             if (global.config.deleteOpen === true) return;
             editOpen();
