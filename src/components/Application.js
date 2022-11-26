@@ -70,12 +70,12 @@ export default function Application(props) {
   const dragOverItem = useRef();
   const dragStart = (e, position) => {
     dragItem.current = position;
-    console.log(e.target.innerHTML);
+    //console.log(e.target.innerHTML);
     console.log("drag item:",position);
   };
   const dragEnter = (e, position) => {
     dragOverItem.current = position;
-    console.log(e.target.innerHTML);
+    //console.log(e.target.innerHTML);
     console.log("drag to:",position)
   };
   const dragEnd = (e) => {

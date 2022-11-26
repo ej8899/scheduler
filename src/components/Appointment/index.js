@@ -132,13 +132,14 @@ export default function Appointment(props) {
   if (mode === DELETE) global.config.deleteOpen = true;
 
   return (
-    <article className="appointment" data-testid="appointment">
+    <article className="appointment dragitem" data-testid="appointment">
       <Header time={props.time} />
 
       {mode === EMPTY && (
         <Empty
           keyname = {props.id}
           dragEnterFn={props.dragEnterFn}
+          dragStartFn={props.dragStartFn}
           dragEndFn={props.dragEndFn}
           toolTip={theTip}
           onAdd={() => {
@@ -157,7 +158,8 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer}
           keyname = {props.id}
           dragStartFn={props.dragStartFn}
-          
+          dragStartFn={props.dragStartFn}
+          dragEndFn={props.dragEndFn}
           onDelete={() => {
             if (global.config.deleteOpen === true) return;
             editOpen();

@@ -19,8 +19,6 @@ console.log("EMPTY PROPS:",props)
     <main className="appointment__add dragitem" 
     draggable
     onDragEnter={(e) => {props.dragEnterFn(e,props.keyname)}}
-    onDragEnd={props.dragEndFn}
-    
     >
       <Tooltip styles={tipStyles} content={props.toolTip} direction="bottom">
         <img

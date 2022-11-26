@@ -14,7 +14,7 @@ console.log(props)
     <main className="appointment__card appointment__card--show dragitem" 
       draggable
       onDragStart={(e) => {props.dragStartFn(e,props.keyname)}}
-
+      onDragEnd={props.dragEndFn}
       >
       <section className="appointment__card-left">
         <h2 className="text--regular">{props.student}</h2>
