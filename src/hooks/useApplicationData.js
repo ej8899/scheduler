@@ -13,6 +13,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import useVisualMode from "./useVisualMode";
 //import axios from "__mocks__/axios";
 const baseURL = "http://localhost:8001/api/";
 
@@ -116,6 +117,11 @@ export default function useApplicationData() {
         ...state.days[numDayOfWeek],
         spots: state.days[numDayOfWeek].spots - 1,
       };
+    } else if (type === "ignore") {
+      day = {
+        ...state.days[numDayOfWeek],
+        spots: state.days[numDayOfWeek].spots,
+      };
     }
 
     let days = state.days;
@@ -123,12 +129,73 @@ export default function useApplicationData() {
     return days;
   }
 
+
+  // extrastretch for drag n drop (WIP)
+  function updateAppointmentList(id,interview,initialID) {
+    const days = spotsRemaining("ignore");
+    console.log("INCOMING DATA:id:",id)
+    console.log("INCOMING DATA:interview:",interview)
+
+    // read the ID - get the new time
+    // in state.appointments
+    const newTime = state.appointments[id].time;
+    console.log("new time:",newTime)
+    // above checks out to here
+
+    // restructure interview  is NOT needed - it is correct as is
+
+    // restructure appointments
+    console.log("appointments list(BEFORE):",state.appointments)
+    // just need to insert interview into interview
+    const studentName = interview.student;
+    const interviewerId = interview.interviewer.id;
+    const appointment = {
+      ...state.appointments[id],
+      interview: { student:studentName, interviewer:interviewerId },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    console.log("restructure appointments;",appointments)
+    // above correct to here
+    
+  
+    bookInterview(id,appointment.interview)
+    .then((res) => {
+      console.log("BOOKINTERVIEW RESULT:", res);
+      //transition("SHOW");
+    })
+    .catch((err) => {
+      console.error(err);
+      //transition(ERROR_SAVE, true);
+    });
+    
+    // cancelInterview(initialID)
+    // .then((res) => {
+    //   if (global.config.debug) console.log("DEL item response:", res);
+    //   transition(EMPTY, true);
+    // })
+    // .catch((err) => {
+    //   if (global.config.debug) console.error(err);
+    //   transition(ERROR_DELETE, true);
+    // });
+    // set state
+    //setState({ ...state, appointments, days });
+    console.log("appointments list(AFTER state):",state.appointments); // back to null in id3
+
+    // console.log("appointment:",appointment)
+    // console.log("appointments:",appointments)
+    // setState({ ...state, appointments, days });
+  }
+
   //
   // bookInterview (save into DB)
   //
   function bookInterview(id, interview) {
-    if (global.config.debug) console.log("APPLICATION:bookInterview:id:", id);
-    if (global.config.debug)
+    // if (global.config.debug) 
+      console.log("APPLICATION:bookInterview:id:", id);
+    //if (global.config.debug)
       console.log("APPLICATION:bookInterview:interview:", interview);
 
     // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/963?journey_step=56&workbook=24
@@ -140,6 +207,7 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+    console.log("bookInterview:appointments:",appointments)
     // PUT data into db: https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/963?journey_step=56&workbook=24
     // reminder, this is TWO STEP action with axios.put
     return axios
@@ -187,5 +255,6 @@ export default function useApplicationData() {
     setDay,
     bookInterview,
     cancelInterview,
+    updateAppointmentList,
   };
 } // end of useApplicationData()

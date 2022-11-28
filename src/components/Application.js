@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import "components/Application.scss";
 
 import DayList  from "components/DayList.js";
@@ -10,12 +9,12 @@ import { isFalsey } from "config";
 
 import Tooltip from "./Tooltips/Tooltip.js";
 import ZModal, { zmodalUpdater } from "./Modal/index.js";
-import { modalAboutMessage, modalPrivacyPolicy, modalCookiesMessage } from "./Modal/ModalData.js";
+import { modalAboutMessage, modalPrivacyPolicy, modalCookiesMessage, dragndropMessage } from "./Modal/ModalData.js";
 
+import { ThemeContext } from "./theme-context.ts";
 
-
+import ThemeSwitch from "./theme-switch.jsx";
 export default function Application(props) {
-
   // set up states & defaults for our zmodal windows
   const [zmodalData, updateZModal] = useState ({
     message: "",
@@ -25,6 +24,12 @@ export default function Application(props) {
     },
     show: false,
   });
+
+  // set up for light and dark modes
+  const [theme, setTheme] = useState("light");
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
 
 
   function showAbout() {
@@ -43,6 +48,7 @@ export default function Application(props) {
     toolTip,
     bookInterview,
     cancelInterview,
+    updateAppointmentList,
   } = useApplicationData();
   
   
@@ -56,12 +62,7 @@ export default function Application(props) {
   let dailyAppointments = [];
   let interviewers = [];
 
-
-
-  // parse out appointments for day
-  dailyAppointments = getAppointmentsForDay(state,state.day);
-  interviewers = getInterviewersForDay(state,state.day);
-
+  
   //
   // draggable items
   // ref: https://rootstack.com/en/blog/how-do-i-use-drag-and-drop-react
@@ -71,18 +72,51 @@ export default function Application(props) {
   const dragStart = (e, position) => {
     dragItem.current = position;
     //console.log(e.target.innerHTML);
-    console.log("drag item:",position);
+    //console.log("drag item:",position);
   };
   const dragEnter = (e, position) => {
     dragOverItem.current = position;
     //console.log(e.target.innerHTML);
-    console.log("drag to:",position)
+    //console.log("drag to:",position)
   };
   const dragEnd = (e) => {
-    console.log("in drag END")
-    // check if somethgn is already here, if so, abort the drag.
-    // if empty, save new item here & delete old location
+    console.log("in drag END:original:",dragItem.current)
+    console.log("in drag END:destination:",dragOverItem.current)
+    const destinationIndex = dragOverItem.current-1;
+    zmodalUpdater(updateZModal ,zmodalData, dragndropMessage());
+    // check if interview is NOT here, 
+    console.log("props of dragover item:",appointmentList)
+    if(!isFalsey(appointmentList[dragOverItem.current-1].props.interview)) {
+      console.log('oops - already an inteview here abort')
+      return;
+    }
+    console.log('no student here ok to drop')
+    // if empty, copy new item here
+
+    const newInterview = appointmentList[dragItem.current-1].props.interview;
+    updateAppointmentList(dragOverItem.current,newInterview,dragItem.current);
+    
+
+    // todo - change appointment id
+    /*
+    bookInterview(destinationIndex, newAppt)
+    .then((res) => {
+      console.log("applicaton res:",res)
+    })
+    .catch((err) => {
+      console.log("application error:",err)
+    });
+    */
+    // remove old from view
+    // remove old item
+    // save data
+    // delete old location from db
   }
+
+
+  // parse out appointments for day
+  dailyAppointments = getAppointmentsForDay(state,state.day);
+  interviewers = getInterviewersForDay(state,state.day);
 
   const appointmentList = Object.values(dailyAppointments).map((item,index) => {
     const interviewer = getInterview(state, item.interview);
@@ -104,6 +138,7 @@ export default function Application(props) {
     )
   })
 
+  
   
   // https://dmitripavlutin.com/react-useeffect-explanation/
   if(global.config.cookiesModal) {
@@ -127,7 +162,10 @@ export default function Application(props) {
   };
 
   return (
-    <main className="layout">
+    <ThemeContext.Provider value = {{ theme, setTheme}}>
+          
+    <div className={`theme-${theme}`}>
+    <main className="layout" id={theme}>
       <section className="sidebar">
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       <img className="sidebar--centered" src="images/logo.png" alt="Interview Scheduler" />
@@ -160,5 +198,7 @@ export default function Application(props) {
       </section>
       
     </main>
+    </div>
+    </ThemeContext.Provider>
   );
 }

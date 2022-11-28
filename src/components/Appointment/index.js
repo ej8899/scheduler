@@ -24,13 +24,12 @@ export default function Appointment(props) {
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
+  
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
   let errorType = "";
-
-
 
 
   //
@@ -142,6 +141,7 @@ export default function Appointment(props) {
           dragStartFn={props.dragStartFn}
           dragEndFn={props.dragEndFn}
           toolTip={theTip}
+          
           onAdd={() => {
             if (!global.config.deleteOpen === true) {
               // delete panel is NOT open so we can allow user to create new entry
@@ -158,7 +158,7 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer}
           keyname = {props.id}
           dragStartFn={props.dragStartFn}
-          dragStartFn={props.dragStartFn}
+          dragEnterFn={props.dragEnterFn}
           dragEndFn={props.dragEndFn}
           onDelete={() => {
             if (global.config.deleteOpen === true) return;

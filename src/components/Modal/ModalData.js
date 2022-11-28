@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import ThemeSwitch from "components/theme-switch";
 
 export function modalCookiesMessage(data) {
   let styles = {
     color: "navy",
     cursor: "pointer",
+    background: "linearGradient(260deg,#9b6c50 0%,#4f2626 100%)",
   };
   let mymodalMessage = (
     <div>
@@ -73,6 +75,7 @@ export function modalAboutMessage() {
       </big>
       <br />
       <br />
+      <ThemeSwitch />
     </div>
   );
 
@@ -124,6 +127,40 @@ export function modalPrivacyPolicy() {
       noAbort: true, 
   },
   };
+
+  return settings;
+}
+
+
+
+
+export function dragndropMessage() {
+  let styles = {
+    fontSize: "6rem",
+    color: "orange",
+  };
+  const mymodalMessage = (
+    <div align="center">
+      <i className="fashadow fa-solid fa-circle-exclamation" style={styles}></i>
+      <br />
+      <br />
+      <big>
+        Hang tight...<br/>
+        Drag & drop is under construction!
+      </big>
+      <br />
+      <br />
+    </div>
+  );
+
+  const settings = {
+      message:mymodalMessage,
+      button:"",
+      show:true,
+      settings: { 
+        noAbort: false, 
+      },
+    };
 
   return settings;
 }

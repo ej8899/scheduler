@@ -13,11 +13,10 @@ export default function Empty(props) {
     "--tooltip-background-color": "orange",
     "--tooltip-margin": "40px;",
   };
-console.log("EMPTY PROPS:",props)
-// onDragEnd={(e) => {console.log("drag end");props.dragEndFn(e,props.keyname)}}
+
   return (
     <main className="appointment__add dragitem" 
-    draggable
+    
     onDragEnter={(e) => {props.dragEnterFn(e,props.keyname)}}
     >
       <Tooltip styles={tipStyles} content={props.toolTip} direction="bottom">
