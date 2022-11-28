@@ -12,7 +12,7 @@ export function modalCookiesMessage(data) {
       <div align="center">
         <div>
           <img
-            className="fashadow"
+            className="fashadow cookieimage"
             src="./images/cookie.svg"
             alt="myCookie"
             width="200"
