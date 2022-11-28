@@ -4,7 +4,7 @@ $active-opacity: 1;
 $inactive-opacity: 0.15;
 
 $white:  rgb(234, 234, 234);
-$black:  rgb(12, 12, 12);
+$black:  rgb(36, 36, 36);
 $orange: orange;
 
 $dark-background: #222f3e;
@@ -18,35 +18,3 @@ $confirm-color: #10ac84;
 
 $spacing: 2rem;
 
-
-// theme-light
-.theme-light {
-  --bodybackgroundcolor: rgb(21, 118, 118);
-  --iconcolor: #545149;
-  --cardbackgroundcolor: #e7cda2;
-  --cardcontentcolor: #35332d;
-  --wasteal: teal;
-  --red: red;
-  --submitformcolor: #f3b860c9;
-  --titleglowcolor: #FD5901;
-  --headerbordercolor: rgb(3, 84, 84);
-  --errorboxcolor: rgba(255, 0, 0, 0.328);
-  --darkiconcolor: var(--eerie-black);
-  color-scheme: light;
-}
-
-// theme-dark varible groups
-.theme-dark {
-  --bodybackgroundcolor: var(--eerie-black);
-  --iconcolor: var(--dutch-white);
-  --cardbackgroundcolor: rgb(102, 97, 97);
-  --cardcontentcolor: var(--dutch-white);
-  --wasteal: var(--davys-grey);
-  --red: var(--persian-red);
-  --submitformcolor: var(--dutch-white);
-  --titleglowcolor: teal;
-  --headerbordercolor: var(--dutch-white);
-  --errorboxcolor: rgba(214, 207, 5, 0.675);
-  --darkiconcolor: var(--eerie-black);
-  color-scheme: dark;
-}

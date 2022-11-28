@@ -193,11 +193,6 @@ export default function useApplicationData() {
   // bookInterview (save into DB)
   //
   function bookInterview(id, interview) {
-    // if (global.config.debug) 
-      console.log("APPLICATION:bookInterview:id:", id);
-    //if (global.config.debug)
-      console.log("APPLICATION:bookInterview:interview:", interview);
-
     // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/963?journey_step=56&workbook=24
     const appointment = {
       ...state.appointments[id],
@@ -207,7 +202,6 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    console.log("bookInterview:appointments:",appointments)
     // PUT data into db: https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/963?journey_step=56&workbook=24
     // reminder, this is TWO STEP action with axios.put
     return axios

@@ -69,6 +69,11 @@
   border-radius: 0rem 2rem 0rem 2rem;
 }
 
+#dark .zmodal-content {
+  background-color:rgb(165, 163, 163);
+  box-shadow: 0 0 30px 15px rgba(85, 84, 84, 0.723);
+}
+
 .zmodal-header, .zmodal-footer {
   padding: 10px;
 }

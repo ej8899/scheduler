@@ -57,11 +57,12 @@ export default function Appointment(props) {
   const [showModal, setShowModal] = useState(false);
   const [modalError, setModalError] = useState();
 
+  // TODO - finish building out dynamic tooltip messages
   const [theTip, updateTip] = useState("click schedule an interview");
   
   useEffect(() => { 
     if(global.config.deleteOpen === true) {
-      console.log('changing tool tip')
+      //console.log('changing tool tip')
       updateTip("Cancel or Confirm your delete interview action first!"); 
     }
   }, [mode]);

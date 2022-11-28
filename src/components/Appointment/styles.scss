@@ -68,6 +68,7 @@ $appointment-height: 11rem;
 
     &--show {
       color: rgba($booked-color, $active-opacity);
+      transition: 0.3s;
       background: linear-gradient(
         90deg,
         rgba($booked-color, $active-opacity),
@@ -79,6 +80,7 @@ $appointment-height: 11rem;
       &:hover {
         color: darken($white, 5%);
         background-color: rgba($booked-color, $active-opacity);
+        transition: 0.3s;
       }
     }
 

@@ -28,13 +28,7 @@
   }
 }
 
-#light .sidebar {
 
-}
-
-#dark .sidebar {
-
-}
 
 .schedule {
   display: flex;
@@ -47,9 +41,11 @@
 
 
 #light {
-  background-color: white;
+  background-color: $white;
 }
 #dark {
-  background-color: rgb(37, 36, 36);
+  background-color: $black;
 }
-
+// example for specific items for light/dark mode changes:  use #mode .classname
+// #light .sidebar { }
+// #dark .sidebar { }

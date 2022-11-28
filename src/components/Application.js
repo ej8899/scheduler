@@ -30,8 +30,6 @@ export default function Application(props) {
     show: false,
   });
 
-console.log("isBrowser", isBrowserDefaultDark());
-
   // set up for light and dark modes
   const [theme, setTheme] = useState(getDefaultTheme);
   const toggleTheme = () => {

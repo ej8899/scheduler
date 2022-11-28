@@ -16,6 +16,7 @@
       background-color: #ee5253;
       cursor: pointer;
       color: $dark-background;
+      transition: 0.3s;
     }
 
     &--selected {
@@ -29,6 +30,7 @@
 
     &--full {
       opacity: $inactive-opacity;
+      transition: 0.3s;
     }
   }
 }
