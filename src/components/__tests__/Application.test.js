@@ -5,9 +5,29 @@ import { render, cleanup, waitForElement,fireEvent,getByText, prettyDOM,getAllBy
 
 import Application from "components/Application";
 import '../../config'; // for global configuration variables (EJ added)
+import { ThemeContext, isBrowserDefaultDark, getDefaultTheme } from "../ThemeContext.ts";
 
 afterEach(cleanup);
 
+// FIX for typeerror on window.matchMedia
+// https://annacoding.com/article/3XVDQn2H5BDX6H1RuyzaQO/Jest-test-fails-:-TypeError:-window.matchMedia-is-not-a-function
+// more info:
+// https://www.appsloveworld.com/reactjs/100/1/jest-test-fails-typeerror-window-matchmedia-is-not-a-function
+beforeAll(() => {
+  Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: jest.fn().mockImplementation(query => ({
+          matches: false,
+          media: query,
+          onchange: null,
+          addListener: jest.fn(), // Deprecated
+          removeListener: jest.fn(), // Deprecated
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+      }))
+  });
+});
 
 
 it("defaults to Monday and changes the schedule when a new day is selected", () => {
