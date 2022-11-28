@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ThemeSwitch from "components/theme-switch";
+import ThemeSwitch from "components/ThemeSwitch";
 
 export function modalCookiesMessage(data) {
   let styles = {
@@ -75,6 +75,7 @@ export function modalAboutMessage() {
       </big>
       <br />
       <br />
+      
       <ThemeSwitch />
     </div>
   );

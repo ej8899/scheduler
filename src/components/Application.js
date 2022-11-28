@@ -8,12 +8,17 @@ import useApplicationData from "hooks/useApplicationData";
 import { isFalsey } from "config";
 
 import Tooltip from "./Tooltips/Tooltip.js";
+
+// modal windows
 import ZModal, { zmodalUpdater } from "./Modal/index.js";
 import { modalAboutMessage, modalPrivacyPolicy, modalCookiesMessage, dragndropMessage } from "./Modal/ModalData.js";
 
-import { ThemeContext } from "./theme-context.ts";
+// light and dark mode switch / theme switch
+import { ThemeContext, isBrowserDefaultDark, getDefaultTheme } from "./ThemeContext.ts";
 
-import ThemeSwitch from "./theme-switch.jsx";
+
+
+
 export default function Application(props) {
   // set up states & defaults for our zmodal windows
   const [zmodalData, updateZModal] = useState ({
@@ -25,8 +30,10 @@ export default function Application(props) {
     show: false,
   });
 
+console.log("isBrowser", isBrowserDefaultDark());
+
   // set up for light and dark modes
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(getDefaultTheme);
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };

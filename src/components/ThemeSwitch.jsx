@@ -1,19 +1,21 @@
 
 import React, { useEffect, useRef, useState, useContext } from "react";
-import { ThemeContext } from './theme-context.ts';
+import { ThemeContext } from './ThemeContext.ts';
 import './Application.scss';
-
+import './ThemeSwitch.scss';
 
 function ThemeSwitch() {
   const { theme, setTheme } = useContext(ThemeContext);
+
   const handleThemeChange = () => {
     const isCurrentDark = theme === 'dark';
     setTheme(isCurrentDark ? 'light' : 'dark');
+    localStorage.setItem('theme', isCurrentDark ? 'light' : 'dark');
   };
 
   return (
-    <header className="header">
-    <div className="header-content">
+    <div>
+      <label>{theme === "light" ? "Light Mode" : "Dark Mode"}</label>
       <div className="toggle-btn-section">
         <div className={`toggle-checkbox m-vertical-auto`}>
           <input
@@ -27,7 +29,6 @@ function ThemeSwitch() {
         </div>
       </div>
     </div>
-  </header>
   );
 };
 export default ThemeSwitch;
