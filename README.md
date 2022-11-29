@@ -4,7 +4,7 @@ Scheduler is a basic application created for <a href="www.lighthouselabs.ca">Lig
 
 Scheduler also builds upon our learning to implement Jest and Cypress test platforms.  * Test modules were extensively modified to work with our extra features like modal windows in this version.
 
-![Screen Shot of Top Page](./screenshots/title.jpg)
+![Screen Shot of Staff working with Scheduler app](./screenshots/title.jpg)
 
 ---
 ## Contents...
@@ -43,7 +43,7 @@ npm run storybook
 ## Features...
 - create, add, edit and delete scheduled interviews through any of the days
 - jump to different day of the week through the left sidebar
-![Screen Shot of Top Page](./screenshots/edit.png)
+![Screen Shot of Adding an Interview](./screenshots/edit.png)
 
 
 ## Bonus features...
@@ -55,7 +55,10 @@ npm run storybook
   - about Scheduler modal window
 - create reusable "tooltips" react component
 - add social media links  
-  ![Screen Shot of Top Page](./screenshots/edittooltip.png)   
+  ![Screen Shot of Tool Tips](./screenshots/edittooltip.png)   
+
+- dark / light mode toggle is also implemented - toggle mode via the 'about (? icon)' modal window 
+![Screen Shot Dark Mode](./screenshots/darkmode.png)     
 [( back to top 🔺)](#lhl-scheduler)
 ---
 ## Future Plans...
@@ -78,6 +81,6 @@ npm run storybook
 ## Updates...
 - Get the latest of our version of Scheduler on [Github here](https://github.com/ej8899/scheduler).
 - A front end dashboard is also available [here](https://github.com/ej8899/scheduler-dashboard)  
-![Screen Shot of Top Page](./screenshots/about.png)    
+![Screen Shot of About App](./screenshots/about.png)    
 [( back to top 🔺)](#lhl-scheduler)
 ---
