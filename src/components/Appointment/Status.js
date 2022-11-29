@@ -6,8 +6,6 @@ import "components/Appointment/styles.scss";
 //
 
 export default function Status(props) {
-  if (global.config.debug) console.log("in STATUS:props", props);
-
   return (
     <main className="appointment__card appointment__card--status">
       <img

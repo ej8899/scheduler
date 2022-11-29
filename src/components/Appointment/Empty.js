@@ -7,7 +7,6 @@ import React from "react";
 //
 
 export default function Empty(props) { 
-
   let tipStyles = {
     "--tooltip-text-color": "black",
     "--tooltip-background-color": "orange",

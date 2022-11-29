@@ -26,10 +26,6 @@ export default function Form(props) {
     props.onCancel();
   };
 
-  if (global.config.debug) console.log("in FORM:props", props);
-  if (global.config.debug) console.log("in FORM:STATE:student", student);
-  if (global.config.debug)
-    console.log("in FORM:STATE:interviewer", interviewer);
 
   function validate() {
     if (global.config.debug) console.log("in FORM:VALIDATE");
@@ -43,7 +39,6 @@ export default function Form(props) {
       return;
     }
     setError("");
-    //props.onSave(student, interviewer);
     props.onSave(name, interviewer);
   }
 
@@ -57,18 +52,12 @@ export default function Form(props) {
         >
           <input
             className="appointment__create-input text--semi-bold"
-            //name="name"
             name={props.name}
             type="text"
             placeholder="Enter Student Name"
-            // value = {student}
             value={name}
-            //onChange={(event) => setStudent(event.target.value)}
             onChange={(event) => setName(event.target.value)}
             data-testid="student-name-input"
-
-            // !REMINDER - we have to use state
-            // !QUESTION - can or should we just not capture on 'submit' instead? save CPU cycles?
           />
         </form>
         <section className="appointment__validation">{error}</section>

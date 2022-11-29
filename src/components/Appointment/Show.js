@@ -7,8 +7,6 @@ import Tooltip from "../Tooltips/Tooltip.js";
 //
 
 export default function Show(props) {
-  if (global.config.debug) console.log("in SHOW:props", props);
-
   return (
     <main className="appointment__card appointment__card--show dragitem" 
       draggable

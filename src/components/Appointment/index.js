@@ -8,8 +8,7 @@ import Status from "components/Appointment/Status.js";
 import Confirm from "components/Appointment/Confirm.js";
 import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode.js";
-import ZModal from "components/Modal";
-import useApplicationData from "hooks/useApplicationData";
+
 //
 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w17/activities/900?journey_step=54
 //
@@ -36,21 +35,15 @@ export default function Appointment(props) {
   // extrastretch -- don't allow more than one edit form open at a time
   //
   function editOpen() {
-    if (global.config.debug)
-      console.log("in editOpen:start:", global.config.editsOpen);
-
     // if delete panel is open, do not allow a new edit
     if (global.config.deleteOpen) return;
 
     // if exists a schedule time in editsOpen, force a click on button w id of editsOpen 'time' (id)
     // get the cancel button of form id of this
     if (!global.config.isFalsey(global.config.editsOpen.current)) {
-      console.log("CLOSING prior form");
       global.config.editsOpen.current.click();
     }
     global.config.editsOpen = {};
-    if (global.config.debug)
-      console.log("in editOpen:exit:", global.config.editsOpen);
   }
 
   // using zModal - just to catch vague saving errors
@@ -111,7 +104,6 @@ export default function Appointment(props) {
   }
 
   function del() {
-    if (global.config.debug) console.log("in DEL():props", props);
     // see below for CONFIRM,true for 'double back' in:
     // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/966?journey_step=56&workbook=24
     transition(CONFIRM, true); // show the 'deleting in progress' message
@@ -180,7 +172,6 @@ export default function Appointment(props) {
           time={props.time}
           onSave={save}
           onCancel={() => {
-            console.log("onCancel of create");
             transition(EMPTY);
           }}
         />
