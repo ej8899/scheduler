@@ -99,6 +99,15 @@
 // specific CSS for various  modal dialogs
 // 
 
+// ABOUT window
+.glitchyshadow {
+  color: rgb(45, 45, 45);
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-shadow: red -2px 0, cyan 2px 0;
+}
+
 // COOKIES animation
 @media (prefers-reduced-motion: no-preference) {
   .cookieimage {

@@ -19,7 +19,7 @@ export function modalCookiesMessage(data) {
             height="200"
           />
         </div>
-        <h2>Nom, Nom, Nom...</h2>
+        <h2 className="glitchyshadow">Nom, Nom, Nom...</h2>
         <big>
           Our web application uses cookies to provide you with the best browsing
           experience and relevant information.
@@ -57,7 +57,7 @@ export function modalAboutMessage() {
       <i className="fashadow fa-solid fa-circle-question" style={styles}></i>
       <br />
       <br />
-      <h2>LHL Scheduler App</h2>
+      <h2 className="glitchyshadow">LHL Scheduler</h2>
       <br />
       <big>
         This is a project for learning React and
