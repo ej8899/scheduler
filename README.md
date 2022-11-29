@@ -50,19 +50,20 @@ npm run storybook
 - start app on "today" vs a default of Monday - if used on Saturday or Sunday, then default to Monday
 - prevent opening form/edits if delete confirmation panel is open
 - limit interview add form to only 1 spot at a time (original code allowed multiple forms open needlessly)
-- create modal window react component for:
+- create reusable modal window React component for:
   - cookies notice and privacy policy modal windows
   - about Scheduler modal window
-- create reusable "tooltips" react component
+- create reusable "tooltips" React component
 - add social media links  
   ![Screen Shot of Tool Tips](./screenshots/edittooltip.png)   
 
-- dark / light mode toggle is also implemented - toggle mode via the 'about (? icon)' modal window 
+- create resuable "dark mode" React component using React Context
+  - toggle mode via the 'about (? icon)' modal window 
 ![Screen Shot Dark Mode](./screenshots/darkmode.png)     
 [( back to top 🔺)](#lhl-scheduler)
 ---
 ## Future Plans...
-- continued grown and experimentation through ReactJS components  
+- continued experimentation through ReactJS components  
 [( back to top 🔺)](#lhl-scheduler)
 ---
 ## Known Bugs...
