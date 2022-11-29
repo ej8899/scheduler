@@ -21,33 +21,35 @@
           cursor: pointer;
           text-indent: -9999px;
           width: 46px;
-          height: 20px;
+          height: 25px; //  slide height
           display: block;
           border-radius: 23px;
           position: relative;
           border: none;
           margin-top: 2px;
+          transition: 0.3s;
 
 
           &::after {
             content: '?';
             position: absolute;
-            top: 3px;
+            top: 1.5px;
             left: 3px;
-            width: 14px;
-            height: 14px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             transition: 0.3s;
             box-shadow: 0 5px 10px rgba(153, 153, 153, 0.4);
-            background-color: #fff;
+            background-color: rgb(221, 122, 15);
           }
         }
 
         .toggle-btn__input:checked ~ .toggle-btn__input-label {
           &:after {
-            background: #fff;
+            background: rgb(249, 249, 249);
             left: calc(100% - 3px);
             transform: translateX(-100%);
+            transition: 0.3s;
           }
         }
 
@@ -57,12 +59,13 @@
             background: #fff;
             left: calc(100% - 3px);
             transform: translateX(-100%);
+            transition: 0.3s;
           }
         }
       }
 
       .toggle-btn__input:checked ~ .toggle-btn__input-label {
-        background-color: #82deff;
+        background-color: orange;
       }
     }
   
