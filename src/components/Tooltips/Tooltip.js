@@ -55,7 +55,6 @@ function Tooltip(props) {
   );
 }
 
-
 export function tooltipUpdator(stateFunction, currState, newData) {
   stateFunction(currState => { return {...currState, ...newData }});
 };

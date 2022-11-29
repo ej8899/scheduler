@@ -39,6 +39,7 @@ export function modalCookiesMessage(data) {
   const settings = {
     message: mymodalMessage,
     show:true,
+    button: "Agree & Continue",
     settings: { 
       noAbort: true, 
     },

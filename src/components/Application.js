@@ -33,7 +33,7 @@ export default function Application(props) {
   // set up states & defaults for our zmodal windows
   const [zmodalData, updateZModal] = useState({
     message: "",
-    button: "Agree & Continue",
+    button: "",
     settings: {
       noAbort: true,
     },
