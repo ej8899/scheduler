@@ -22,8 +22,8 @@ module.exports = global.config = {
   editsOpen: {},
   deleteOpen: false,
   editRef: null,
-  newData: false,
-  useWebSockets: true,
+  newData: false,      // todo - evaluate for viability
+  useWebSockets: true, // todo - implement as a toggle option
 
   link: {
     github: "https://github.com/ej8899/scheduler",
