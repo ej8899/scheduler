@@ -133,8 +133,8 @@ export default function Appointment(props) {
     if (props.interview === null && mode === SHOW) {
     transition(EMPTY);
     }
-    global.config.newData = false;
-  }, [props.interview, transition, mode, global.config.newData]);
+    //global.config.newData = false;
+  }, [props.interview, transition, mode,]);
 
 
   return (

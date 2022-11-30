@@ -23,6 +23,7 @@ module.exports = global.config = {
   deleteOpen: false,
   editRef: null,
   newData: false,
+  useWebSockets: true,
 
   link: {
     github: "https://github.com/ej8899/scheduler",
