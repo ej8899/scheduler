@@ -43,6 +43,7 @@ npm run storybook
 ## Features...
 - create, add, edit and delete scheduled interviews through any of the days
 - jump to different day of the week through the left sidebar
+- websocket support so app can auto update across all open instances
 ![Screen Shot of Adding an Interview](./screenshots/edit.png)
 
 
