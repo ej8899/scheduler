@@ -156,9 +156,8 @@ export default function useApplicationData() {
   // extrastretch for drag n drop (WIP)
   function updateAppointmentList(id,interview,initialID) {
     const days = spotsRemaining("ignore");
-    console.log("INCOMING DATA:id:",id)
-    console.log("INCOMING DATA:interview:",interview)
-
+    // TODO cleanup this code and console.log
+    
     // read the ID - get the new time
     // in state.appointments
     const newTime = state.appointments[id].time;

@@ -76,25 +76,27 @@ export default function Application(props) {
   //
   // draggable items (WIP)
   // ref: https://rootstack.com/en/blog/how-do-i-use-drag-and-drop-react
-  //
+  // ref: https://vijayt.com/post/drag-and-drop-example-using-plain-react/
+  // ref: https://codesandbox.io/s/react-drag-and-drop-forked-9012wf
   const dragItem = useRef();
   const dragOverItem = useRef();
   const dragStart = (e, position) => {
     dragItem.current = position;
     //console.log(e.target.innerHTML);
     console.log("drag item:",position);
-    
   };
-  const dragEnter = (e, position) => {
+  const dragEnter = (e, position) => { // dragOver?
     dragOverItem.current = position;
+    e.stopPropagation();
     e.preventDefault();
     //console.log(e.target.innerHTML);
+    //console.log(e)
     console.log("drag to:",position);
   };
   const dragEnd = (e) => {
     let destinationPageKey, sourcePageKey;
     //zmodalUpdater(updateZModal, zmodalData, dragndropMessage());
-
+    e.stopPropagation();
     e.preventDefault();
     console.log("in drag END:original:", dragItem.current);
     console.log("in drag END:destination:", dragOverItem.current);

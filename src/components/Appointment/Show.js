@@ -6,13 +6,19 @@ import Tooltip from "../Tooltips/Tooltip.js";
 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w17/activities/900?journey_step=54
 //
 
+// todo onDragOver v onDragEnter ???
+// todo onDragEnd v onDrop
+// ideal is (perhaps) - dragstart -> dragover -> ondrop
 export default function Show(props) {
   return (
     <main className="appointment__card appointment__card--show dragitem" 
       draggable
       onDragStart={(e) => {props.dragStartFn(e,props.keyname)}}
       onDragEnter={(e) => {props.dragEnterFn(e,props.keyname)}}
+      onDragOver={(e) => {  e.stopPropagation();e.preventDefault()}}
+      onDrop= {(e) => {  e.stopPropagation();e.preventDefault()}}
       onDragEnd={props.dragEndFn}
+      onDrag = {(e) => {  e.stopPropagation();e.preventDefault()}}
       >
       <section className="appointment__card-left">
         <h2 className="text--regular">{props.student}</h2>
