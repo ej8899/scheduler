@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState, useContext } from "react";
-import { ThemeContext } from './ThemeContext.ts';
+import { ThemeContext } from './ThemeContext.jsx';
 import './Application.scss';
 import './ThemeSwitch.scss';
 

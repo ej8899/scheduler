@@ -11,8 +11,14 @@
 // [] The bookInterview action makes an HTTP request and updates the local state.
 // [] The cancelInterview action makes an HTTP request and updates the local state.
 
-import { useState, useEffect } from "react";
+import { useReducer, useState, useEffect } from "react";
 import axios from "axios";
+import reducer, {
+  SET_DAY,
+  SET_APP_DATA,
+  SET_INTERVIEW,
+} from "reducers/application.js";
+
 import useVisualMode from "./useVisualMode";
 //import axios from "__mocks__/axios";
 const baseURL = "http://localhost:8001/api/";
@@ -59,22 +65,31 @@ export default function useApplicationData() {
   //
   // initial setState
   //
-  const [state, setState] = useState({
-    day: dayName, // default on start up is "today"
+  // const [state, setState] = useState({
+  //   day: dayName, // default on start up is "today"
+  //   days: [],
+  //   appointments: {},
+  // });
+  const [state, dispatch] = useReducer(reducer, {
+    day: dayName,
     days: [],
     appointments: {},
+    interviewers: {},
   });
+
 
   // for combined state object
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/929?journey_step=55
-  const setDay = (day) => {
-    setState({ ...state, day });
-  };
+  // const setDay = (day) => {
+  //   setState({ ...state, day });
+  // };
+
+  const setDay = (day) => dispatch({ type: SET_DAY, day: day, })
 
   //
-  // grab our data
+  // grab data
   //
-  useEffect(() => {
+  function grabData() {
     const daysURL = `/api/days`;
     const appointmentURL = `/api/appointments`;
     const interviewersURL = `/api/interviewers`;
@@ -89,16 +104,24 @@ export default function useApplicationData() {
           console.log("axiosGET(APPOINTMENTS):", all[1].data);
         if (global.config.debug)
           console.log("axiosGET(INTERVIEWERS):", all[2].data);
-        setState((prev) => ({
-          ...prev,
+        dispatch({
+          type: SET_APP_DATA,
           days: all[0].data,
           appointments: all[1].data,
           interviewers: all[2].data,
-        }));
+        });
       })
       .catch((err) => {
         console.error("ERR in axiosGET:", err);
       });
+      global.config.newData=true;
+  }
+
+  //
+  // initial load functions
+  //
+  useEffect(() => {
+    grabData();
   }, []);
 
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/968?journey_step=56
@@ -159,7 +182,16 @@ export default function useApplicationData() {
     };
     console.log("restructure appointments;",appointments)
     // above correct to here
-    
+  
+    cancelInterview(initialID)
+    .then((res) => {
+      if (global.config.debug) console.log("DEL item response:", res);
+      //transition(EMPTY, true);
+    })
+    .catch((err) => {
+      if (global.config.debug) console.error(err);
+      // transition(ERROR_DELETE, true);
+    });
   
     bookInterview(id,appointment.interview)
     .then((res) => {
@@ -171,22 +203,12 @@ export default function useApplicationData() {
       //transition(ERROR_SAVE, true);
     });
     
-    // cancelInterview(initialID)
-    // .then((res) => {
-    //   if (global.config.debug) console.log("DEL item response:", res);
-    //   transition(EMPTY, true);
-    // })
-    // .catch((err) => {
-    //   if (global.config.debug) console.error(err);
-    //   transition(ERROR_DELETE, true);
-    // });
+  
     // set state
     //setState({ ...state, appointments, days });
+    grabData();
     console.log("appointments list(AFTER state):",state.appointments); // back to null in id3
 
-    // console.log("appointment:",appointment)
-    // console.log("appointments:",appointments)
-    // setState({ ...state, appointments, days });
   }
 
   //
@@ -194,27 +216,33 @@ export default function useApplicationData() {
   //
   function bookInterview(id, interview) {
     // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/963?journey_step=56&workbook=24
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview },
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
+    // const appointment = {
+    //   ...state.appointments[id],
+    //   interview: { ...interview },
+    // };
+    // const appointments = {
+    //   ...state.appointments,
+    //   [id]: appointment,
+    // };
     // PUT data into db: https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/963?journey_step=56&workbook=24
     // reminder, this is TWO STEP action with axios.put
     return axios
       .put(`${baseURL}appointments/${id}`, { interview })
       .then((res) => {
-        if (global.config.debug)
-          console.log("BOOKINTERVIEW - PUT response:", res.status);
-        // 204 is all good
-        // TODO error handling?
+        // if (global.config.debug)
+        //   console.log("BOOKINTERVIEW - PUT response:", res.status);
+        // // 204 is all good
+        // // TODO error handling?
 
-        const days = spotsRemaining("decrease");
-        setState({ ...state, appointments, days });
-        return res.status;
+        // const days = spotsRemaining("decrease");
+        // setState({ ...state, appointments, days });
+        // return res.status;
+        dispatch({
+          type: SET_INTERVIEW,
+          id,
+          spots: "add",
+          interview,
+        })
       });
   }
 
@@ -222,25 +250,31 @@ export default function useApplicationData() {
   // cancelInterview (delete From DB)
   //
   function cancelInterview(id, interview = null) {
-    const appointment = {
-      ...state.appointments[id],
-      interview,
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
+    // const appointment = {
+    //   ...state.appointments[id],
+    //   interview,
+    // };
+    // const appointments = {
+    //   ...state.appointments,
+    //   [id]: appointment,
+    // };
 
     if (global.config.debug) console.log("cancelInterview() id:", id);
     return axios
-      .delete(`${baseURL}appointments/${id}`, { appointment })
+      .delete(`${baseURL}appointments/${id}`)
       .then((res) => {
-        if (global.config.debug)
-          console.log("cancelINTERVIEW - PUT response:", res.status);
+        // if (global.config.debug)
+        //   console.log("cancelINTERVIEW - PUT response:", res.status);
 
-        const days = spotsRemaining("increase");
-        setState({ ...state, appointments, days });
-        return res.status;
+        // const days = spotsRemaining("increase");
+        // setState({ ...state, appointments, days });
+        // return res.status;
+        dispatch({
+          type: SET_INTERVIEW,
+          id,
+          spots: "del",
+          interview: null,
+        })
       });
   }
 
