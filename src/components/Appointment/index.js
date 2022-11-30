@@ -123,6 +123,20 @@ export default function Appointment(props) {
   }
   if (mode === DELETE) global.config.deleteOpen = true;
 
+  
+  // listen for changes in state and update if required
+  // NOTE: this should solve (part of) our drag & drop 'refresh' problem.
+  useEffect(() => {
+    if (props.interview && mode === EMPTY) {
+    transition(SHOW);
+    }
+    if (props.interview === null && mode === SHOW) {
+    transition(EMPTY);
+    }
+    global.config.newData = false;
+  }, [props.interview, transition, mode, global.config.newData]);
+
+
   return (
     <article className="appointment dragitem" data-testid="appointment">
       <Header time={props.time} />
@@ -145,7 +159,7 @@ export default function Appointment(props) {
         />
       )}
 
-      {mode === SHOW && (
+      {mode === SHOW && props.interview && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}

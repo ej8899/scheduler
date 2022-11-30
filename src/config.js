@@ -22,6 +22,7 @@ module.exports = global.config = {
   editsOpen: {},
   deleteOpen: false,
   editRef: null,
+  newData: false,
 
   link: {
     github: "https://github.com/ej8899/scheduler",

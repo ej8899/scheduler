@@ -27,7 +27,7 @@ import {
   ThemeContext,
   isBrowserDefaultDark,
   getDefaultTheme,
-} from "./ThemeContext.ts";
+} from "./ThemeContext.jsx";
 
 export default function Application(props) {
   // set up states & defaults for our zmodal windows
@@ -82,44 +82,56 @@ export default function Application(props) {
   const dragStart = (e, position) => {
     dragItem.current = position;
     //console.log(e.target.innerHTML);
-    //console.log("drag item:",position);
+    console.log("drag item:",position);
+    
   };
   const dragEnter = (e, position) => {
     dragOverItem.current = position;
+    e.preventDefault();
     //console.log(e.target.innerHTML);
-    //console.log("drag to:",position)
+    console.log("drag to:",position);
   };
   const dragEnd = (e) => {
+    let destinationPageKey, sourcePageKey;
+    //zmodalUpdater(updateZModal, zmodalData, dragndropMessage());
+
+    e.preventDefault();
     console.log("in drag END:original:", dragItem.current);
     console.log("in drag END:destination:", dragOverItem.current);
     const destinationIndex = dragOverItem.current - 1;
-    zmodalUpdater(updateZModal, zmodalData, dragndropMessage());
+
+    console.log("appointmentList",appointmentList)
+
+    // adjust for pageKey
+    destinationPageKey = dragOverItem.current - 1;
+    sourcePageKey = dragItem.current - 1;
+    // todo refactor this mess:
+    if (dragOverItem.current > 20) {
+      destinationPageKey = dragOverItem.current - 21;
+      sourcePageKey = dragItem.current - 21;
+    } else
+    if (dragOverItem.current > 15) {
+      destinationPageKey = dragOverItem.current - 16;
+      sourcePageKey = dragItem.current - 16;
+    } else
+    if (dragOverItem.current > 10) {
+      destinationPageKey = dragOverItem.current - 11;
+      sourcePageKey = dragItem.current - 11;
+    } else
+    if (dragOverItem.current > 5) {
+      destinationPageKey = dragOverItem.current - 6;
+      sourcePageKey = dragItem.current - 6;
+    }
+
     // check if interview is NOT here,
-    console.log("props of dragover item:", appointmentList);
-    if (!isFalsey(appointmentList[dragOverItem.current - 1].props.interview)) {
+    if (!isFalsey(appointmentList[destinationPageKey].props.interview)) {
       console.log("oops - already an inteview here abort");
       return;
     }
     console.log("no student here ok to drop");
     // if empty, copy new item here
-
-    const newInterview = appointmentList[dragItem.current - 1].props.interview;
+    const newInterview = appointmentList[sourcePageKey].props.interview;
     updateAppointmentList(dragOverItem.current, newInterview, dragItem.current);
-
-    // todo - change appointment id
-    /*
-    bookInterview(destinationIndex, newAppt)
-    .then((res) => {
-      console.log("applicaton res:",res)
-    })
-    .catch((err) => {
-      console.log("application error:",err)
-    });
-    */
-    // remove old from view
-    // remove old item
-    // save data
-    // delete old location from db
   };
 
   // parse out appointments for day

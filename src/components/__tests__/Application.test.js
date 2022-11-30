@@ -5,7 +5,7 @@ import { render, cleanup, waitForElement,fireEvent,getByText, prettyDOM,getAllBy
 
 import Application from "components/Application";
 import '../../config'; // for global configuration variables (EJ added)
-import { ThemeContext, isBrowserDefaultDark, getDefaultTheme } from "../ThemeContext.ts";
+import { ThemeContext, isBrowserDefaultDark, getDefaultTheme } from "../ThemeContext.jsx";
 
 afterEach(cleanup);
 
@@ -117,7 +117,7 @@ it("loads data, cancels an interview and increases the spots remaining for Monda
       queryByText(day, "Monday")
     );
   // 8. Check that the DayListItem with the text "Monday" also has the text "1 spot remaining".
-  expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+  expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
 });
 
 
