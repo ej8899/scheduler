@@ -122,6 +122,27 @@ export default function useApplicationData() {
   //
   useEffect(() => {
     grabData();
+
+    // WEB SOCKETS:
+    // setup for web sockets / websockets - auto update if multiple instances of app are running
+    // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/974?journey_step=56&workbook=24
+    const wsocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL || "ws://localhost:8001");
+    wsocket.onopen = () => {
+      if(global.config.debug) console.log("Web socket opened");
+      wsocket.send("Ping");
+    };
+    wsocket.onmessage = (event) => {
+      if(global.config.debug) console.log("wsocket message rx'd:",JSON.parse(event.data));
+      let socketMessage = JSON.parse(event.data);
+      if (socketMessage.type === "SET_INTERVIEW") {
+        dispatch({
+          type: SET_INTERVIEW,
+          id: socketMessage.id,
+          spots: "add",
+          interview: socketMessage.interview,
+        })
+      }
+    }
   }, []);
 
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/968?journey_step=56
