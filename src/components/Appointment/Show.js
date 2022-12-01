@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "components/Appointment/styles.scss";
 import Tooltip from "../Tooltips/Tooltip.js";
 
@@ -10,15 +10,21 @@ import Tooltip from "../Tooltips/Tooltip.js";
 // todo onDragEnd v onDrop
 // ideal is (perhaps) - dragstart -> dragover -> ondrop
 export default function Show(props) {
+
+  const [isDragging, setIsDragging] = useState(false);
+  function handleDragEnd() {
+    setIsDragging(false);
+  }
   return (
     <main className="appointment__card appointment__card--show dragitem" 
       draggable
-      onDragStart={(e) => {props.dragStartFn(e,props.keyname)}}
+      onDragStart={(e) => {setIsDragging(true);props.dragStartFn(e,props.keyname)}}
       onDragEnter={(e) => {props.dragEnterFn(e,props.keyname)}}
       onDragOver={(e) => {  e.stopPropagation();e.preventDefault()}}
       onDrop= {(e) => {  e.stopPropagation();e.preventDefault()}}
-      onDragEnd={props.dragEndFn}
+      onDragEnd={(e) => {handleDragEnd();props.dragEndFn(e)}}
       onDrag = {(e) => {  e.stopPropagation();e.preventDefault()}}
+      style = {{backgroundColor: isDragging ? "rgba(55,138,240,0.10)" : ""}}
       >
       <section className="appointment__card-left">
         <h2 className="text--regular">{props.student}</h2>
