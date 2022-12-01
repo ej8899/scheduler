@@ -15,7 +15,9 @@ export default function Empty(props) {
 
   return (
     <main className="appointment__add dragitem" 
-    draggable
+    onDragOver={(e) => {  e.stopPropagation();e.preventDefault()}}
+    onDrop= {(e) => {  e.stopPropagation();e.preventDefault()}}
+
     onDragEnter={(e) => {props.dragEnterFn(e,props.keyname)}}
     >
       <Tooltip styles={tipStyles} content={props.toolTip} direction="bottom">
