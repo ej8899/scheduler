@@ -3,6 +3,9 @@ import classNames from "classnames";
 
 import "components/Button.scss";
 
+//
+// Button component
+//
 export default function Button(props) {
   //if (global.config.debug) console.log("BUTTON PROPS",props)
 

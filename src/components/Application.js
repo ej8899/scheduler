@@ -30,8 +30,16 @@ import {
   getDefaultTheme,
 } from "./ThemeContext.jsx";
 
+
+//
+// application - main function
+//
 export default function Application(props) {
+
+  //
+  // MODAL WINDOWS: 
   // set up states & defaults for our zmodal windows
+  //
   const [zmodalData, updateZModal] = useState({
     message: "",
     button: "",
@@ -40,24 +48,29 @@ export default function Application(props) {
     },
     show: false,
   });
-
-  // set up for light and dark modes
-  const [theme, setTheme] = useState(getDefaultTheme);
-  const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
-  };
-
   function showAbout() {
     zmodalUpdater(updateZModal, zmodalData, modalAboutMessage({clickFunction: showReleaseNotes}));
   }
   function showReleaseNotes() {
     zmodalUpdater(updateZModal, zmodalData, modalReleaseNotes());
   }
-
   function showPrivacy() {
     zmodalUpdater(updateZModal, zmodalData, modalPrivacyPolicy());
   }
 
+
+  //
+  // set up for light and dark modes
+  //
+  const [theme, setTheme] = useState(getDefaultTheme);
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
+
+
+  //
+  // set up APP data
+  //
   const {
     state,
     setDay,
@@ -69,16 +82,13 @@ export default function Application(props) {
   } = useApplicationData();
 
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/930?journey_step=55
-  /*
-    const setDays = (days) => {
-    setState(prev => ({...state,days}));
-  };
-  */
   let dailyAppointments = [];
   let interviewers = [];
 
+
   //
   // draggable items (WIP)
+  //
   // ref: https://rootstack.com/en/blog/how-do-i-use-drag-and-drop-react
   // ref: https://vijayt.com/post/drag-and-drop-example-using-plain-react/
   // ref: https://codesandbox.io/s/react-drag-and-drop-forked-9012wf
@@ -87,7 +97,7 @@ export default function Application(props) {
   const dragStart = (e, position) => {
     dragItem.current = position;
     //console.log(e.target.innerHTML);
-    console.log("drag item:",position);
+    //console.log("drag item:",position);
   };
   const dragEnter = (e, position) => { // dragOver?
     dragOverItem.current = position;
@@ -95,7 +105,7 @@ export default function Application(props) {
     e.preventDefault();
     //console.log(e.target.innerHTML);
     //console.log(e)
-    console.log("drag to:",position);
+    //console.log("drag to:",position);
   };
   const dragEnd = (e) => {
     let destinationPageKey, sourcePageKey;
@@ -140,7 +150,9 @@ export default function Application(props) {
     updateAppointmentList(dragOverItem.current, newInterview, dragItem.current);
   };
 
+  //
   // parse out appointments for day
+  //
   dailyAppointments = getAppointmentsForDay(state, state.day);
   interviewers = getInterviewersForDay(state, state.day);
 
@@ -166,16 +178,17 @@ export default function Application(props) {
     }
   );
 
+  
+  //
+  // open cookies modal if we're using it
+  //
   // https://dmitripavlutin.com/react-useeffect-explanation/
+  //
   if (global.config.cookiesModal) {
     useEffect(() => {
       cookiesModal(true);
     }, []);
   }
-
-  // console.log("\n\nDELETEOPEN:",global.config.deleteOpen);
-  // useEffect(() => { setTip("Cancel or Confirm your delete interview action first!"); }, []);
-
   function cookiesModal(modalState = false) {
     zmodalUpdater(
       updateZModal,
@@ -186,6 +199,7 @@ export default function Application(props) {
     // todo - update localStorage once user says ok
   }
 
+  // setup any extra styles not included in SCSS files
   let tipStyles = {
     "--tooltip-text-color": "black",
     "--tooltip-background-color": "orange",
@@ -193,7 +207,7 @@ export default function Application(props) {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={`theme-${theme}`}>
+      <div >
         <main className="layout" id={theme}>
           <section className="sidebar">
             {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
