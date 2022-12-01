@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import ThemeSwitch from "components/ThemeSwitch";
+import { zmodalUpdater } from "./index.js";
+
+function showReleaseNotes() {
+  zmodalUpdater(updateZModal, zmodalData, modalReleaseNotes());
+}
 
 export function modalCookiesMessage(data) {
   let styles = {
@@ -48,11 +53,14 @@ export function modalCookiesMessage(data) {
   return settings;
 }
 
-export function modalAboutMessage() {
+export function modalAboutMessage(data) {
   let styles = {
     fontSize: "6rem",
     color: "orange",
   };
+  let linkstyles = {
+    cursor: "pointer",
+  }
   const mymodalMessage = (
     <div align="center">
       <i className="fashadow fa-solid fa-circle-question" style={styles}></i>
@@ -73,6 +81,10 @@ export function modalAboutMessage() {
         <i className="fa-regular fa-copyright"></i> 2022, All Rights Reserved
         <br />
         Version: {global.config.appVersion}
+        <br /><br />
+        <span style={linkstyles} onClick={data.clickFunction}>
+            Release Notes
+          </span>
       </big>
       <br />
       <br />
@@ -104,7 +116,7 @@ export function modalPrivacyPolicy() {
         <i className="fashadow fa-solid fa-lock" style={styles}></i>
         <br />
         <br />
-        <h2>Privacy Policy</h2>
+        <h2 className="glitchyshadow">Privacy Policy</h2>
         <br />
         Nullam cursus velit ac dui cursus hendrerit. Proin malesuada erat eu
         tempus sagittis. Pellentesque sit amet odio at mauris tristique egestas
@@ -133,6 +145,43 @@ export function modalPrivacyPolicy() {
   return settings;
 }
 
+export function modalReleaseNotes() {
+  let styles = {
+    fontSize: "6rem",
+    color: "orange",
+  };
+  let mymodalMessage = (
+    <div>
+      <div align="center">
+        <i className="fashadow fa-solid fa-file-lines" style={styles}></i>
+        <br />
+        <br />
+        <h2 className="glitchyshadow">Release Notes:</h2>
+        <br/>
+  
+        <code style={{display: "inline-block",textAlign: "left"}}>
+        v1.0:<br/>
+        - Websocket Support<br/>&nbsp;&nbsp;(auto updates across all open instances)<br/>
+        - Dark & Light mode toggle<br/>
+        - Drag and Drop to adjust schedules<br/>
+        </code>
+
+        <br />
+      </div>
+    </div>
+  );
+
+  const settings = {
+    message: mymodalMessage,
+    button:"ok",
+    show:true,
+    settings: { 
+      noAbort: true, 
+  },
+  };
+
+  return settings;
+}
 
 
 

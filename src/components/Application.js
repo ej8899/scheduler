@@ -20,6 +20,7 @@ import {
   modalPrivacyPolicy,
   modalCookiesMessage,
   dragndropMessage,
+  modalReleaseNotes,
 } from "./Modal/ModalData.js";
 
 // light and dark mode switch / theme switch
@@ -47,7 +48,10 @@ export default function Application(props) {
   };
 
   function showAbout() {
-    zmodalUpdater(updateZModal, zmodalData, modalAboutMessage());
+    zmodalUpdater(updateZModal, zmodalData, modalAboutMessage({clickFunction: showReleaseNotes}));
+  }
+  function showReleaseNotes() {
+    zmodalUpdater(updateZModal, zmodalData, modalReleaseNotes());
   }
 
   function showPrivacy() {
