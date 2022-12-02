@@ -3,6 +3,9 @@ import ReactDOM from "react-dom";
 import "./modal.scss";
 
 
+//
+// react based modal window builder
+//
 export default function ZModal(props) {
   // props.show  true = show modal, false = remove modal
   // if(!props.show) {
@@ -10,7 +13,6 @@ export default function ZModal(props) {
   // }
   const isFalsey = function(value) { return !value};
   const { onClose, settings } = props;
-  
 
   const closeOnEscapeKeyDown = useCallback((e) => {  
     if ((e.charCode || e.keyCode) === 27) {

@@ -19,6 +19,7 @@ export default function Appointment(props) {
   const CREATE = "CREATE";
   const SAVE = "SAVE";
   const DELETE = "DELETE";
+  const UPDATE = "UPDATE";
   const CONFIRM = "CONFIRM";
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE";

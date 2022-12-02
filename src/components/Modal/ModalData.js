@@ -6,6 +6,9 @@ function showReleaseNotes() {
   zmodalUpdater(updateZModal, zmodalData, modalReleaseNotes());
 }
 
+//
+// cookies modal
+//
 export function modalCookiesMessage(data) {
   let styles = {
     color: "navy",
@@ -53,6 +56,9 @@ export function modalCookiesMessage(data) {
   return settings;
 }
 
+//
+// about app modal
+//
 export function modalAboutMessage(data) {
   let styles = {
     fontSize: "6rem",
@@ -105,6 +111,9 @@ export function modalAboutMessage(data) {
   return settings;
 }
 
+//
+// privacy policy modal
+//
 export function modalPrivacyPolicy() {
   let styles = {
     fontSize: "6rem",
@@ -145,6 +154,9 @@ export function modalPrivacyPolicy() {
   return settings;
 }
 
+//
+// application release notes modal
+//
 export function modalReleaseNotes() {
   let styles = {
     fontSize: "6rem",
@@ -183,8 +195,9 @@ export function modalReleaseNotes() {
   return settings;
 }
 
-
-
+//
+// drag and drop WIP modal
+//
 export function dragndropMessage() {
   let styles = {
     fontSize: "6rem",

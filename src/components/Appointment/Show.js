@@ -35,7 +35,7 @@ export default function Show(props) {
       onDrop= {(e) => {  e.stopPropagation();e.preventDefault()}}
       onDragEnd={(e) => {handleDragEnd();props.dragEndFn(e)}}
       onDrag = {(e) => {  e.stopPropagation();e.preventDefault()}}
-      onClick = {(e) => {setIsClicked(true);console.log("clicked")}}
+      onClick = {(e) => {setIsClicked(true);}}
       style = {{
         opacity: isDragging ? "0.6" : "1",
         backgroundColor: isDragging ? "orange" : "",

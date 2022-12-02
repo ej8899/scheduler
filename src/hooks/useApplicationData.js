@@ -5,11 +5,10 @@
 //
 
 // Our useApplicationData Hook will return an object with four keys:
-
 // [x] The state object will maintain the same structure.
-// [] The setDay action can be used to set the current day.
-// [] The bookInterview action makes an HTTP request and updates the local state.
-// [] The cancelInterview action makes an HTTP request and updates the local state.
+// [x] The setDay action can be used to set the current day.
+// [x] The bookInterview action makes an HTTP request and updates the local state.
+// [x] The cancelInterview action makes an HTTP request and updates the local state.
 
 import { useReducer, useState, useEffect } from "react";
 import axios from "axios";
@@ -80,10 +79,6 @@ export default function useApplicationData() {
 
   // for combined state object
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/929?journey_step=55
-  // const setDay = (day) => {
-  //   setState({ ...state, day });
-  // };
-
   const setDay = (day) => dispatch({ type: SET_DAY, day: day, })
 
   //
@@ -145,38 +140,12 @@ export default function useApplicationData() {
     }
   }, []);
 
-  // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/968?journey_step=56
-  function spotsRemaining(type) {
-    let day = {};
-    const numDayOfWeek = findDay(state.day); // convert written day of week to day number
-    if (global.config.debug) console.log("state.day:", numDayOfWeek);
-    // reminder - we add to spots available if we remove an existing appointment!
-    if (type === "increase") {
-      day = {
-        ...state.days[numDayOfWeek],
-        spots: state.days[numDayOfWeek].spots + 1,
-      };
-    } else if (type === "decrease") {
-      day = {
-        ...state.days[numDayOfWeek],
-        spots: state.days[numDayOfWeek].spots - 1,
-      };
-    } else if (type === "ignore") {
-      day = {
-        ...state.days[numDayOfWeek],
-        spots: state.days[numDayOfWeek].spots,
-      };
-    }
-
-    let days = state.days;
-    days[numDayOfWeek] = day;
-    return days;
-  }
-
-
-  // extrastretch for drag n drop (WIP)
+  
+  // 
+  // updateAppointmentList -- support required data adjustments for drag and drop
+  // TODO - how can we implement transitions here??
+  //
   function updateAppointmentList(id,interview,initialID) {
-    const days = spotsRemaining("ignore");
     // TODO cleanup this code and console.log
     
     // read the ID - get the new time
@@ -184,8 +153,6 @@ export default function useApplicationData() {
     const newTime = state.appointments[id].time;
     console.log("new time:",newTime)
     // above checks out to here
-
-    // restructure interview  is NOT needed - it is correct as is
 
     // restructure appointments
     console.log("appointments list(BEFORE):",state.appointments)
@@ -223,9 +190,6 @@ export default function useApplicationData() {
       //transition(ERROR_SAVE, true);
     });
     
-  
-    // set state
-    //setState({ ...state, appointments, days });
     grabData();
     console.log("appointments list(AFTER state):",state.appointments); // back to null in id3
 
@@ -235,28 +199,11 @@ export default function useApplicationData() {
   // bookInterview (save into DB)
   //
   function bookInterview(id, interview) {
-    // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/963?journey_step=56&workbook=24
-    // const appointment = {
-    //   ...state.appointments[id],
-    //   interview: { ...interview },
-    // };
-    // const appointments = {
-    //   ...state.appointments,
-    //   [id]: appointment,
-    // };
     // PUT data into db: https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w19/activities/963?journey_step=56&workbook=24
     // reminder, this is TWO STEP action with axios.put
     return axios
       .put(`${baseURL}appointments/${id}`, { interview })
       .then((res) => {
-        // if (global.config.debug)
-        //   console.log("BOOKINTERVIEW - PUT response:", res.status);
-        // // 204 is all good
-        // // TODO error handling?
-
-        // const days = spotsRemaining("decrease");
-        // setState({ ...state, appointments, days });
-        // return res.status;
         dispatch({
           type: SET_INTERVIEW,
           id,
@@ -270,25 +217,10 @@ export default function useApplicationData() {
   // cancelInterview (delete From DB)
   //
   function cancelInterview(id, interview = null) {
-    // const appointment = {
-    //   ...state.appointments[id],
-    //   interview,
-    // };
-    // const appointments = {
-    //   ...state.appointments,
-    //   [id]: appointment,
-    // };
-
     if (global.config.debug) console.log("cancelInterview() id:", id);
     return axios
       .delete(`${baseURL}appointments/${id}`)
       .then((res) => {
-        // if (global.config.debug)
-        //   console.log("cancelINTERVIEW - PUT response:", res.status);
-
-        // const days = spotsRemaining("increase");
-        // setState({ ...state, appointments, days });
-        // return res.status;
         dispatch({
           type: SET_INTERVIEW,
           id,
