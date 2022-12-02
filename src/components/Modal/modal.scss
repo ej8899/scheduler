@@ -99,6 +99,28 @@
 // specific CSS for various  modal dialogs
 // 
 
+.underLink {
+  cursor:pointer;
+  width: max-content;
+  position: relative;
+  margin: 100px auto;
+}
+.underLink::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  height: 4px;
+  width: 100%;
+  left: 0;
+  background-color: orange;
+  transition: 0.3s;
+  transition-timing-function: ease-in-out;
+  transform: scaleX(0);
+}
+.underLink:hover::after {
+  transform: scaleX(1);
+}
+
 // ABOUT window
 .glitchyshadow {
   color: rgb(45, 45, 45);

@@ -32,7 +32,7 @@ export function modalCookiesMessage(data) {
           <br />
           Before continuing to use our web application, you agree & accept our{" "}
           <br />
-          <span style={styles} onClick={data.clickFunction}>
+          <span className="underLink" style={styles} onClick={data.clickFunction}>
             Cookie & Privacy Policy
           </span>
           .
@@ -82,7 +82,7 @@ export function modalAboutMessage(data) {
         <br />
         Version: {global.config.appVersion}
         <br /><br />
-        <span style={linkstyles} onClick={data.clickFunction}>
+        <span className="underLink" style={linkstyles} onClick={data.clickFunction}>
             Release Notes
           </span>
       </big>

@@ -81,6 +81,7 @@ $appointment-height: 11rem;
       &:hover {
         color: darken($white, 5%);
         background-color: rgba($booked-color, $active-opacity);
+        transform: scale(1.01);
         transition: 0.3s;
       }
     }
@@ -185,4 +186,18 @@ $appointment-height: 11rem;
 
 #dark .appointment__time {
   color:white;
+}
+
+.grabbable {
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+/* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.grabbable:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }

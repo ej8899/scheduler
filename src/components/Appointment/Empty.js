@@ -8,6 +8,7 @@ import React, { useState } from "react";
 
 export default function Empty(props) { 
 
+  // localized dragging support - also see Application.js for main handler
   const [isOver, setIsOver] = useState(false);
   function handleDragOver(e) {
     setIsOver(true);
@@ -18,7 +19,6 @@ export default function Empty(props) {
     setIsOver(false);
   }
 
-
   let tipStyles = {
     "--tooltip-text-color": "black",
     "--tooltip-background-color": "orange",
@@ -27,10 +27,10 @@ export default function Empty(props) {
 
   return (
     <main className="appointment__add dragitem"
-    style = {{ backgroundColor: isOver ? "#007000" : "" }} 
+    style = {{ backgroundColor: isOver ? "teal" : "" }} 
     
     onDragOver={handleDragOver}
-    onDrop= {(e) => {  e.stopPropagation();e.preventDefault()}}
+    onDrop= {(e) => { setIsOver(false); e.stopPropagation();e.preventDefault()}}
     onDragLeave = {handleDragLeave}
 
     onDragEnter={(e) => {props.dragEnterFn(e,props.keyname)}}

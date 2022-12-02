@@ -11,20 +11,35 @@ import Tooltip from "../Tooltips/Tooltip.js";
 // ideal is (perhaps) - dragstart -> dragover -> ondrop
 export default function Show(props) {
 
+  // localized dragging support - also see Application.js for main handler
   const [isDragging, setIsDragging] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
   function handleDragEnd() {
     setIsDragging(false);
   }
+  function handleDragStart(e) {
+    // what is current background? save it
+    // set to dragging bg
+    // return bg color
+    setIsDragging(true);
+    props.dragStartFn(e,props.keyname);
+  }
+
   return (
-    <main className="appointment__card appointment__card--show dragitem" 
+    <main className="appointment__card appointment__card--show dragitem grabbable" 
       draggable
-      onDragStart={(e) => {setIsDragging(true);props.dragStartFn(e,props.keyname)}}
+      onDragStart={handleDragStart}
       onDragEnter={(e) => {props.dragEnterFn(e,props.keyname)}}
       onDragOver={(e) => {  e.stopPropagation();e.preventDefault()}}
       onDrop= {(e) => {  e.stopPropagation();e.preventDefault()}}
       onDragEnd={(e) => {handleDragEnd();props.dragEndFn(e)}}
       onDrag = {(e) => {  e.stopPropagation();e.preventDefault()}}
-      style = {{backgroundColor: isDragging ? "rgba(55,138,240,0.10)" : ""}}
+      onClick = {(e) => {setIsClicked(true);console.log("clicked")}}
+      style = {{
+        opacity: isDragging ? "0.6" : "1",
+        backgroundColor: isDragging ? "orange" : "",
+        }}
       >
       <section className="appointment__card-left">
         <h2 className="text--regular">{props.student}</h2>

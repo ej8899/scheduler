@@ -87,7 +87,8 @@ export default function Application(props) {
 
 
   //
-  // draggable items (WIP)
+  // draggable items (main controller code)
+  // support code in Appointment/Show.js and Empty.js
   //
   // ref: https://rootstack.com/en/blog/how-do-i-use-drag-and-drop-react
   // ref: https://vijayt.com/post/drag-and-drop-example-using-plain-react/
@@ -96,16 +97,11 @@ export default function Application(props) {
   const dragOverItem = useRef();
   const dragStart = (e, position) => {
     dragItem.current = position;
-    //console.log(e.target.innerHTML);
-    //console.log("drag item:",position);
   };
   const dragEnter = (e, position) => { // dragOver?
     dragOverItem.current = position;
     e.stopPropagation();
     e.preventDefault();
-    //console.log(e.target.innerHTML);
-    //console.log(e)
-    //console.log("drag to:",position);
   };
   const dragEnd = (e) => {
     let destinationPageKey, sourcePageKey;
