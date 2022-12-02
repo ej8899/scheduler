@@ -73,6 +73,7 @@ npm run storybook
 [( back to top 🔺)](#lhl-scheduler)
 ---
 ## Attributions...
+- [conColors library](https://github.com/ej8899/conColors) (modals & misc animations)
 - FontAwesome (various icons)
 - Node.js
 - PostgreSQL
