@@ -48,6 +48,7 @@ npm run storybook
 
 
 ## Bonus features...
+![Screen Shot of Tool Tips](./screenshots/scheduler-overview.gif)
 - start app on "today" vs a default of Monday - if used on Saturday or Sunday, then default to Monday
 - prevent opening form/edits if delete confirmation panel is open
 - limit interview add form to only 1 spot at a time (original code allowed multiple forms open needlessly)
