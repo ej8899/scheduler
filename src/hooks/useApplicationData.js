@@ -155,7 +155,7 @@ export default function useApplicationData() {
     // above checks out to here
 
     // restructure appointments
-    console.log("appointments list(BEFORE):",state.appointments)
+    //console.log("appointments list(BEFORE):",state.appointments)
     // just need to insert interview into interview
     const studentName = interview.student;
     const interviewerId = interview.interviewer.id;
@@ -167,7 +167,7 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    console.log("restructure appointments;",appointments)
+    //console.log("restructure appointments;",appointments)
     // above correct to here
   
     cancelInterview(initialID)
@@ -191,8 +191,7 @@ export default function useApplicationData() {
     });
     
     grabData();
-    console.log("appointments list(AFTER state):",state.appointments); // back to null in id3
-
+    // console.log("appointments list(AFTER state):",state.appointments); // back to null in id3
   }
 
   //

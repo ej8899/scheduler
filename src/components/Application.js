@@ -108,11 +108,11 @@ export default function Application(props) {
     //zmodalUpdater(updateZModal, zmodalData, dragndropMessage());
     e.stopPropagation();
     e.preventDefault();
-    console.log("in drag END:original:", dragItem.current);
-    console.log("in drag END:destination:", dragOverItem.current);
+    // console.log("in drag END:original:", dragItem.current);
+    // console.log("in drag END:destination:", dragOverItem.current);
     const destinationIndex = dragOverItem.current - 1;
 
-    console.log("appointmentList",appointmentList)
+    // console.log("appointmentList",appointmentList)
 
     // adjust for pageKey
     destinationPageKey = dragOverItem.current - 1;
