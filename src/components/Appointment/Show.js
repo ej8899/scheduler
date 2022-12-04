@@ -38,8 +38,9 @@ export default function Show(props) {
       onDrag = {(e) => {  e.stopPropagation();e.preventDefault()}}
       onClick = {(e) => {setIsClicked(true);}}
       style = {{
-        opacity: isDragging ? "0.6" : "1",
+        opacity: isDragging ? ".6" : "1",
         backgroundColor: isDragging ? "orange" : "",
+        background: isDragging ? "linear-gradient(140deg, rgba(207,130,23,1) 5%, rgba(251,174,0,1) 89%)" : "",
         }}
       >
       <section className="appointment__card-left">

@@ -55,6 +55,7 @@ export default function Empty(props) {
     <main className={classes}
     style = {{
       backgroundColor: isOver ? "teal" : "",
+      background: isOver ? "linear-gradient(344deg, rgba(207,130,23,1) 0%, rgba(0,128,128,1) 56%)" : "",
   }} 
     
     onDragOver={handleDragOver}
