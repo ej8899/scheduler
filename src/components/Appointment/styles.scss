@@ -17,6 +17,7 @@ $appointment-height: 11rem;
     justify-content: center;
     align-items: center;
     margin-left: 48px;
+    border-radius: 0.5rem;
 
     &-button {
       @include button-inactive--opacity;
@@ -81,7 +82,7 @@ $appointment-height: 11rem;
       &:hover {
         color: darken($white, 5%);
         background-color: rgba($booked-color, $active-opacity);
-        transform: scale(1.01);
+        //transform: scale(1.01);
         transition: 0.3s;
       }
     }
@@ -189,7 +190,7 @@ $appointment-height: 11rem;
 {
   display: flex !important;
   background-color: rgba(238, 59, 59, 0.758);
-  border-radius: 15px;
+  border-radius: 0.5rem;
   font-size: 2rem;
   color: white;
 }
