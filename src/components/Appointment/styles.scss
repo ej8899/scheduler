@@ -184,6 +184,16 @@ $appointment-height: 11rem;
   }
 }
 
+
+.showtrash
+{
+  display: flex !important;
+  background-color: rgba(238, 59, 59, 0.758);
+  border-radius: 15px;
+  font-size: 2rem;
+  color: white;
+}
+
 #dark .appointment__time {
   color:white;
 }

@@ -81,6 +81,7 @@ export default function Application(props) {
     bookInterview,
     cancelInterview,
     updateAppointmentList,
+    trashAppointment,
   } = useApplicationData();
 
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/930?journey_step=55
@@ -116,8 +117,16 @@ export default function Application(props) {
     console.log("in drag END:destination:", dragOverItem.current);
     const destinationIndex = dragOverItem.current - 1;
 
+    // trash can in left sidebar
+    // todo remove this - was a test for showing an element
     if (dragOverItem.current === 'trash') {
-      console.log("TO DELETE")
+      console.log("TO DELETE sidebar")
+      return;
+    }
+    // trashcan at "5pm" position
+    if (dragOverItem.current === 'trashcan') {
+      console.log("TO DELETE -5pm trashcan")
+      trashAppointment(dragItem.current);
       return;
     }
     // console.log("appointmentList",appointmentList)
@@ -210,7 +219,7 @@ export default function Application(props) {
     "--tooltip-background-color": "orange",
   };
 
-  console.log("application dragTrash:",dragTrash);
+  console.log("application.js dragTrash:",dragTrash);
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <div >
@@ -302,7 +311,7 @@ export default function Application(props) {
                 {dragTrash && <div
                 onDragEnter={(e) => {dragEnter(e,"trash")}} 
                 onDragEnd={(e) => {dragEnter(e,"trash")}}
-                key="trash">dsfdfdfd trash  dsfdsfkdsjfklsd</div>}
+                key="trash">.</div>}
             <img
               className="sidebar__lhl sidebar--centered"
               src="images/lhl.png"
@@ -312,7 +321,17 @@ export default function Application(props) {
 
           <section className="schedule">
             {appointmentList}
-            <Appointment key="last" time="5pm" />
+            <Appointment 
+              key="last" 
+              time="5pm" 
+              toolTip="delete item"
+              changeTip={setTip}
+              dragStartFn={dragStart}
+              dragEnterFn={dragEnter}
+              dragEndFn={dragEnd}
+              setdragTrash={setdragTrash}
+              trashMode={dragTrash}
+              />
           </section>
         </main>
       </div>

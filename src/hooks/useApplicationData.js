@@ -141,6 +141,25 @@ export default function useApplicationData() {
     }
   }, []);
 
+
+  //
+  // trashAppointment(id)
+  //
+  // TODO - show a 'deleting' card
+  function trashAppointment(initialID) {
+    cancelInterview(initialID)
+    .then((res) => {
+      if (global.config.debug) console.log("DEL item response:", res);
+      //transition(EMPTY, true);
+    })
+    .catch((err) => {
+      if (global.config.debug) console.error(err);
+      // transition(ERROR_DELETE, true);
+    });
+    grabData();
+    console.log("deleted ", initialID)
+  }
+
   
   // 
   // updateAppointmentList -- support required data adjustments for drag and drop
@@ -236,5 +255,6 @@ export default function useApplicationData() {
     bookInterview,
     cancelInterview,
     updateAppointmentList,
+    trashAppointment,
   };
 } // end of useApplicationData()

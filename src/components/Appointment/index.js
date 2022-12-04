@@ -144,12 +144,13 @@ export default function Appointment(props) {
 
       {mode === EMPTY && (
         <Empty
-          keyname = {props.id}
+          keyname = {props.id || 'trashcan'}
           dragEnterFn={props.dragEnterFn}
           dragStartFn={props.dragStartFn}
           dragEndFn={props.dragEndFn}
           toolTip={theTip}
-          
+          theTime={props.time}
+          trashMode={props.trashMode}
           onAdd={() => {
             if (!global.config.deleteOpen === true) {
               // delete panel is NOT open so we can allow user to create new entry

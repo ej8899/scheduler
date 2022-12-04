@@ -25,23 +25,48 @@ export default function Empty(props) {
     "--tooltip-margin": "40px;",
   };
 
+  // default EMPTY icon is to 'add'
+  let icon = (
+    <img
+    className="appointment__add-button"
+    src="images/add.png"
+    alt="Add"
+    onClick={props.onAdd}
+  />
+  )
+  // set EMPTY icon to a trash can
+  if(props.theTime === "5pm") {
+    console.log("LAST ITEM");
+    icon = (
+      <i className="fa-solid fa-trash-can fa-xl"></i>
+    )
+  }
+// let trashmode = "initial";
+// if (props.trashMode === true) {
+//   trashmode = "initial !important"
+// }
+
+let classes="";
+if(props.trashMode === true) {
+  classes = "showtrash ";
+}
+classes += "appointment__add dragitem";
+
   return (
-    <main className="appointment__add dragitem"
-    style = {{ backgroundColor: isOver ? "teal" : "" }} 
+    <main className={classes}
+    style = {{
+      backgroundColor: isOver ? "teal" : "",
+  }} 
     
     onDragOver={handleDragOver}
     onDrop= {(e) => { setIsOver(false); e.stopPropagation();e.preventDefault()}}
     onDragLeave = {handleDragLeave}
 
-    onDragEnter={(e) => {props.dragEnterFn(e,props.keyname)}}
+    onDragEnter={(e) => {props.dragEnterFn(e,props.keyname || "trashcan")}}
     >
       <Tooltip styles={tipStyles} content={props.toolTip} direction="bottom">
-        <img
-        className="appointment__add-button"
-        src="images/add.png"
-        alt="Add"
-        onClick={props.onAdd}
-      /></Tooltip>
+        {icon}
+      </Tooltip>
     </main>
   );
 }
