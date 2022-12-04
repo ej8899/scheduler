@@ -66,14 +66,21 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  //background-color: white;
   padding: 1rem 1.5rem;
   width: 500px;
   border-radius: 0rem 2rem 0rem 2rem;
+
+  // glass effect
+  backdrop-filter: blur(25px) saturate(144%);
+    -webkit-backdrop-filter: blur(25px) saturate(144%);
+  
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 #dark .zmodal-content {
-  background-color:rgb(165, 163, 163);
+  background-color: rgba(190, 184, 184, 0.5);
   box-shadow: 0 0 30px 15px rgba(85, 84, 84, 0.723);
 }
 
