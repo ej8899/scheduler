@@ -77,6 +77,7 @@ export default function useApplicationData() {
   });
 
 
+
   // for combined state object
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/929?journey_step=55
   const setDay = (day) => dispatch({ type: SET_DAY, day: day, })
@@ -139,6 +140,25 @@ export default function useApplicationData() {
       }
     }
   }, []);
+
+
+  //
+  // trashAppointment(id)
+  //
+  // TODO - show a 'deleting' card
+  function trashAppointment(initialID) {
+    cancelInterview(initialID)
+    .then((res) => {
+      if (global.config.debug) console.log("DEL item response:", res);
+      //transition(EMPTY, true);
+    })
+    .catch((err) => {
+      if (global.config.debug) console.error(err);
+      // transition(ERROR_DELETE, true);
+    });
+    grabData();
+    console.log("deleted ", initialID)
+  }
 
   
   // 
@@ -235,5 +255,6 @@ export default function useApplicationData() {
     bookInterview,
     cancelInterview,
     updateAppointmentList,
+    trashAppointment,
   };
 } // end of useApplicationData()

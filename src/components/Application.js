@@ -36,6 +36,8 @@ import {
 //
 export default function Application(props) {
 
+  const [dragTrash, setdragTrash] = useState(false);
+
   //
   // MODAL WINDOWS: 
   // set up states & defaults for our zmodal windows
@@ -79,6 +81,7 @@ export default function Application(props) {
     bookInterview,
     cancelInterview,
     updateAppointmentList,
+    trashAppointment,
   } = useApplicationData();
 
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/930?journey_step=55
@@ -97,6 +100,7 @@ export default function Application(props) {
   const dragOverItem = useRef();
   const dragStart = (e, position) => {
     dragItem.current = position;
+    setdragTrash(true);
   };
   const dragEnter = (e, position) => { // dragOver?
     dragOverItem.current = position;
@@ -105,6 +109,7 @@ export default function Application(props) {
   };
   const dragEnd = (e) => {
     let destinationPageKey, sourcePageKey;
+    setdragTrash(false);
     //zmodalUpdater(updateZModal, zmodalData, dragndropMessage());
     e.stopPropagation();
     e.preventDefault();
@@ -112,6 +117,19 @@ export default function Application(props) {
     // console.log("in drag END:destination:", dragOverItem.current);
     const destinationIndex = dragOverItem.current - 1;
 
+    // trash can in left sidebar
+    // todo remove this - was a test for showing an element
+    if (dragOverItem.current === 'trash') {
+      //console.log("TO DELETE sidebar")
+      return;
+    }
+    // trashcan at "5pm" position
+    if (dragOverItem.current === 'trashcan') {
+      //console.log("TO DELETE -5pm trashcan")
+      // TODO confirmation modal
+      trashAppointment(dragItem.current);
+      return;
+    }
     // console.log("appointmentList",appointmentList)
 
     // adjust for pageKey
@@ -169,6 +187,7 @@ export default function Application(props) {
           dragStartFn={dragStart}
           dragEnterFn={dragEnter}
           dragEndFn={dragEnd}
+          setdragTrash={setdragTrash}
         />
       );
     }
@@ -200,6 +219,7 @@ export default function Application(props) {
     "--tooltip-text-color": "black",
     "--tooltip-background-color": "orange",
   };
+
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -289,7 +309,10 @@ export default function Application(props) {
             <nav className="sidebar__menu">
               <DayList days={state.days} value={state.day} onChange={setDay} />
             </nav>
-
+                {dragTrash && <div
+                onDragEnter={(e) => {dragEnter(e,"trash")}} 
+                onDragEnd={(e) => {dragEnter(e,"trash")}}
+                key="trash">.</div>}
             <img
               className="sidebar__lhl sidebar--centered"
               src="images/lhl.png"
@@ -299,7 +322,17 @@ export default function Application(props) {
 
           <section className="schedule">
             {appointmentList}
-            <Appointment key="last" time="5pm" />
+            <Appointment 
+              key="last" 
+              time="5pm" 
+              toolTip="delete item"
+              changeTip={setTip}
+              dragStartFn={dragStart}
+              dragEnterFn={dragEnter}
+              dragEndFn={dragEnd}
+              setdragTrash={setdragTrash}
+              trashMode={dragTrash}
+              />
           </section>
         </main>
       </div>
