@@ -36,6 +36,8 @@ import {
 //
 export default function Application(props) {
 
+  const [dragTrash, setdragTrash] = useState(false);
+
   //
   // MODAL WINDOWS: 
   // set up states & defaults for our zmodal windows
@@ -97,6 +99,7 @@ export default function Application(props) {
   const dragOverItem = useRef();
   const dragStart = (e, position) => {
     dragItem.current = position;
+    setdragTrash(true);
   };
   const dragEnter = (e, position) => { // dragOver?
     dragOverItem.current = position;
@@ -105,13 +108,18 @@ export default function Application(props) {
   };
   const dragEnd = (e) => {
     let destinationPageKey, sourcePageKey;
+    setdragTrash(false);
     //zmodalUpdater(updateZModal, zmodalData, dragndropMessage());
     e.stopPropagation();
     e.preventDefault();
-    // console.log("in drag END:original:", dragItem.current);
-    // console.log("in drag END:destination:", dragOverItem.current);
+    console.log("in drag END:original:", dragItem.current);
+    console.log("in drag END:destination:", dragOverItem.current);
     const destinationIndex = dragOverItem.current - 1;
 
+    if (dragOverItem.current === 'trash') {
+      console.log("TO DELETE")
+      return;
+    }
     // console.log("appointmentList",appointmentList)
 
     // adjust for pageKey
@@ -169,6 +177,7 @@ export default function Application(props) {
           dragStartFn={dragStart}
           dragEnterFn={dragEnter}
           dragEndFn={dragEnd}
+          setdragTrash={setdragTrash}
         />
       );
     }
@@ -201,6 +210,7 @@ export default function Application(props) {
     "--tooltip-background-color": "orange",
   };
 
+  console.log("application dragTrash:",dragTrash);
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <div >
@@ -289,7 +299,10 @@ export default function Application(props) {
             <nav className="sidebar__menu">
               <DayList days={state.days} value={state.day} onChange={setDay} />
             </nav>
-
+                {dragTrash && <div
+                onDragEnter={(e) => {dragEnter(e,"trash")}} 
+                onDragEnd={(e) => {dragEnter(e,"trash")}}
+                key="trash">dsfdfdfd trash  dsfdsfkdsjfklsd</div>}
             <img
               className="sidebar__lhl sidebar--centered"
               src="images/lhl.png"

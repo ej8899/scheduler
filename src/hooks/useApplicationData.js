@@ -77,6 +77,7 @@ export default function useApplicationData() {
   });
 
 
+
   // for combined state object
   // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w18/activities/929?journey_step=55
   const setDay = (day) => dispatch({ type: SET_DAY, day: day, })

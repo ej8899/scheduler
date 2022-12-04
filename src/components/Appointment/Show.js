@@ -15,6 +15,7 @@ export default function Show(props) {
   const [isDragging, setIsDragging] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
+
   function handleDragEnd() {
     setIsDragging(false);
   }
