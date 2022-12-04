@@ -114,7 +114,8 @@ $appointment-height: 11rem;
 
   &:last-of-type &__add,
   &:last-of-type &__card {
-    display: none;
+    //display: none;
+    opacity: 0;
   }
 
   &__actions {
@@ -194,7 +195,13 @@ $appointment-height: 11rem;
   background: linear-gradient(344deg, rgba(207,130,23,1) 5%, rgba(200,26,9,1) 89%);
   border-radius: 0.5rem;
   font-size: 2rem;
-  color: white;
+  color: black;
+  opacity: 1 !important;
+  transition: all 0.3s ease-in-out;
+}
+.showtrashhide {
+  opacity:  0 !important;
+  transition: all 0.3s ease-in-out;
 }
 
 #dark .appointment__time {

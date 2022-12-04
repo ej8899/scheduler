@@ -17,12 +17,14 @@ export default function Show(props) {
 
 
   function handleDragEnd() {
+    setIsClicked(false);
     setIsDragging(false);
   }
   function handleDragStart(e) {
     // what is current background? save it
     // set to dragging bg
     // return bg color
+    setIsClicked(true);
     setIsDragging(true);
     props.dragStartFn(e,props.keyname);
   }
@@ -36,9 +38,12 @@ export default function Show(props) {
       onDrop= {(e) => {  e.stopPropagation();e.preventDefault()}}
       onDragEnd={(e) => {handleDragEnd();props.dragEndFn(e)}}
       onDrag = {(e) => {  e.stopPropagation();e.preventDefault()}}
-      onClick = {(e) => {setIsClicked(true);}}
+      //onMouseDown = {(e) => {setIsClicked(true);}}
+      //onMouseUp = {(e) => {setIsClicked(false);}}
       style = {{
+        transform: isClicked ? "scale(0.9)" : "scale(1.0)",
         opacity: isDragging ? ".6" : "1",
+        //transform: isDragging ? "scale(0.8)" : "",
         backgroundColor: isDragging ? "orange" : "",
         background: isDragging ? "linear-gradient(140deg, rgba(207,130,23,1) 5%, rgba(251,174,0,1) 89%)" : "",
         }}
