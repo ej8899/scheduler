@@ -113,19 +113,20 @@ export default function Application(props) {
     //zmodalUpdater(updateZModal, zmodalData, dragndropMessage());
     e.stopPropagation();
     e.preventDefault();
-    console.log("in drag END:original:", dragItem.current);
-    console.log("in drag END:destination:", dragOverItem.current);
+    // console.log("in drag END:original:", dragItem.current);
+    // console.log("in drag END:destination:", dragOverItem.current);
     const destinationIndex = dragOverItem.current - 1;
 
     // trash can in left sidebar
     // todo remove this - was a test for showing an element
     if (dragOverItem.current === 'trash') {
-      console.log("TO DELETE sidebar")
+      //console.log("TO DELETE sidebar")
       return;
     }
     // trashcan at "5pm" position
     if (dragOverItem.current === 'trashcan') {
-      console.log("TO DELETE -5pm trashcan")
+      //console.log("TO DELETE -5pm trashcan")
+      // TODO confirmation modal
       trashAppointment(dragItem.current);
       return;
     }
@@ -219,7 +220,7 @@ export default function Application(props) {
     "--tooltip-background-color": "orange",
   };
 
-  console.log("application.js dragTrash:",dragTrash);
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <div >

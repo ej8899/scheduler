@@ -25,6 +25,7 @@ export default function Empty(props) {
     "--tooltip-margin": "40px;",
   };
 
+  
   // default EMPTY icon is to 'add'
   let icon = (
     <img
@@ -34,23 +35,21 @@ export default function Empty(props) {
     onClick={props.onAdd}
   />
   )
-  // set EMPTY icon to a trash can
+
+  // set EMPTY icon to a trash can if we're in the 5pm position - item stays hidden unless we're dragging an item
   if(props.theTime === "5pm") {
-    console.log("LAST ITEM");
     icon = (
       <i className="fa-solid fa-trash-can fa-xl"></i>
     )
   }
-// let trashmode = "initial";
-// if (props.trashMode === true) {
-//   trashmode = "initial !important"
-// }
 
-let classes="";
-if(props.trashMode === true) {
-  classes = "showtrash ";
-}
-classes += "appointment__add dragitem";
+
+  // set up classes in our 'empty' panels for adding or trashing (drag n drop) appointments
+  let classes="";
+  if(props.trashMode === true) {
+    classes = "showtrash ";
+  }
+  classes += "appointment__add dragitem";
 
   return (
     <main className={classes}
