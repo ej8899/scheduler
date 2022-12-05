@@ -1,4 +1,11 @@
 
+//
+//  zlog(type,message,extra messages)
+//  example:  zlog('debug',"here's the value of x:", x);
+//
+// use zlog(userwarning);
+// to send a console message indicating dev tools are a browser feature - built in testing ignores for command terminal if test running
+//
 export default function zlog(...args) {
   const zlogStyle = {
     error:  'color: white; background: #c92424; border-radius: 4px',
@@ -9,7 +16,7 @@ export default function zlog(...args) {
 
   let zmessage = `%c ${args[0]} `;
   let finmessage = '';
-  for (let x=1; x<=args.length-1;x++) {
+  for (let x = 1; x <= args.length - 1; x ++) {
     finmessage += JSON.stringify(args[x]);
     finmessage += ' ';
   }
