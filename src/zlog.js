@@ -18,7 +18,12 @@ export default function zlog(...args) {
     case 'userwarning':
       let warnmessage = '%cCAUTION: This is a browser feature intended for developers. If someone told you to copy-paste something here to enable a feature, it is a likely a scam and could give them access to your private information!.';
       let warnstyle = `color: white; background: #c92424; border-radius: 4px; font-size: 1.2rem;`;
-      console.log(warnmessage,warnstyle);
+
+      // skip showing this message if we're running console in a terminal for testing (JEST for example)
+      if(process.env.JEST_WORKER_ID === undefined || process.env.NODE_ENV !== 'test') {
+        console.log(warnmessage,warnstyle);
+      }
+      
       break;
     case 'error':
       console.error(zmessage,zlogStyle.error,finmessage);
