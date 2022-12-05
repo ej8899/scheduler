@@ -17,6 +17,7 @@ import reducer, {
   SET_APP_DATA,
   SET_INTERVIEW,
 } from "reducers/application.js";
+import zlog from "zlog";
 
 import useVisualMode from "./useVisualMode";
 //import axios from "__mocks__/axios";
@@ -157,7 +158,7 @@ export default function useApplicationData() {
       // transition(ERROR_DELETE, true);
     });
     grabData();
-    console.log("deleted ", initialID)
+    zlog('info',"deleted "+ initialID)
   }
 
   
@@ -171,7 +172,7 @@ export default function useApplicationData() {
     // read the ID - get the new time
     // in state.appointments
     const newTime = state.appointments[id].time;
-    console.log("new time:",newTime)
+    zlog('debug',"new time:",newTime)
     // above checks out to here
 
     // restructure appointments
@@ -202,7 +203,7 @@ export default function useApplicationData() {
   
     bookInterview(id,appointment.interview)
     .then((res) => {
-      console.log("BOOKINTERVIEW RESULT:", res);
+      zlog('info',"BOOKINTERVIEW RESULT:" + JSON.stringify(res));
       //transition("SHOW");
     })
     .catch((err) => {

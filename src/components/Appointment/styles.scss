@@ -199,6 +199,9 @@ $appointment-height: 11rem;
   opacity: 1 !important;
   transition: all 0.3s ease-in-out;
 }
+.showtrash:hover {
+  font-size: 3rem;
+}
 .showtrashhide {
   opacity:  0 !important;
   transition: all 0.3s ease-in-out;

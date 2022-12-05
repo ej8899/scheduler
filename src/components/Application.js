@@ -29,6 +29,7 @@ import {
   isBrowserDefaultDark,
   getDefaultTheme,
 } from "./ThemeContext.jsx";
+import zlog from "zlog.js";
 
 
 //
@@ -101,6 +102,7 @@ export default function Application(props) {
   const dragStart = (e, position) => {
     dragItem.current = position;
     setdragTrash(true);
+    //console.log('info',e)
   };
   const dragEnter = (e, position) => { // dragOver?
     dragOverItem.current = position;
@@ -155,10 +157,10 @@ export default function Application(props) {
 
     // check if interview is NOT here,
     if (!isFalsey(appointmentList[destinationPageKey].props.interview)) {
-      console.log("oops - already an inteview here abort");
+      zlog('debug',"already a student here");
       return;
     }
-    console.log("no student here ok to drop");
+    zlog('debug',"no student here ok to drop");
     // if empty, copy new item here
     const newInterview = appointmentList[sourcePageKey].props.interview;
     updateAppointmentList(dragOverItem.current, newInterview, dragItem.current);
