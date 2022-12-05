@@ -36,7 +36,6 @@ import zlog from "zlog.js";
 // application - main function
 //
 export default function Application(props) {
-
   const [dragTrash, setdragTrash] = useState(false);
 
   //

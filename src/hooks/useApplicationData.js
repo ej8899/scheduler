@@ -118,6 +118,7 @@ export default function useApplicationData() {
   // initial load functions
   //
   useEffect(() => {
+    zlog('userwarning');
     grabData();
 
     // WEB SOCKETS:
