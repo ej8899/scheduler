@@ -29,14 +29,21 @@ import {
   isBrowserDefaultDark,
   getDefaultTheme,
 } from "./ThemeContext.jsx";
+
+// console log helper
 import zlog from "zlog.js";
 
+// load spinners
+import LoadingSpinner from "./LoadingSpinner.jsx";
 
 //
 // application - main function
 //
 export default function Application(props) {
   const [dragTrash, setdragTrash] = useState(false);
+
+  // spinners (use in drag and drop instead of panel updates)
+  const [isLoading, setIsLoading] = useState(false);
 
   //
   // MODAL WINDOWS: 
@@ -128,7 +135,9 @@ export default function Application(props) {
     if (dragOverItem.current === 'trashcan') {
       //console.log("TO DELETE -5pm trashcan")
       // TODO confirmation modal
+      setIsLoading(true);
       trashAppointment(dragItem.current);
+      setIsLoading(false);
       return;
     }
     // console.log("appointmentList",appointmentList)
@@ -157,12 +166,15 @@ export default function Application(props) {
     // check if interview is NOT here,
     if (!isFalsey(appointmentList[destinationPageKey].props.interview)) {
       zlog('debug',"already a student here");
+
       return;
     }
     zlog('debug',"no student here ok to drop");
     // if empty, copy new item here
     const newInterview = appointmentList[sourcePageKey].props.interview;
+    setIsLoading(true);
     updateAppointmentList(dragOverItem.current, newInterview, dragItem.current);
+    setTimeout(() => setIsLoading(false),1000);
   };
 
   //
@@ -247,6 +259,8 @@ export default function Application(props) {
                 {zmodalData.message}
               </ZModal>
             )}
+
+            {isLoading ? <LoadingSpinner /> : <div></div>}
 
             <div className="socicons-container" align="center">
               <Tooltip
