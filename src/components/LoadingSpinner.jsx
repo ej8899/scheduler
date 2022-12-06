@@ -7,7 +7,7 @@ import "./LoadingSpinner.scss";
 export default function LoadingSpinner() {
   return (
     
-    <div className="spinner-container">
+    <div className="spinner-containersidebar">
       <div className="spinner-box">
         <div className="circle-border">
           <div className="circle-core">

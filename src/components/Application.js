@@ -260,8 +260,6 @@ export default function Application(props) {
               </ZModal>
             )}
 
-            {isLoading ? <LoadingSpinner /> : <div></div>}
-
             <div className="socicons-container" align="center">
               <Tooltip
                 styles={tipStyles}
@@ -323,6 +321,7 @@ export default function Application(props) {
 
             <nav className="sidebar__menu">
               <DayList days={state.days} value={state.day} onChange={setDay} />
+              {isLoading ? <LoadingSpinner /> : <div></div>}
             </nav>
                 {dragTrash && <div
                 onDragEnter={(e) => {dragEnter(e,"trash")}} 
