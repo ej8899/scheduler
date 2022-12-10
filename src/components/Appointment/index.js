@@ -137,10 +137,25 @@ export default function Appointment(props) {
     //global.config.newData = false;
   }, [props.interview, transition, mode,]);
 
+  let timeSpot = props.time;
+  if(global.config.timeClock === 24) {
+    // strip num from props.time and 
+    let tnum = props.time.match(/\d+/g);  // ref tnum[0]
+    let ttext = props.time.match(/[a-zA-Z]+/g); // ref ttext[0]
+    if (ttext == 'am') {
+      timeSpot = "0" + tnum[0] + 'h';
+    } else {
+      if(tnum[0] === '12') {
+        timeSpot = "1200" + 'h';  
+      } else {
+        timeSpot = (+tnum[0] + 12) + "00" + 'h';
+      }
+    }
+  }
 
   return (
     <article className="appointment dragitem" data-testid="appointment">
-      <Header time={props.time} />
+      <Header time={timeSpot} />
 
       {mode === EMPTY && (
         <Empty
