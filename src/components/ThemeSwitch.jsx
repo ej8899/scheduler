@@ -15,7 +15,7 @@ function ThemeSwitch() {
 
   return (
     <div>
-      <label>{theme === "light" ? "Light Mode" : "Dark Mode"}</label>
+      <label>{theme === "light" ? "Currently Light Mode" : "Currently Dark Mode"}</label>
       <div className="toggle-btn-section">
         <div className={`toggle-checkbox m-vertical-auto`}>
           <input

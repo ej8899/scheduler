@@ -1,5 +1,6 @@
-import { alternatives } from "joi";
+
 import React, { useEffect, useRef, useState, useContext } from "react";
+import zlog from "zlog";
 import ElementSwitch from "./ElementSwitch";
 import './ThemeSwitch.scss';
 
@@ -10,13 +11,13 @@ function HourSwitch() {
   const handleHourChange = () => {
     const isCurrentHour = hourTheme === '24';
     setHourTheme(isCurrentHour ? '12' : '24');
-    console.log("SWITCHED:",hourTheme);
+    zlog("info", "SWITCHED:",hourTheme);
     global.config.timeClock = +hourTheme;
   };
 
   return (
     <div>
-    <label>{hourTheme + " hour time"}</label>
+    <label>{hourTheme === "12" ? "Currently 24h mode" : "Currently 12h mode"}</label>
     <div className="toggle-btn-section">
       <div className={`toggle-checkbox m-vertical-auto`}>
         <input
@@ -36,6 +37,7 @@ export default HourSwitch;
 
 
 
+// TODO - should we break down 'switch' into an individual item for re-use?  that makes state more difficult.
 
 // function HourSwitch(props) {
 //   const [ hourTheme, setHourTheme ] = useState('12');
