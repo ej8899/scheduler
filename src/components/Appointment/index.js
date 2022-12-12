@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import "components/Appointment/styles.scss";
 import Header from "components/Appointment/Header.js";
 import Show from "components/Appointment/Show.js";
@@ -11,7 +11,7 @@ import useVisualMode from "hooks/useVisualMode.js";
 // NOTE1:  lazy loading of components - need import react w lazy and Suspense
 // NOTE2: suspense can be given a null for fallback to avoid anything from rendering
 // import Confirm from "components/Appointment/Confirm.js";
-const Confirm = lazy(() => import('./Confirm.js'));
+const Confirm = React.lazy(() => import('./Confirm.js'));
 
 //
 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w17/activities/900?journey_step=54

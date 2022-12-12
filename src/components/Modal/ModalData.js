@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ThemeSwitch from "components/ThemeSwitch";
+import HourSwitch from "components/HourSwitch.jsx";
 import { zmodalUpdater } from "./index.js";
 
 function showReleaseNotes() {
@@ -96,6 +97,7 @@ export function modalAboutMessage(data) {
       <br />
       
       <ThemeSwitch />
+      <HourSwitch />
     </div>
   );
 
