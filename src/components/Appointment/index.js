@@ -1,13 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 import "components/Appointment/styles.scss";
 import Header from "components/Appointment/Header.js";
 import Show from "components/Appointment/Show.js";
 import Empty from "components/Appointment/Empty.js";
 import Form from "components/Appointment/Form.js";
 import Status from "components/Appointment/Status.js";
-import Confirm from "components/Appointment/Confirm.js";
 import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode.js";
+
+// NOTE1:  lazy loading of components - need import react w lazy and Suspense
+// NOTE2: suspense can be given a null for fallback to avoid anything from rendering
+// import Confirm from "components/Appointment/Confirm.js";
+const Confirm = lazy(() => import('./Confirm.js'));
 
 //
 // https://flex-web.compass.lighthouselabs.ca/workbooks/flex-m07w17/activities/900?journey_step=54
@@ -137,6 +141,7 @@ export default function Appointment(props) {
     //global.config.newData = false;
   }, [props.interview, transition, mode,]);
 
+  // process 12/24 hour time settings
   let timeSpot = props.time;
   if(global.config.timeClock === 24) {
     // strip num from props.time and 
@@ -222,6 +227,7 @@ export default function Appointment(props) {
       )}
 
       {mode === DELETE && (
+        <Suspense fallback={<div>Loading...</div>}>
         <Confirm
           message={"Delete this interview?"}
           id={props.time}
@@ -230,7 +236,7 @@ export default function Appointment(props) {
             back();
           }}
           onConfirm={del}
-        />
+        /></Suspense>
       )}
 
       {mode === SAVE && <Status message={"Saving Appointment..."} />}

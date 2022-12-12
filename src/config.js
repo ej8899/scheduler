@@ -24,7 +24,7 @@ module.exports = global.config = {
   editRef: null,
   newData: false,      // todo - evaluate for viability
   useWebSockets: true, // todo - implement as a toggle option
-  timeClock: 24,       // 12 or 24 for clock setting - will save to localstorage
+  timeClock: 24,       // 12 or 24 for clock setting - // todo - save to localstorage
 
   link: {
     github: "https://github.com/ej8899/scheduler",
