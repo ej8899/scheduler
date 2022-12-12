@@ -90,7 +90,7 @@ export function modalAboutMessage(data) {
         Version: {global.config.appVersion}
         <br /><br />
         <span className="underLink" style={linkstyles} onClick={data.clickFunction}>
-            Release Notes
+        <i className="fa-solid fa-chevron-right fa-sm"></i> Release Notes <i className="fa-solid fa-chevron-left fa-sm"></i>
           </span>
       </big>
       <br />
