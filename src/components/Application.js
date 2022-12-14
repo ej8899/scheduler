@@ -1,33 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
 import "components/Application.scss";
+import { useEffect, useRef, useState } from "react";
 
-import DayList from "components/DayList.js";
 import Appointment from "components/Appointment/index.js";
+import DayList from "components/DayList.js";
+import { isFalsey } from "config";
 import {
   getAppointmentsForDay,
   getInterview,
-  getInterviewersForDay,
+  getInterviewersForDay
 } from "helpers/selectors.js";
 import useApplicationData from "hooks/useApplicationData";
-import { isFalsey,goSleep } from "config";
 
 import Tooltip from "./Tooltips/Tooltip.js";
 
 // modal windows
 import ZModal, { zmodalUpdater } from "./Modal/index.js";
 import {
-  modalAboutMessage,
-  modalPrivacyPolicy,
-  modalCookiesMessage,
-  dragndropMessage,
-  modalReleaseNotes,
+  modalAboutMessage, modalCookiesMessage, modalPrivacyPolicy, modalReleaseNotes
 } from "./Modal/ModalData.js";
 
 // light and dark mode switch / theme switch
 import {
-  ThemeContext,
-  isBrowserDefaultDark,
-  getDefaultTheme,
+  getDefaultTheme, ThemeContext
 } from "./ThemeContext.jsx";
 
 // console log helper

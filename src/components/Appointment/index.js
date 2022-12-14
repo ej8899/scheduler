@@ -227,7 +227,7 @@ export default function Appointment(props) {
       )}
 
       {mode === DELETE && (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div><big>Loading this component</big></div>}>
         <Confirm
           message={"Delete this interview?"}
           id={props.time}
