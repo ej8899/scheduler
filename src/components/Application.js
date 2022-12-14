@@ -49,10 +49,10 @@ export default function Application(props) {
   const [pageLoading,setPageLoading] = useState(true);
   const pageloader = document.getElementById('pageloader');
   if(pageLoading === true) {
-    setTimeout(() => {
+    global.config.goSleep(2000).then(()=> { 
       pageloader.style.display = "none";
-      setPageLoading(false);
-    }, 2000);
+      setPageLoading(false); 
+    });
   }
 
   // classes for main display
@@ -228,9 +228,7 @@ export default function Application(props) {
     if (global.config.cookiesModal) {
       cookiesModal(true);
     }
-    setTimeout(() => {
-      setclassName("layout fadein");
-    }, 2000);
+    global.config.goSleep(2000).then(()=> { setclassName("layout fadein"); });
   }, []);
   
   function cookiesModal(modalState = false) {
