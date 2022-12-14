@@ -31,6 +31,7 @@
         align-items: center;
         text-align: center;
         min-height: 100vh;
+        transition: all 0.5s ease-in-out;
       }
       .loading-title {
         font-size: 4rem;
@@ -42,13 +43,14 @@
   <body>
     <noscript>You need to enable JavaScript to run this application.</noscript>
 
-    <div id="root">
-      <div class="center-screen">
-        <div class="loading-title">
-          Hold on, it's loading!
-        </div>
+    
+    <div class="center-screen" id="pageloader">
+      <div class="loading-title">
+        Hold on, it's loading!
+      </div>
     </div>
-    </div>
+
+    <div id="root"></div>
 
   </body>
 </html>

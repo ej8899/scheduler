@@ -36,6 +36,11 @@ module.exports = global.config = {
   isFalsey: function (value) {
     return !value;
   },
+
+  // usage: global.config.goSleep(xxx).then(()=> { ... });
+  goSleep: function (ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 };
 
 /*

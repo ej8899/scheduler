@@ -9,7 +9,7 @@ import {
   getInterviewersForDay,
 } from "helpers/selectors.js";
 import useApplicationData from "hooks/useApplicationData";
-import { isFalsey } from "config";
+import { isFalsey,goSleep } from "config";
 
 import Tooltip from "./Tooltips/Tooltip.js";
 
@@ -41,9 +41,22 @@ import LoadingSpinner from "./LoadingSpinner.jsx";
 //
 export default function Application(props) {
   const [dragTrash, setdragTrash] = useState(false);
-
+  
   // spinners (use in drag and drop instead of panel updates)
   const [isLoading, setIsLoading] = useState(false);
+
+  //  setup controlled page loader -- NOTE check our useEffect for smooth load of app itself
+  const [pageLoading,setPageLoading] = useState(true);
+  const pageloader = document.getElementById('pageloader');
+  if(pageLoading === true) {
+    setTimeout(() => {
+      pageloader.style.display = "none";
+      setPageLoading(false);
+    }, 2000);
+  }
+
+  // classes for main display
+  const [className, setclassName] = useState("layout");
 
   //
   // MODAL WINDOWS: 
@@ -208,15 +221,18 @@ export default function Application(props) {
 
   
   //
-  // open cookies modal if we're using it
-  //
+  // useEffect - actions on first load
   // https://dmitripavlutin.com/react-useeffect-explanation/
   //
-  if (global.config.cookiesModal) {
-    useEffect(() => {
+  useEffect(() => {
+    if (global.config.cookiesModal) {
       cookiesModal(true);
-    }, []);
-  }
+    }
+    setTimeout(() => {
+      setclassName("layout fadein");
+    }, 2000);
+  }, []);
+  
   function cookiesModal(modalState = false) {
     zmodalUpdater(
       updateZModal,
@@ -235,9 +251,10 @@ export default function Application(props) {
 
 
   return (
+    !pageLoading && (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <div >
-        <main className="layout" id={theme}>
+        <main className={className} id={theme}>
           <section className="sidebar">
             {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
             <img
@@ -351,5 +368,6 @@ export default function Application(props) {
         </main>
       </div>
     </ThemeContext.Provider>
+    )
   );
 }
