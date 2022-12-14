@@ -1,12 +1,12 @@
-import React, { Suspense, useEffect, useRef, useState } from "react";
-import "components/Appointment/styles.scss";
-import Header from "components/Appointment/Header.js";
-import Show from "components/Appointment/Show.js";
 import Empty from "components/Appointment/Empty.js";
 import Form from "components/Appointment/Form.js";
+import Header from "components/Appointment/Header.js";
+import Show from "components/Appointment/Show.js";
 import Status from "components/Appointment/Status.js";
-import Error from "./Error";
+import "components/Appointment/styles.scss";
 import useVisualMode from "hooks/useVisualMode.js";
+import React, { Suspense, useEffect, useState } from "react";
+import Error from "./Error";
 
 // NOTE1:  lazy loading of components - need import react w lazy and Suspense
 // NOTE2: suspense can be given a null for fallback to avoid anything from rendering
