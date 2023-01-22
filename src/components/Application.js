@@ -29,6 +29,7 @@ import zlog from "zlog.js";
 
 // load spinners
 import LoadingSpinner from "./LoadingSpinner.jsx";
+import NavBar from "./NavBar.jsx";
 
 //
 // application - main function
@@ -43,7 +44,7 @@ export default function Application(props) {
   const [pageLoading,setPageLoading] = useState(true);
   const pageloader = document.getElementById('pageloader');
   if(pageLoading === true) {
-    global.config.goSleep(2000).then(()=> { 
+    global.config.goSleep(2000).then(()=> {   // update here if we want to delay even more
       pageloader.style.display = "none";
       setPageLoading(false); 
     });
@@ -193,6 +194,7 @@ export default function Application(props) {
   const appointmentList = Object.values(dailyAppointments).map(
     (item, index) => {
       const interviewer = getInterview(state, item.interview);
+      
       return (
         <Appointment
           key={item.id}
@@ -245,7 +247,8 @@ export default function Application(props) {
   return (
     !pageLoading && (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div >
+      
+      <div><NavBar/>
         <main className={className} id={theme}>
           <section className="sidebar">
             {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}

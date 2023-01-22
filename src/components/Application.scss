@@ -45,10 +45,19 @@
 
 #light {
   background-color: $white;
+  color-scheme: light;
 }
 #dark {
   background-color: $black;
+  color-scheme: dark;
 }
 // example for specific items for light/dark mode changes:  use #mode .classname
 // #light .sidebar { }
 // #dark .sidebar { }
+
+#dark :root {
+  color-scheme: dark;
+}
+#light :root {
+  color-scheme: light;
+}

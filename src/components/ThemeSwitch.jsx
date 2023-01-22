@@ -13,11 +13,12 @@ function ThemeSwitch() {
     localStorage.setItem('theme', isCurrentDark ? 'light' : 'dark');
   };
 
+  //<label>{theme === "light" ? "Currently Light Mode" : "Currently Dark Mode"}</label>
   return (
     <div>
-      <label>{theme === "light" ? "Currently Light Mode" : "Currently Dark Mode"}</label>
       <div className="toggle-btn-section">
         <div className={`toggle-checkbox m-vertical-auto`}>
+          dark&nbsp;
           <input
             className="toggle-btn__input"
             type="checkbox"
@@ -26,6 +27,7 @@ function ThemeSwitch() {
             checked={theme === 'light'}
           />
           <button type="button" className={`toggle-btn__input-label`} onClick={handleThemeChange}></button>
+          &nbsp;light
         </div>
       </div>
     </div>

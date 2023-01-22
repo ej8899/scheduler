@@ -15,12 +15,12 @@ function HourSwitch() {
     global.config.timeClock = +hourTheme;
   };
 
+  // <label>{hourTheme === "12" ? "Currently 24h mode" : "Currently 12h mode"}</label>
   return (
     <div>
-    <label>{hourTheme === "12" ? "Currently 24h mode" : "Currently 12h mode"}</label>
     <div className="toggle-btn-section">
       <div className={`toggle-checkbox m-vertical-auto`}>
-        <input
+        12h&nbsp;<input
           className="toggle-btn__input"
           type="checkbox"
           name="checkbox"
@@ -28,6 +28,7 @@ function HourSwitch() {
           checked={hourTheme === '12'}
         />
         <button type="button" className={`toggle-btn__input-label`} onClick={handleHourChange}></button>
+        &nbsp;24h
       </div>
     </div>
   </div>
